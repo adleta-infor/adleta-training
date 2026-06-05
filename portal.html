@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// Auth guard — redirect to login if not authenticated
+if (sessionStorage.getItem("adleta_auth") !== "ok") {
+  window.location.replace("index.html");
+}
+</script>
+<title>Adleta Infor M3 — Super User Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f2133;
+  --navy-mid: #172d42;
+  --navy-light: #1f3a52;
+  --teal: #1a7a6d;
+  --teal-bright: #22a08f;
+  --teal-glow: rgba(26,122,109,0.15);
+  --gold: #c49a2a;
+  --red: #c0443b;
+  --blue: #2d6fa3;
+  --ink: #0f1f2e;
+  --body: #344b5f;
+  --muted: #6b8199;
+  --line: #dde5ed;
+  --bg: #f2f5f8;
+  --surface: #ffffff;
+  --surface-2: #f7f9fb;
+  --pill-bg: #eaf1f7;
+  --pill-ink: #2d5a7a;
+  --shadow-sm: 0 2px 8px rgba(15,33,51,0.07);
+  --shadow-md: 0 8px 24px rgba(15,33,51,0.10);
+  --shadow-lg: 0 20px 48px rgba(15,33,51,0.12);
+  --r: 10px;
+  --r-sm: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+body { background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+a { color: var(--teal); text-decoration: none; font-weight: 500; }
+a:hover { text-decoration: underline; color: var(--teal-bright); }
+button, input { font: inherit; }
+h1,h2,h3,h4 { line-height: 1.2; font-weight: 700; }
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.app { display: grid; grid-template-columns: 268px 1fr; min-height: 100vh; }
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar {
+  background: var(--navy);
+  color: #e8f1f8;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-top { padding: 24px 20px 20px; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.brand-mark {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--teal-bright), var(--teal));
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.brand-text { line-height: 1.25; }
+.brand-name { font-weight: 700; font-size: 14px; color: #fff; }
+.brand-sub { font-size: 12px; color: #7fa3be; }
+
+.nav { display: flex; flex-direction: column; gap: 2px; }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  color: #a8c4d8;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+}
+
+.nav-link svg { opacity: 0.7; flex-shrink: 0; }
+.nav-link:hover { background: var(--navy-mid); color: #fff; text-decoration: none; }
+.nav-link.active { background: var(--navy-light); color: #fff; }
+.nav-link.active svg { opacity: 1; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 20px 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.planner-card {
+  background: var(--navy-light);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r);
+  padding: 14px;
+}
+
+.planner-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #7fa3be; margin-bottom: 4px; }
+.planner-name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+.planner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #7de8d8;
+  font-weight: 500;
+}
+
+/* ── MAIN ─────────────────────────────────────────────── */
+.main { display: flex; flex-direction: column; min-width: 0; }
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero {
+  background: var(--navy);
+  padding: 36px 40px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 300px at 110% 50%, rgba(26,122,109,0.18) 0%, transparent 70%),
+    repeating-linear-gradient(120deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 48px);
+  pointer-events: none;
+}
+
+.hero-inner { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+
+.hero-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal-bright); font-weight: 600; margin-bottom: 10px; }
+
+.hero h1 { font-size: 26px; font-weight: 700; color: #fff; max-width: 640px; line-height: 1.25; margin-bottom: 4px; }
+
+.hero-sub { color: #8ab2ca; font-size: 14px; margin-top: 8px; }
+
+.hero-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; margin-top: 4px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 16px; border-radius: var(--r-sm);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  border: none; transition: all 0.15s; text-decoration: none;
+}
+
+.btn-primary { background: var(--teal-bright); color: white; }
+.btn-primary:hover { background: var(--teal); text-decoration: none; color: white; }
+.btn-ghost { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+.btn-ghost:hover { background: rgba(255,255,255,0.18); text-decoration: none; color: white; }
+
+/* ── CONTENT AREA ─────────────────────────────────────── */
+.content { padding: 28px 40px 40px; flex: 1; }
+
+.view { display: none; }
+.view.active { display: block; }
+
+/* ── SECTION HEADER ──────────────────────────────────── */
+.sec-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 16px; margin-bottom: 22px; flex-wrap: wrap;
+}
+
+.sec-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--teal); font-weight: 600; margin-bottom: 5px; }
+.sec-header h2 { font-size: 22px; color: var(--ink); }
+
+/* ── METRIC STRIP ─────────────────────────────────────── */
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+
+.metric {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  border-top: 3px solid var(--teal);
+}
+
+.metric:nth-child(2) { border-top-color: var(--blue); }
+.metric:nth-child(3) { border-top-color: var(--gold); }
+.metric:nth-child(4) { border-top-color: var(--red); }
+
+.metric-val { font-size: 32px; font-weight: 800; color: var(--teal); line-height: 1; margin-bottom: 4px; }
+.metric:nth-child(2) .metric-val { color: var(--blue); }
+.metric:nth-child(3) .metric-val { color: var(--gold); }
+.metric:nth-child(4) .metric-val { color: var(--red); }
+.metric-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ── DASHBOARD GRID ──────────────────────────────────── */
+.dash-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+
+/* ── MASTERY MODEL ─────────────────────────────────────── */
+.mastery {
+  display: grid;
+  grid-template-columns: 1fr 32px 1fr 32px 1fr 32px 1fr;
+  align-items: center;
+  gap: 0;
+  margin-top: 4px;
+}
+
+.mastery-node {
+  background: linear-gradient(135deg, #e6f4f1, #d4ece8);
+  border: 1px solid #b0d9d2;
+  border-radius: var(--r);
+  padding: 14px 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal);
+  min-height: 72px;
+  display: grid;
+  place-items: center;
+}
+
+.mastery-arrow { display: grid; place-items: center; }
+.mastery-arrow svg { color: var(--teal); opacity: 0.5; }
+
+/* ── CHECKLIST ─────────────────────────────────────────── */
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+
+.check-item {
+  display: grid; grid-template-columns: 20px 1fr;
+  align-items: start; gap: 10px; padding: 8px 0;
+  border-bottom: 1px solid var(--line); font-size: 14px;
+}
+.check-item:last-child { border-bottom: none; }
+
+.check-item input[type=checkbox] {
+  width: 16px; height: 16px; margin-top: 3px;
+  accent-color: var(--teal); cursor: pointer;
+}
+
+/* ── PROGRESS BAR ─────────────────────────────────────── */
+.progress-wrap { display: flex; align-items: center; gap: 12px; }
+.progress-track { flex: 1; height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--teal-bright)); border-radius: 99px; transition: width 0.4s; }
+.progress-label { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
+
+/* ── PILLS ─────────────────────────────────────────────── */
+.pill {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 12px; font-weight: 600;
+  background: var(--pill-bg); color: var(--pill-ink);
+}
+
+.pill-teal { background: #e0f2ee; color: #145c52; }
+.pill-blue { background: #e0ecf7; color: #1e4f7a; }
+.pill-gold { background: #faf0db; color: #7a5c12; }
+.pill-red  { background: #fce8e7; color: #8a2e28; }
+
+/* ── TIMELINE ─────────────────────────────────────────── */
+.timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+.phase-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--teal);
+  position: relative;
+}
+.phase-card:nth-child(2) { border-top-color: var(--blue); }
+.phase-card:nth-child(3) { border-top-color: var(--gold); }
+.phase-card:nth-child(4) { border-top-color: var(--red); }
+
+.phase-weeks { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; }
+.phase-name { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.phase-purpose { font-size: 13px; color: var(--body); margin-bottom: 10px; line-height: 1.5; }
+.phase-success { font-size: 13px; color: var(--teal); font-style: italic; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; line-height: 1.5; }
+
+/* ── MODULE GRID ─────────────────────────────────────── */
+.search-bar {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.search-input {
+  padding: 9px 14px; border-radius: var(--r-sm);
+  border: 1px solid var(--line); background: var(--surface);
+  width: 280px; font-size: 14px;
+  outline: none; transition: border-color 0.15s;
+}
+.search-input:focus { border-color: var(--teal); }
+
+.module-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.module-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.module-card h3 { font-size: 15px; color: var(--ink); }
+.module-owner { font-size: 12px; color: var(--muted); font-weight: 500; }
+.module-summary { font-size: 13px; color: var(--body); line-height: 1.5; flex: 1; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  padding: 3px 8px; border-radius: 4px;
+  background: #eef2f6; color: #344b5f;
+}
+
+.module-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.module-links a {
+  font-size: 13px; padding: 5px 12px;
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  color: var(--teal); font-weight: 600;
+  transition: all 0.15s;
+}
+.module-links a:hover { background: var(--teal-glow); border-color: var(--teal); text-decoration: none; }
+
+/* ── READINESS ─────────────────────────────────────────── */
+.readiness-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
+
+.readiness-item {
+  display: grid; grid-template-columns: 22px 1fr; gap: 12px;
+  align-items: start; padding: 12px 0;
+  border-bottom: 1px solid var(--line); font-size: 14px;
+}
+.readiness-item:last-child { border-bottom: none; }
+.readiness-item input { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--teal); cursor: pointer; }
+.readiness-item label { line-height: 1.5; cursor: pointer; }
+
+.teach-back-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; box-shadow: var(--shadow-sm); }
+.teach-back-card h3 { font-size: 16px; margin-bottom: 10px; }
+.teach-back-card p { font-size: 14px; color: var(--body); line-height: 1.6; margin-bottom: 16px; }
+.teach-back-card a { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+
+/* ── HANDOFF GRID ─────────────────────────────────────── */
+.handoff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.handoff-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.handoff-card h3 { font-size: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.handoff-section { margin-bottom: 12px; }
+.handoff-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+.handoff-text { font-size: 13px; color: var(--body); line-height: 1.5; }
+
+/* ── RESOURCES ─────────────────────────────────────────── */
+.resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.resource-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.resource-card h3 { font-size: 15px; }
+.resource-card p { font-size: 13px; color: var(--body); line-height: 1.5; flex: 1; }
+.resource-card a { font-size: 13px; display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; }
+
+/* ── SUPER USERS PANEL ────────────────────────────────── */
+.su-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+.su-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 16px 18px;
+  display: flex; align-items: center; gap: 14px;
+}
+.su-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 14px; color: white; flex-shrink: 0;
+}
+.su-name { font-size: 14px; font-weight: 700; }
+.su-dept { font-size: 12px; color: var(--muted); }
+.su-module { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--teal); margin-top: 4px; }
+
+/* ── EMPTY STATE ─────────────────────────────────────── */
+.empty { text-align: center; padding: 48px 0; color: var(--muted); font-size: 14px; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .app { grid-template-columns: 240px 1fr; }
+  .content { padding: 22px 28px 32px; }
+  .module-grid, .handoff-grid, .resource-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline { grid-template-columns: repeat(2, 1fr); }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { height: auto; position: static; }
+  .hero { padding: 24px 20px; }
+  .content { padding: 16px 20px 28px; }
+  .dash-grid, .readiness-grid { grid-template-columns: 1fr; }
+  .module-grid, .handoff-grid, .resource-grid, .timeline, .su-grid { grid-template-columns: 1fr; }
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .mastery { grid-template-columns: 1fr; gap: 8px; }
+  .mastery-arrow { transform: rotate(90deg); }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ── SIDEBAR ────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="brand">
+      <div class="brand-mark">M3</div>
+      <div class="brand-text">
+        <div class="brand-name">Adleta Infor M3</div>
+        <div class="brand-sub">Super User Training</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-link active" data-view="dashboard">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-link" data-view="superusers">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Super Users
+      </button>
+      <button class="nav-link" data-view="roadmap">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        Roadmap
+      </button>
+      <button class="nav-link" data-view="modules">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Modules
+      </button>
+      <button class="nav-link" data-view="readiness">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Readiness
+      </button>
+      <button class="nav-link" data-view="handoff">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        Dept. Handoff
+      </button>
+      <button class="nav-link" data-view="resources">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        Resources
+      </button>
+    </nav>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="planner-card">
+      <div class="planner-label">Active Plan</div>
+      <div class="planner-name">Infor ERP Training</div>
+      <a class="planner-link" href="https://tasks.office.com" target="_blank" rel="noreferrer">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open Planner
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- ── MAIN ────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">Super User Academy</div>
+        <h1>Build department masters who can do, explain, troubleshoot, and teach.</h1>
+        <div class="hero-sub">Adleta Corporation &nbsp;·&nbsp; Infor M3 Rollout &nbsp;·&nbsp; 9-Week Program &nbsp;·&nbsp; Trainer: KRISTENB</div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-ghost" id="resetBtn" type="button">Reset Progress</button>
+        <button class="btn btn-ghost" id="logoutBtn" type="button">Sign Out</button>
+        <a class="btn btn-primary" href="https://adleta.sharepoint.com/sites/ProjectManagement/Shared%20Documents" target="_blank" rel="noreferrer">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          Open SharePoint
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ── DASHBOARD ──────────────────────────────────── -->
+    <div id="view-dashboard" class="view active">
+      <div class="metrics">
+        <div class="metric"><div class="metric-val">9</div><div class="metric-label">Training Weeks</div></div>
+        <div class="metric"><div class="metric-val">6</div><div class="metric-label">Super Users</div></div>
+        <div class="metric"><div class="metric-val">12</div><div class="metric-label">Module Files</div></div>
+        <div class="metric"><div class="metric-val">26</div><div class="metric-label">Planner Tasks</div></div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card-title">
+            Mastery Model
+            <span class="pill pill-teal">Required for sign-off</span>
+          </div>
+          <div class="mastery">
+            <div class="mastery-node">Do it</div>
+            <div class="mastery-arrow"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+            <div class="mastery-node">Explain it</div>
+            <div class="mastery-arrow"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+            <div class="mastery-node">Troubleshoot it</div>
+            <div class="mastery-arrow"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+            <div class="mastery-node">Teach it</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            Progress
+            <span class="pill" id="progressPill">0 / 6 checked</span>
+          </div>
+          <div class="progress-wrap" style="margin-bottom:20px">
+            <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+            <div class="progress-label" id="progressPct">0%</div>
+          </div>
+          <div class="checklist" id="nextActionsList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SUPER USERS ─────────────────────────────────── -->
+    <div id="view-superusers" class="view">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Training cohort</div>
+          <h2>Super User Team</h2>
+        </div>
+        <span class="pill pill-teal">6 confirmed</span>
+      </div>
+      <div class="su-grid" id="suGrid"></div>
+
+      <div style="margin-top:28px">
+        <div class="sec-header">
+          <div>
+            <div class="sec-eyebrow">Assignment overview</div>
+            <h2>Who Covers What</h2>
+          </div>
+        </div>
+        <div class="module-grid" id="suModuleMap"></div>
+      </div>
+    </div>
+
+    <!-- ── ROADMAP ─────────────────────────────────────── -->
+    <div id="view-roadmap" class="view">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">9-week path</div>
+          <h2>Roadmap — Foundation to Trainer Readiness</h2>
+        </div>
+      </div>
+      <div class="timeline" id="phaseTimeline"></div>
+    </div>
+
+    <!-- ── MODULES ─────────────────────────────────────── -->
+    <div id="view-modules" class="view">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Department mastery</div>
+          <h2>Module Library</h2>
+        </div>
+        <div class="search-bar">
+          <input class="search-input" id="moduleSearch" type="search" placeholder="Search module, owner, program…">
+        </div>
+      </div>
+      <div class="module-grid" id="moduleGrid"></div>
+    </div>
+
+    <!-- ── READINESS ───────────────────────────────────── -->
+    <div id="view-readiness" class="view">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Sign-off criteria</div>
+          <h2>Readiness Tracker</h2>
+        </div>
+      </div>
+      <div class="readiness-grid">
+        <div class="card">
+          <div class="card-title">Sign-Off Checklist</div>
+          <div id="readinessList"></div>
+        </div>
+        <div class="teach-back-card">
+          <h3>Teach-Back Standard</h3>
+          <p>Each super user must explain their module workflow, walk through the key M3 programs, handle one exception scenario, name upstream and downstream handoffs, and demonstrate how they would train their department team.</p>
+          <p style="margin-top:10px;font-size:13px;color:var(--muted)">Teach-backs are conducted in Week 9. Any super user who does not pass will receive targeted remediation before sign-off.</p>
+          <a href="https://adleta.sharepoint.com/sites/ProjectManagement" target="_blank" rel="noreferrer">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open SharePoint for Week 9 packet
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HANDOFF ─────────────────────────────────────── -->
+    <div id="view-handoff" class="view">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Department rollout</div>
+          <h2>Training Handoff Builder</h2>
+        </div>
+      </div>
+      <div class="handoff-grid" id="handoffGrid"></div>
+    </div>
+
+    <!-- ── RESOURCES ───────────────────────────────────── -->
+    <div id="view-resources" class="view">
+      <div class="sec-header">
+        <div>
+          <div class="sec-eyebrow">Source library</div>
+          <h2>Training Resources</h2>
+        </div>
+      </div>
+      <div class="resource-grid" id="resourceGrid"></div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /app -->
+
+<script>
+// ── DATA ────────────────────────────────────────────────────
+const SP = "https://adleta.sharepoint.com/sites/ProjectManagement/Shared%20Documents";
+
+const superUsers = [
+  { name: "Alan Burk",      dept: "Purchasing",          module: "PPS200 / PPS300 / APS100",  color: "#2d6fa3" },
+  { name: "Jose Manjarrez", dept: "Warehouse / Ops",     module: "MMS060 / MMS200 / MMS100",  color: "#1a7a6d" },
+  { name: "Tony Shipka",    dept: "Customer Service",    module: "OIS100 / OIS300 / OIS390",  color: "#8b5e3c" },
+  { name: "Jeanell Coral",  dept: "Sales",               module: "OIS100 / OIS101 / OIS010",  color: "#7a3c7a" },
+  { name: "Philip Jones",   dept: "Finance / Accounting",module: "APS100 / ARS200 / GLS100",  color: "#c49a2a" },
+  { name: "Terri Sauter",   dept: "Management",          module: "OIS600 / MMS600 / GLS990",  color: "#c0443b" },
+];
+
+const suModules = [
+  { name: "Purchasing", owner: "Alan Burk", weeks: "Week 3", programs: ["CRS620","PPS200","PPS201","PPS300","APS100"], summary: "Supplier lookup, PO creation and lines, PO status and approvals, receiving handoff, three-way match support." },
+  { name: "Inventory", owner: "Jose Manjarrez", weeks: "Week 4", programs: ["MMS060","MMS200","MMS100","MMS150","MMS300"], summary: "Item lookup, stock balances, transfers, adjustments, cycle counts, discrepancy handling." },
+  { name: "Customer Service", owner: "Tony Shipka", weeks: "Week 5", programs: ["CRS610","OIS100","OIS101","OIS300","OIS390"], summary: "Customer lookup, order entry, shipments, returns, order status, back order communication." },
+  { name: "Sales", owner: "Jeanell Coral", weeks: "Week 5", programs: ["CRS610","OIS100","OIS010","OIS015","OIS300"], summary: "Customer lookup, sales order entry, pricing and discounts, order management, shipment confirmation." },
+  { name: "Finance AP/AR", owner: "Philip Jones", weeks: "Week 6", programs: ["APS100","APS200","ARS100","ARS200","ARS300"], summary: "Supplier invoices, payment runs, customer invoices, cash application, aging, credit holds." },
+  { name: "General Ledger", owner: "Philip Jones", weeks: "Week 6", programs: ["GLS040","GLS100","GLS050","GLS910","GLS990"], summary: "Chart of accounts, journal entries, period close, GL inquiry, financial reports." },
+];
+
+const phases = [
+  { weeks:"Weeks 1-2", name:"Foundation", pill:"pill-teal", purpose:"Common M3 navigation, terminology, super user role clarity, and readiness for module training.", success:"Every super user can log in, search, use favorites, explain key terms, and log issues." },
+  { weeks:"Weeks 3-7", name:"Department Mastery", pill:"pill-blue", purpose:"Role-based module deep dives for Purchasing, Inventory, Order Management, Finance, and Reporting.", success:"Each owner can complete core workflows and explain department exceptions." },
+  { weeks:"Week 8", name:"End-to-End Process", pill:"pill-gold", purpose:"Connect departments through Procure to Pay and Order to Cash walkthroughs.", success:"Super users can trace handoffs and diagnose where a process is stuck." },
+  { weeks:"Week 9", name:"Trainer Readiness", pill:"pill-red", purpose:"Teach-backs, FAQ build, readiness decisions, remediation, and go-live support prep.", success:"Each super user passes teach-back and has a department training handoff plan." },
+];
+
+const modules = [
+  { name:"Foundation", owner:"All super users", weeks:"Weeks 1-2", programs:["CRS610","CRS620","MMS060","PPS200","OIS100"], summary:"Navigation, lookup, favorites, terminology, issue logging, and super-user expectations.", links:[["Training Plan",SP+"/Adleta_Infor_ERP_Training_Plan.docx"],["Schedule",SP+"/Adleta_Infor_Training_Schedule.xlsx"]] },
+  { name:"Purchasing / Procurement", owner:"Alan Burk", weeks:"Week 3", programs:["CRS620","PPS200","PPS201","PPS300","APS100"], summary:"Supplier lookup, purchase orders, receiving handoff, status, approvals, and three-way match support.", links:[["Deck",SP+"/Adleta_M3_Purchasing_Training_Deck.pptx"],["Guide",SP+"/Adleta_M3_Purchasing_LearningGuide.docx"]] },
+  { name:"Inventory Management", owner:"Jose Manjarrez", weeks:"Week 4", programs:["MMS060","MMS200","MMS100","MMS150","MMS300"], summary:"Item lookup, stock balances, transfers, adjustments, cycle counts, and discrepancy handling.", links:[["Deck",SP+"/Adleta_M3_Inventory_Training_Deck.pptx"],["Guide",SP+"/Adleta_M3_Inventory_LearningGuide.docx"]] },
+  { name:"Order Management / Sales", owner:"Tony Shipka + Jeanell Coral", weeks:"Week 5", programs:["CRS610","OIS100","OIS101","OIS300","OIS390"], summary:"Customer lookup, sales order entry, pricing, availability, shipments, returns, and backorders.", links:[["Deck",SP+"/Adleta_M3_OrderManagement_Training_Deck.pptx"],["Guide",SP+"/Adleta_M3_OrderManagement_LearningGuide.docx"]] },
+  { name:"Finance AP / AR", owner:"Philip Jones", weeks:"Week 6", programs:["APS100","APS200","ARS100","ARS200","ARS300"], summary:"Supplier invoices, payment runs, customer invoices, cash application, aging, and credit holds.", links:[["Deck",SP+"/Adleta_M3_Finance_APAR_Training_Deck.pptx"],["Guide",SP+"/Adleta_M3_Finance_APAR_LearningGuide.docx"]] },
+  { name:"Finance — General Ledger", owner:"Philip Jones", weeks:"Week 6", programs:["GLS040","GLS100","GLS050","GLS910","GLS990"], summary:"Chart of accounts, journal entries, period close, GL inquiry, and financial reports.", links:[["Deck",SP+"/Adleta_M3_Finance_GL_Training_Deck.pptx"],["Guide",SP+"/Adleta_M3_Finance_GL_LearningGuide.docx"]] },
+  { name:"Reporting and Dashboards", owner:"Terri Sauter", weeks:"Week 7", programs:["OIS600","OIS620","MMS600","ARS300","GLS990"], summary:"Standard reports, exports, scheduled reports, KPIs, dashboards, and reporting ownership.", links:[["Deck",SP+"/Adleta_M3_Reporting_Training_Deck.pptx"],["Guide",SP+"/Adleta_M3_Reporting_LearningGuide.docx"]] },
+  { name:"Procure to Pay", owner:"Purchasing, Warehouse, Finance", weeks:"Week 8", programs:["CRS620","PPS200","PPS300","MMS200","APS100","APS200"], summary:"End-to-end from supplier and PO through receipt, three-way match, and vendor payment.", links:[["Training Plan",SP+"/Adleta_Infor_ERP_Training_Plan.docx"]] },
+  { name:"Order to Cash", owner:"Sales / CS, Warehouse, Finance", weeks:"Week 8", programs:["CRS610","OIS100","OIS101","OIS300","ARS100","ARS200"], summary:"End-to-end from customer order through shipment, invoice, payment received, and exceptions.", links:[["Training Plan",SP+"/Adleta_Infor_ERP_Training_Plan.docx"]] },
+  { name:"Go-Live Support", owner:"All super users", weeks:"Week 9+", programs:["Issue Log","Teams","Planner","SharePoint"], summary:"Support tiers, FAQ, issue priority, daily rhythm, escalation path, and stabilization.", links:[["Schedule",SP+"/Adleta_Infor_Training_Schedule.xlsx"],["Role Definition",SP+"/Adleta_Infor_SuperUser_Role_Definition.docx"]] },
+];
+
+const nextActions = [
+  "Confirm training environment access with IT before Week 1 sessions",
+  "Use Module Owner Review Checklists with each department owner",
+  "Confirm practice data for all modules — Purchasing, Inventory, Order Mgmt, Finance, Reporting",
+  "Review Week 8 Procure to Pay and Order to Cash walkthroughs with cross-functional owners",
+  "Confirm Week 9 teach-back schedule, rubric, and sign-off expectations",
+  "Set up go-live support hours, Teams channel, escalation owners, and issue-log process",
+];
+
+const readinessItems = [
+  "Super user can navigate to core M3 programs without coaching",
+  "Super user can complete primary module workflow in the training environment",
+  "Super user can explain one exception and the first troubleshooting step",
+  "Super user can identify upstream and downstream department handoffs",
+  "Super user can create a complete issue-log entry",
+  "Super user passed the Week 9 module teach-back",
+  "Department training handoff plan is documented and ready",
+  "Known issues, FAQ, and escalation path are all documented",
+];
+
+const handoffs = [
+  { dept:"Purchasing", color:"#2d6fa3", teach:"Supplier lookup, PO creation and lines, PO status, receiving handoff, match exception handling.", practice:"Create or review a PO, identify status, explain mismatch handling process." },
+  { dept:"Warehouse / Operations", color:"#1a7a6d", teach:"Item lookup, stock balance, transfers, adjustments, cycle count, shipment and receiving handoffs.", practice:"Look up item, verify stock, process or explain a transfer and adjustment." },
+  { dept:"Sales / Customer Service", color:"#7a3c7a", teach:"Customer lookup, order entry, lines, pricing, availability, order status, returns and backorders.", practice:"Enter or review an order, check status, explain back order and return handling." },
+  { dept:"Finance", color:"#c49a2a", teach:"Supplier invoice, three-way match, payment proposal, customer invoice, cash application, AR aging, GL period close.", practice:"Review invoice or payment scenario and explain exception handling." },
+  { dept:"Management / Reporting", color:"#c0443b", teach:"Standard reports, exports, scheduled reports, KPIs, dashboard setup, and action ownership by KPI.", practice:"Run a report, export data, explain what a KPI means and what action it triggers." },
+];
+
+const resources = [
+  { name:"Training Plan", summary:"9-section Word document — full curriculum, 9-week schedule, roles, risks, and sign-off process.", url:SP+"/Adleta_Infor_ERP_Training_Plan.docx" },
+  { name:"Super User Role Definition", summary:"Responsibilities, time commitment, readiness checklist, and acknowledgment form for all super users.", url:SP+"/Adleta_Infor_SuperUser_Role_Definition.docx" },
+  { name:"Training Schedule", summary:"Excel workbook — master schedule, attendance tracker, module completion tracker, and issue log.", url:SP+"/Adleta_Infor_Training_Schedule.xlsx" },
+  { name:"Purchasing Learning Guide", summary:"Word doc — step-by-step M3 instructions for Alan Burk covering PPS200, PPS300, APS100, and more.", url:SP+"/Adleta_M3_Purchasing_LearningGuide.docx" },
+  { name:"Inventory Learning Guide", summary:"Word doc — step-by-step instructions for Jose Manjarrez covering MMS060, MMS200, MMS100, MMS150, MMS300.", url:SP+"/Adleta_M3_Inventory_LearningGuide.docx" },
+  { name:"Order Management Guide", summary:"Word doc — step-by-step instructions for Tony Shipka and Jeanell Coral covering OIS100–OIS390.", url:SP+"/Adleta_M3_OrderManagement_LearningGuide.docx" },
+  { name:"Finance AP/AR Guide", summary:"Word doc — step-by-step instructions for Philip Jones covering APS100, APS200, ARS100, ARS200, ARS300.", url:SP+"/Adleta_M3_Finance_APAR_LearningGuide.docx" },
+  { name:"Finance GL Guide", summary:"Word doc — chart of accounts, journal entries, period close checklist, and financial reports for Philip Jones.", url:SP+"/Adleta_M3_Finance_GL_LearningGuide.docx" },
+  { name:"Reporting and Dashboards Guide", summary:"Word doc — standard reports, scheduling, KPI dashboard build guide for Terri Sauter.", url:SP+"/Adleta_M3_Reporting_LearningGuide.docx" },
+];
+
+// ── STATE ────────────────────────────────────────────────────
+const STATE_KEY = "adleta-m3-v2";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(STATE_KEY) || "{}"); } catch(e) { state = {}; }
+function save() { try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch(e){} updateProgress(); }
+
+// ── PROGRESS ─────────────────────────────────────────────────
+function updateProgress() {
+  const total = nextActions.length;
+  const done  = nextActions.filter((_, i) => state["action-"+i]).length;
+  const pct   = Math.round(done / total * 100);
+  const fill  = document.getElementById("progressFill");
+  const pctEl = document.getElementById("progressPct");
+  const pill  = document.getElementById("progressPill");
+  if (fill)  fill.style.width  = pct + "%";
+  if (pctEl) pctEl.textContent = pct + "%";
+  if (pill)  pill.textContent  = done + " / " + total + " checked";
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function renderNextActions() {
+  const el = document.getElementById("nextActionsList");
+  if (!el) return;
+  el.innerHTML = "";
+  nextActions.forEach((text, i) => {
+    const id = "action-" + i;
+    const div = document.createElement("label");
+    div.className = "check-item";
+    div.innerHTML = `<input type="checkbox" id="${id}" ${state[id]?"checked":""}><span>${text}</span>`;
+    div.querySelector("input").addEventListener("change", e => { state[id] = e.target.checked; save(); });
+    el.appendChild(div);
+  });
+  updateProgress();
+}
+
+function renderReadiness() {
+  const el = document.getElementById("readinessList");
+  if (!el) return;
+  el.innerHTML = "";
+  readinessItems.forEach((text, i) => {
+    const id = "ready-" + i;
+    const div = document.createElement("div");
+    div.className = "readiness-item";
+    div.innerHTML = `<input type="checkbox" id="${id}" ${state[id]?"checked":""}><label for="${id}">${text}</label>`;
+    div.querySelector("input").addEventListener("change", e => { state[id] = e.target.checked; save(); });
+    el.appendChild(div);
+  });
+}
+
+function renderSuperUsers() {
+  const grid = document.getElementById("suGrid");
+  if (!grid) return;
+  grid.innerHTML = superUsers.map(su => {
+    const initials = su.name.split(" ").map(n=>n[0]).join("");
+    return `<div class="su-card">
+      <div class="su-avatar" style="background:${su.color}">${initials}</div>
+      <div>
+        <div class="su-name">${su.name}</div>
+        <div class="su-dept">${su.dept}</div>
+        <div class="su-module">${su.module}</div>
+      </div>
+    </div>`;
+  }).join("");
+
+  const mapEl = document.getElementById("suModuleMap");
+  if (mapEl) {
+    mapEl.innerHTML = suModules.map(m => `
+      <div class="module-card">
+        <span class="pill">${m.weeks}</span>
+        <h3>${m.name}</h3>
+        <div class="module-owner">${m.owner}</div>
+        <div class="module-summary">${m.summary}</div>
+        <div class="tags">${m.programs.map(p=>`<span class="tag">${p}</span>`).join("")}</div>
+      </div>`).join("");
+  }
+}
+
+function renderRoadmap() {
+  const el = document.getElementById("phaseTimeline");
+  if (!el) return;
+  el.innerHTML = phases.map(p => `
+    <div class="phase-card">
+      <div class="phase-weeks">${p.weeks}</div>
+      <div class="phase-name">${p.name}</div>
+      <div class="phase-purpose">${p.purpose}</div>
+      <div class="phase-success">&#10003; ${p.success}</div>
+    </div>`).join("");
+}
+
+function renderModules(list) {
+  const el = document.getElementById("moduleGrid");
+  if (!el) return;
+  const items = list || modules;
+  if (!items.length) { el.innerHTML = '<div class="empty">No modules match your search.</div>'; return; }
+  el.innerHTML = items.map(m => `
+    <div class="module-card">
+      <span class="pill">${m.weeks}</span>
+      <h3>${m.name}</h3>
+      <div class="module-owner">Owner: ${m.owner}</div>
+      <div class="module-summary">${m.summary}</div>
+      <div class="tags">${m.programs.map(p=>`<span class="tag">${p}</span>`).join("")}</div>
+      <div class="module-links">${m.links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noreferrer">${label}</a>`).join("")}</div>
+    </div>`).join("");
+}
+
+function renderHandoff() {
+  const el = document.getElementById("handoffGrid");
+  if (!el) return;
+  el.innerHTML = handoffs.map(h => `
+    <div class="handoff-card">
+      <h3>
+        <span style="width:10px;height:10px;border-radius:50%;background:${h.color};display:inline-block;flex-shrink:0"></span>
+        ${h.dept}
+      </h3>
+      <div class="handoff-section">
+        <div class="handoff-label">Super user teaches</div>
+        <div class="handoff-text">${h.teach}</div>
+      </div>
+      <div class="handoff-section">
+        <div class="handoff-label">Department users practice</div>
+        <div class="handoff-text">${h.practice}</div>
+      </div>
+    </div>`).join("");
+}
+
+function renderResources() {
+  const el = document.getElementById("resourceGrid");
+  if (!el) return;
+  el.innerHTML = resources.map(r => `
+    <div class="resource-card">
+      <h3>${r.name}</h3>
+      <p>${r.summary}</p>
+      <a href="${r.url}" target="_blank" rel="noreferrer">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open file
+      </a>
+    </div>`).join("");
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────
+function switchView(viewId) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+  const view = document.getElementById("view-" + viewId);
+  if (view) view.classList.add("active");
+  const link = document.querySelector(`[data-view="${viewId}"]`);
+  if (link) link.classList.add("active");
+}
+
+document.querySelectorAll(".nav-link").forEach(link => {
+  link.addEventListener("click", () => switchView(link.dataset.view));
+});
+
+// ── SEARCH ───────────────────────────────────────────────────
+document.getElementById("moduleSearch").addEventListener("input", e => {
+  const q = e.target.value.trim().toLowerCase();
+  if (!q) { renderModules(); return; }
+  renderModules(modules.filter(m =>
+    [m.name, m.owner, m.weeks, m.summary, ...m.programs].join(" ").toLowerCase().includes(q)
+  ));
+});
+
+// ── RESET ────────────────────────────────────────────────────
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if (!confirm("Reset all progress checkboxes?")) return;
+  Object.keys(state).forEach(k => delete state[k]);
+  save();
+  renderNextActions();
+  renderReadiness();
+});
+
+
+// ── LOGOUT ───────────────────────────────────────────────────
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  sessionStorage.removeItem("adleta_auth");
+  sessionStorage.removeItem("adleta_user");
+  window.location.replace("index.html");
+});
+
+// Show username in hero
+const username = sessionStorage.getItem("adleta_user") || "";
+if (username) {
+  const sub = document.querySelector(".hero-sub");
+  if (sub) sub.textContent += "  ·  Signed in as " + username;
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+renderNextActions();
+renderReadiness();
+renderSuperUsers();
+renderRoadmap();
+renderModules();
+renderHandoff();
+renderResources();
+</script>
+</body>
+</html>

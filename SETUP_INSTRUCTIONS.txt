@@ -1,0 +1,175 @@
+# Adleta M3 Training Portal — Setup Instructions
+# How to publish your training site with login credentials
+
+═══════════════════════════════════════════════════════
+WHAT YOU WILL HAVE WHEN DONE
+═══════════════════════════════════════════════════════
+
+A live website at a URL like:
+  https://YOUR-NAME.github.io/adleta-training/
+
+- Login page that requires a username and password
+- Full training portal behind the login
+- You control who has access
+- Free to host forever
+
+═══════════════════════════════════════════════════════
+STEP 1 — CREATE A FREE GITHUB ACCOUNT
+═══════════════════════════════════════════════════════
+
+1. Go to https://github.com
+2. Click "Sign up"
+3. Use your Adleta email
+4. Choose a username — something like: kristenb-adleta
+5. Complete the verification and confirm your email
+
+═══════════════════════════════════════════════════════
+STEP 2 — CREATE A NEW REPOSITORY
+═══════════════════════════════════════════════════════
+
+A "repository" is just a folder on GitHub that holds your website files.
+
+1. Once logged in, click the green "New" button (top left)
+2. Repository name: adleta-training
+   (this becomes part of your URL)
+3. Set to PUBLIC (required for free GitHub Pages hosting)
+4. Check "Add a README file"
+5. Click "Create repository"
+
+═══════════════════════════════════════════════════════
+STEP 3 — UPLOAD YOUR TWO FILES
+═══════════════════════════════════════════════════════
+
+You have two files from this package:
+  - index.html   (the login page)
+  - portal.html  (the training portal)
+
+1. In your new repository, click "Add file" → "Upload files"
+2. Drag and drop BOTH files into the upload area
+3. Scroll down and click "Commit changes"
+
+═══════════════════════════════════════════════════════
+STEP 4 — TURN ON GITHUB PAGES
+═══════════════════════════════════════════════════════
+
+1. In your repository, click "Settings" (top tab)
+2. In the left sidebar, click "Pages"
+3. Under "Branch", select "main" from the dropdown
+4. Click "Save"
+5. Wait about 2 minutes
+6. GitHub will show you your live URL:
+   https://YOUR-USERNAME.github.io/adleta-training/
+
+That's it — your site is live!
+
+═══════════════════════════════════════════════════════
+STEP 5 — TEST IT
+═══════════════════════════════════════════════════════
+
+1. Open the URL GitHub gave you
+2. You should see the Adleta login page
+3. Log in with: kristenb / Adleta2026!
+4. You should see the full training portal
+
+═══════════════════════════════════════════════════════
+STEP 6 — SHARE WITH YOUR TEAM
+═══════════════════════════════════════════════════════
+
+Send each person their credentials:
+
+  URL:       https://YOUR-USERNAME.github.io/adleta-training/
+  
+  KRISTENB        kristenb        / Adleta2026!
+  Alan Burk       alanburk        / Infor2026!
+  Jose Manjarrez  josemanjarrez   / Infor2026!
+  Tony Shipka     tonyshipka      / Infor2026!
+  Jeanell Coral   jeanellcoral    / Infor2026!
+  Philip Jones    philipjones     / Infor2026!
+  Terri Sauter    terrisauter     / Infor2026!
+
+IMPORTANT: Ask each person to change their password after
+first login — or change the passwords in index.html before
+you publish (see Changing Passwords below).
+
+═══════════════════════════════════════════════════════
+HOW TO CHANGE PASSWORDS
+═══════════════════════════════════════════════════════
+
+1. Go to your GitHub repository
+2. Click on "index.html"
+3. Click the pencil icon (Edit this file)
+4. Find this section near the bottom:
+
+   const USERS = [
+     { user: "kristenb",      pass: "Adleta2026!" },
+     { user: "alanburk",      pass: "Infor2026!" },
+     ...
+   ];
+
+5. Change any password to whatever you want
+6. Click "Commit changes"
+7. The change is live immediately
+
+HOW TO ADD A NEW USER:
+   Add a new line inside the USERS list:
+   { user: "newusername", pass: "TheirPassword1!" },
+
+HOW TO REMOVE A USER:
+   Delete their line from the USERS list.
+   They will be locked out immediately.
+
+═══════════════════════════════════════════════════════
+HOW TO UPDATE THE PORTAL CONTENT
+═══════════════════════════════════════════════════════
+
+If you need to update the training content on the portal:
+1. Go to your GitHub repository
+2. Click on "portal.html"
+3. Click the pencil icon to edit
+4. Make your changes
+5. Click "Commit changes"
+Changes are live within 1-2 minutes.
+
+═══════════════════════════════════════════════════════
+IMPORTANT SECURITY NOTE
+═══════════════════════════════════════════════════════
+
+This login system protects your site from casual visitors
+but is NOT enterprise-grade security. The passwords are
+stored in the HTML file which is public on GitHub.
+
+This is FINE for:
+- Training materials that are not sensitive
+- A team portal for internal reference
+- Keeping the site organized and not indexed by Google
+
+This is NOT appropriate for:
+- Passwords, SSNs, or financial data
+- HIPAA or PCI regulated content
+- Anything you'd fire someone for leaking
+
+For Adleta's training portal this is perfectly appropriate.
+
+═══════════════════════════════════════════════════════
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════
+
+Site not loading after 5 minutes:
+  → Go to Settings → Pages and confirm branch is set to "main"
+  → Make sure you uploaded to the ROOT of the repository,
+    not inside a subfolder
+
+Login redirects back to login page immediately:
+  → Make sure both index.html and portal.html are uploaded
+  → Try clearing your browser cache (Ctrl+Shift+Delete)
+
+Can't find the Pages setting:
+  → Repository must be PUBLIC for free Pages hosting
+  → Go to Settings → General → change to Public first
+
+═══════════════════════════════════════════════════════
+NEED HELP?
+═══════════════════════════════════════════════════════
+
+If you get stuck on any step, take a screenshot and
+bring it back here — happy to walk through it with you.

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adleta Infor M3 Training — Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  background: #0f2133;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 700px 400px at 80% 50%, rgba(26,122,109,0.18) 0%, transparent 70%),
+    repeating-linear-gradient(120deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 52px);
+  pointer-events: none;
+}
+.card {
+  position: relative;
+  background: #172d42;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 44px 48px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.logo-mark {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, #22a08f, #1a7a6d);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+.logo-text { line-height: 1.25; }
+.logo-name { font-size: 15px; font-weight: 700; color: #fff; }
+.logo-sub  { font-size: 13px; color: #7fa3be; }
+
+h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.subtitle { font-size: 14px; color: #7fa3be; margin-bottom: 32px; }
+
+.field { margin-bottom: 18px; }
+label { display: block; font-size: 13px; font-weight: 600; color: #a8c4d8; margin-bottom: 7px; }
+input {
+  width: 100%;
+  padding: 11px 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input::placeholder { color: rgba(255,255,255,0.3); }
+input:focus { border-color: #22a08f; }
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #1a7a6d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.15s;
+}
+.btn:hover { background: #22a08f; }
+
+.error {
+  display: none;
+  background: rgba(192,68,59,0.2);
+  border: 1px solid rgba(192,68,59,0.4);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #f5a09a;
+  margin-top: 14px;
+  text-align: center;
+}
+.error.show { display: block; }
+
+.footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: #4e6a80;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <div class="logo-mark">M3</div>
+    <div class="logo-text">
+      <div class="logo-name">Adleta Infor M3</div>
+      <div class="logo-sub">Super User Training</div>
+    </div>
+  </div>
+
+  <h1>Welcome back</h1>
+  <p class="subtitle">Sign in to access the training portal</p>
+
+  <form id="loginForm" onsubmit="doLogin(event)">
+    <div class="field">
+      <label for="username">Username</label>
+      <input id="username" type="text" placeholder="Enter your username" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+    </div>
+    <button class="btn" type="submit">Sign in</button>
+    <div class="error" id="errorMsg">Incorrect username or password. Please try again.</div>
+  </form>
+
+  <div class="footer">
+    Need access? Contact KRISTENB &nbsp;·&nbsp; Adleta Corporation
+  </div>
+</div>
+
+<script>
+// ── CREDENTIALS ─────────────────────────────────────────────
+// To add or remove users, edit this list.
+// Format: { user: "username", pass: "password" }
+// IMPORTANT: change all passwords before going live.
+const USERS = [
+  { user: "kristenb",      pass: "Adleta2026!" },
+  { user: "alanburk",      pass: "Infor2026!" },
+  { user: "josemanjarrez", pass: "Infor2026!" },
+  { user: "tonyshipka",    pass: "Infor2026!" },
+  { user: "jeanellcoral",  pass: "Infor2026!" },
+  { user: "philipjones",   pass: "Infor2026!" },
+  { user: "terrisauter",   pass: "Infor2026!" },
+  // Add more users below this line:
+  // { user: "newuser", pass: "NewPassword1!" },
+];
+
+const SESSION_KEY = "adleta_auth";
+
+// If already logged in, go straight to portal
+if (sessionStorage.getItem(SESSION_KEY) === "ok") {
+  window.location.replace("portal.html");
+}
+
+function doLogin(e) {
+  e.preventDefault();
+  const u = document.getElementById("username").value.trim().toLowerCase();
+  const p = document.getElementById("password").value;
+  const match = USERS.find(x => x.user === u && x.pass === p);
+  if (match) {
+    sessionStorage.setItem(SESSION_KEY, "ok");
+    sessionStorage.setItem(SESSION_USER, u);
+    window.location.replace("portal.html");
+  } else {
+    document.getElementById("errorMsg").classList.add("show");
+    document.getElementById("password").value = "";
+    document.getElementById("password").focus();
+  }
+}
+
+const SESSION_USER = "adleta_user";
+</script>
+</body>
+</html>
