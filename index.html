@@ -168,7 +168,7 @@ const USERS = [
 const SESSION_KEY = "adleta_auth";
 
 // If already logged in, go straight to portal
-if (sessionStorage.getItem(SESSION_KEY) === "ok") {
+if (sessionStorage.getItem("adleta_auth3") === "ok") {
   window.location.replace("portal.html");
 }
 
@@ -178,8 +178,8 @@ function doLogin(e) {
   const p = document.getElementById("password").value;
   const match = USERS.find(x => x.user === u && x.pass === p);
   if (match) {
-    sessionStorage.setItem(SESSION_KEY, "ok");
-    sessionStorage.setItem(SESSION_USER, u);
+    sessionStorage.setItem("adleta_auth3", "ok");
+    sessionStorage.setItem("adleta_user3", u);
     window.location.replace("portal.html");
   } else {
     document.getElementById("errorMsg").classList.add("show");
