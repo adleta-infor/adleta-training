@@ -192,6 +192,26 @@ p{color:var(--body);line-height:1.6;}
 .empty{text-align:center;padding:40px;color:var(--muted);font-size:13px;}
 @media(max-width:1100px){.mod-grid,.res-grid,.su-grid{grid-template-columns:repeat(2,1fr);}.timeline{grid-template-columns:repeat(2,1fr);}.metrics{grid-template-columns:repeat(2,1fr);}.session-body{grid-template-columns:1fr;}}
 @media(max-width:768px){.app{grid-template-columns:1fr;}.sidebar{height:auto;position:static;}.hero{padding:20px;}.content{padding:16px 18px 32px;}.dash-grid,.admin-grid{grid-template-columns:1fr;}.mod-grid,.res-grid,.su-grid,.timeline{grid-template-columns:1fr;}.mastery{grid-template-columns:1fr;gap:6px;}}
+
+.admin-tabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:20px;}
+.admin-tab{padding:10px 20px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;}
+.admin-tab.active{color:var(--teal);border-bottom-color:var(--teal);}
+.admin-tab-pane{display:none;}.admin-tab-pane.active{display:block;}
+.guide-section{margin-bottom:28px;}
+.guide-section h3{font-size:14px;font-weight:800;color:var(--ink);margin:0 0 10px 0;padding-bottom:8px;border-bottom:1px solid var(--line);}
+.guide-su-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:16px;}
+.guide-su-card{border:1px solid var(--line);border-radius:var(--r);padding:14px;background:var(--surface);}
+.guide-su-name{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:2px;}
+.guide-su-dept{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.guide-su-modules{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
+.guide-su-sessions{font-size:12px;color:var(--body);margin-bottom:6px;}
+.guide-step-list{list-style:none;padding:0;margin:0;}
+.guide-step-list li{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--body);}
+.guide-step-list li:last-child{border-bottom:none;}
+.guide-step-num{width:22px;height:22px;min-width:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;}
+.guide-tip{background:#fef9ec;border:1px solid #f0d060;border-radius:var(--r);padding:12px 14px;font-size:12px;color:#7a6020;margin-top:8px;}
+.guide-tip strong{color:#5a4010;}
+
 </style>
 </head>
 <body>
@@ -653,7 +673,156 @@ function retakeQuiz(sid){delete ST[`quiz-score-${sid}`];delete ST[`quiz-answers-
 function renderRoadmap(){document.getElementById("view-roadmap").innerHTML=`<div class="sec-hd"><div><div class="sec-eyebrow">9-week path</div><h2>Roadmap</h2></div></div><div class="timeline">${PHASES.map(p=>`<div class="phase-card"><div class="phase-weeks">${p.weeks}</div><div class="phase-name">${p.name}</div><div class="phase-purpose">${p.purpose}</div><div class="phase-success">✓ ${p.success}</div></div>`).join("")}</div>`;}
 function renderSuperUsers(){const us=Object.entries(USERS).filter(([,u])=>u.superuser===true);document.getElementById("view-superusers").innerHTML=`<div class="sec-hd"><div><div class="sec-eyebrow">Training cohort</div><h2>Super User Team</h2></div><span class="pill pill-teal">${us.length} confirmed</span></div><div class="su-grid">${us.map(([un,u])=>{const ini=u.name.split(" ").map(n=>n[0]).join("").substring(0,2);const mods=u.modules.filter(m=>m!=="all"&&m!=="all-readonly").map(id=>MODULES[id]?.name||id).join(", ");return`<div class="su-card"><div class="su-av" style="background:${u.color}">${ini}</div><div><div class="su-name">${u.name}</div><div class="su-dept">${u.dept}</div><div class="su-mod">${mods||"All modules"}</div></div></div>`;}).join("")}</div>`;}
 function renderResources(){document.getElementById("view-resources").innerHTML=`<div class="sec-hd"><div><div class="sec-eyebrow">Source library</div><h2>Training Resources</h2></div></div><div class="res-grid">${RESOURCES.map(r=>`<div class="res-card"><h3>${r.name}</h3><p>${r.summary}</p><a class="res-link" href="${r.url}" target="_blank" rel="noreferrer"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Open file</a></div>`).join("")}</div>`;}
-function renderAdmin(){if(currentUserData.role!=="admin"){switchView("dashboard");return;}const rows=Object.entries(USERS).map(([un,u])=>{const mods=u.modules.includes("all")?"All":u.modules.filter(m=>m!=="all-readonly").map(id=>MODULES[id]?.name||id).join(", ");return`<tr><td><span class="status-dot dot-green"></span>${un}</td><td>${u.name}</td><td>${u.dept}</td><td>${u.role==="admin"?"Admin":"Super User"}</td><td style="font-size:11px">${mods}</td></tr>`;}).join("");const prows=Object.entries(USERS).filter(([,u])=>u.superuser===true).map(([un,u])=>{const mm=u.modules.includes("all")?Object.values(MODULES):u.modules.filter(m=>m!=="all-readonly").map(id=>MODULES[id]).filter(Boolean);const ms=mm.flatMap(m=>m.sessions);const ps=ms.filter(s=>(ST[`quiz-score-${s.id}`]||0)>=70).length;const pct=ms.length?Math.round(ps/ms.length*100):0;return`<tr><td>${u.name}</td><td>${u.dept}</td><td>${ps} / ${ms.length}</td><td><div style="display:flex;align-items:center;gap:8px"><div class="prog-track" style="width:80px"><div class="prog-fill" style="width:${pct}%"></div></div><span style="font-size:12px;color:var(--muted)">${pct}%</span></div></td></tr>`;}).join("");document.getElementById("view-admin").innerHTML=`<div class="sec-hd"><div><div class="sec-eyebrow">Admin only</div><h2>Admin Panel</h2></div></div><div class="card" style="margin-bottom:16px"><div class="card-title">Downloads</div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-primary" href="Adleta_M3_Department_User_Roster.xlsx" download><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Department User Roster</a></div><p style="font-size:12px;color:var(--muted);margin-top:10px">Roster includes all 87 Adleta employees pre-mapped to their super user. Update Training Status as sessions are completed.</p></div><div class="admin-grid"><div class="card"><div class="card-title">User Accounts</div><table class="user-table"><thead><tr><th>Username</th><th>Name</th><th>Department</th><th>Role</th><th>Modules</th></tr></thead><tbody>${rows}</tbody></table><p style="font-size:12px;color:var(--muted);margin-top:10px">To add/change users, edit the USERS object in portal.html on GitHub.</p></div><div class="card"><div class="card-title">Super User Progress</div><table class="user-table"><thead><tr><th>Name</th><th>Department</th><th>Sessions Passed</th><th>Progress</th></tr></thead><tbody>${prows}</tbody></table></div></div>`;}
+function renderAdmin(){if(currentUserData.role!=="admin"){switchView("dashboard");return;}const rows=Object.entries(USERS).map(([un,u])=>{const mods=u.modules.includes("all")?"All":u.modules.filter(m=>m!=="all-readonly").map(id=>MODULES[id]?.name||id).join(", ");return`<tr><td><span class="status-dot dot-green"></span>${un}</td><td>${u.name}</td><td>${u.dept}</td><td>${u.role==="admin"?"Admin":"Super User"}</td><td style="font-size:11px">${mods}</td></tr>`;}).join("");const prows=Object.entries(USERS).filter(([,u])=>u.superuser===true).map(([un,u])=>{const mm=u.modules.includes("all")?Object.values(MODULES):u.modules.filter(m=>m!=="all-readonly").map(id=>MODULES[id]).filter(Boolean);const ms=mm.flatMap(m=>m.sessions);const ps=ms.filter(s=>(ST[`quiz-score-${s.id}`]||0)>=70).length;const pct=ms.length?Math.round(ps/ms.length*100):0;return`<tr><td>${u.name}</td><td>${u.dept}</td><td>${ps} / ${ms.length}</td><td><div style="display:flex;align-items:center;gap:8px"><div class="prog-track" style="width:80px"><div class="prog-fill" style="width:${pct}%"></div></div><span style="font-size:12px;color:var(--muted)">${pct}%</span></div></td></tr>`;}).join("");document.getElementById("view-admin").innerHTML=`<div class="sec-hd"><div><div class="sec-eyebrow">Admin only</div><h2>Admin Panel</h2></div></div>
+<div class="admin-tabs">
+<div class="admin-tab active" onclick="switchAdminTab('progress',this)">Progress</div>
+<div class="admin-tab" onclick="switchAdminTab('guide',this)">Trainer Guide</div>
+</div>
+<div class="admin-tab-pane active" id="atab-progress"><div class="card" style="margin-bottom:16px"><div class="card-title">Downloads</div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-primary" href="Adleta_M3_Department_User_Roster.xlsx" download><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Department User Roster</a></div><p style="font-size:12px;color:var(--muted);margin-top:10px">Roster includes all 87 Adleta employees pre-mapped to their super user. Update Training Status as sessions are completed.</p></div><div class="admin-grid"><div class="card"><div class="card-title">User Accounts</div><table class="user-table"><thead><tr><th>Username</th><th>Name</th><th>Department</th><th>Role</th><th>Modules</th></tr></thead><tbody>${rows}</tbody></table><p style="font-size:12px;color:var(--muted);margin-top:10px">To add/change users, edit the USERS object in portal.html on GitHub.</p></div><div class="card"><div class="card-title">Super User Progress</div><table class="user-table"><thead><tr><th>Name</th><th>Department</th><th>Sessions Passed</th><th>Progress</th></tr></thead><tbody>${prows}</tbody></table></div></div>
+</div>
+<!-- TRAINER GUIDE TAB -->
+<div class="admin-tab-pane" id="atab-guide">
+<div class="guide-section">
+<h3>How This Training Works</h3>
+<p style="font-size:13px;color:var(--body);line-height:1.7;margin-bottom:10px">
+You are using a <strong>Train-the-Trainer</strong> model. You (Kristen) train each Super User 1-on-1 using this portal and the M3 test environment. Once certified, each Super User trains their own department team using the same approach.
+</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px">
+<div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:center">
+<div style="font-size:22px;font-weight:800;color:var(--teal)">1</div>
+<div style="font-size:12px;font-weight:700;color:var(--ink);margin:4px 0">Kristen Trains</div>
+<div style="font-size:11px;color:var(--muted)">1-on-1 with each Super User via this portal + M3 test environment</div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:center">
+<div style="font-size:22px;font-weight:800;color:var(--teal)">2</div>
+<div style="font-size:12px;font-weight:700;color:var(--ink);margin:4px 0">Super User Certified</div>
+<div style="font-size:11px;color:var(--muted)">Super User passes all quizzes and completes checklists for their modules</div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:center">
+<div style="font-size:22px;font-weight:800;color:var(--teal)">3</div>
+<div style="font-size:12px;font-weight:700;color:var(--ink);margin:4px 0">Super User Trains Dept</div>
+<div style="font-size:11px;color:var(--muted)">Super User leads sessions for their department using the same portal</div>
+</div>
+</div>
+</div>
+
+<div class="guide-section">
+<h3>Before You Start — Setup Checklist</h3>
+<ul class="guide-step-list">
+<li><div class="guide-step-num">✓</div><div><strong>M3 test environment access confirmed</strong> — each Super User has login credentials and can reach the test system</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>Security roles assigned in M3</strong> — IT has granted each Super User the roles needed for their modules (see Security Roles guide)</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>Portal passwords updated</strong> — change the default Infor2026! passwords before sharing portal logins</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>1-on-1 sessions scheduled</strong> — block 1.5–2 hours per session with each Super User. Plan 2–3 sessions per module.</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>CRP recordings accessible</strong> — Super User can reach SharePoint and play the session videos (sign in with Adleta account)</div></li>
+</ul>
+</div>
+
+<div class="guide-section">
+<h3>How to Run a Training Session (Step by Step)</h3>
+<ul class="guide-step-list">
+<li><div class="guide-step-num">1</div><div><strong>Open the portal together</strong> — have the Super User log in to the portal on their own computer. You log in as admin on yours so you can see their progress.</div></li>
+<li><div class="guide-step-num">2</div><div><strong>Navigate to the session</strong> — Super User clicks Modules → opens their module → selects the session. Review the session title and duration together.</div></li>
+<li><div class="guide-step-num">3</div><div><strong>Watch the video first</strong> — click Watch Recording. Watch the full CRP video together. Don't skip it — the video shows the exact scenario they need to learn.</div></li>
+<li><div class="guide-step-num">4</div><div><strong>Walk through the steps in M3 test</strong> — open M3 test environment side by side. Go through each numbered step on the portal, doing it live in M3. You narrate; they type.</div></li>
+<li><div class="guide-step-num">5</div><div><strong>Super User does it solo</strong> — reset or start a new record and have them repeat the workflow start to finish without guidance. Only intervene if they are stuck for more than 60 seconds.</div></li>
+<li><div class="guide-step-num">6</div><div><strong>Take the quiz</strong> — have them answer all questions on their own. Do not hint. Submit and review the results together. If they score below 70%, walk through the missed questions and have them retake it.</div></li>
+<li><div class="guide-step-num">7</div><div><strong>Complete the checklist</strong> — go through the session checklist together. Check off each item they demonstrated. Items not yet checked = topics to revisit next session.</div></li>
+<li><div class="guide-step-num">8</div><div><strong>Add notes</strong> — have the Super User type their key takeaways and any Adleta-specific tips into the My Notes box. These notes will be there when they train their dept.</div></li>
+</ul>
+<div class="guide-tip"><strong>💡 Tip:</strong> Cover 2–3 sessions per sitting. Back-to-back sessions on related topics (e.g., all 3 AP payment sessions in one afternoon) build context faster than spreading them out.</div>
+</div>
+
+<div class="guide-section">
+<h3>Super User Training Schedule</h3>
+<div class="guide-su-grid">
+<div class="guide-su-card" style="border-left:4px solid #2d6fa3">
+<div class="guide-su-name">Alan Burk</div>
+<div class="guide-su-dept">Purchasing / Inventory Control</div>
+<div class="guide-su-modules"><span class="pill pill-gray">Foundation</span><span class="pill pill-gray">Purchasing</span><span class="pill pill-gray">Inventory</span></div>
+<div class="guide-su-sessions">~16 sessions · Estimate 6–8 training hours</div>
+<div style="font-size:11px;color:var(--muted)">Key topics: Planned PO Release, Pre-Receipts, EDI, AAA allocation, Cycle Counts</div>
+</div>
+<div class="guide-su-card" style="border-left:4px solid #1a7a6d">
+<div class="guide-su-name">Jose Manjarrez</div>
+<div class="guide-su-dept">Warehouse</div>
+<div class="guide-su-modules"><span class="pill pill-gray">Foundation</span><span class="pill pill-gray">Inventory</span></div>
+<div class="guide-su-sessions">~8 sessions · Estimate 3–4 training hours</div>
+<div style="font-size:11px;color:var(--muted)">Key topics: Pick/pack, AAA, cycle counts, warehouse management</div>
+</div>
+<div class="guide-su-card" style="border-left:4px solid #8b5e3c">
+<div class="guide-su-name">Tony Shipka</div>
+<div class="guide-su-dept">Customer Service / Order Entry</div>
+<div class="guide-su-modules"><span class="pill pill-gray">Foundation</span><span class="pill pill-gray">Order Mgmt</span></div>
+<div class="guide-su-sessions">~12 sessions · Estimate 5–6 training hours</div>
+<div style="font-size:11px;color:var(--muted)">Key topics: Manual orders (CL1, COD, WC), credit holds, returns</div>
+</div>
+<div class="guide-su-card" style="border-left:4px solid #7a3c7a">
+<div class="guide-su-name">Jeanell Coral</div>
+<div class="guide-su-dept">Sales / CRM &amp; Pricing / Reporting</div>
+<div class="guide-su-modules"><span class="pill pill-gray">Foundation</span><span class="pill pill-gray">Order Mgmt</span><span class="pill pill-gray">Reporting</span></div>
+<div class="guide-su-sessions">~18 sessions · Estimate 7–9 training hours</div>
+<div style="font-size:11px;color:var(--muted)">Key topics: Quotes to CO, drop ship, Birst visualizer &amp; dashboards</div>
+</div>
+<div class="guide-su-card" style="border-left:4px solid #c49a2a">
+<div class="guide-su-name">Philip Jones</div>
+<div class="guide-su-dept">Accounting</div>
+<div class="guide-su-modules"><span class="pill pill-gray">Foundation</span><span class="pill pill-gray">Finance AP</span><span class="pill pill-gray">Finance GL</span></div>
+<div class="guide-su-sessions">~16 sessions · Estimate 6–8 training hours</div>
+<div style="font-size:11px;color:var(--muted)">Key topics: PO match, payment proposals (check &amp; wire), void check, bank recon, AR tickler</div>
+</div>
+<div class="guide-su-card" style="border-left:4px solid #5b7fa6">
+<div class="guide-su-name">Abbey Parker</div>
+<div class="guide-su-dept">Logistics / Transportation</div>
+<div class="guide-su-modules"><span class="pill pill-gray">Foundation</span><span class="pill pill-gray">Logistics</span></div>
+<div class="guide-su-sessions">~9 sessions · Estimate 3–4 training hours</div>
+<div style="font-size:11px;color:var(--muted)">Key topics: Load sheets, manifests, will call pick/pack, common carrier, shipping reports</div>
+</div>
+<div class="guide-su-card" style="border-left:4px solid #7a5ea6">
+<div class="guide-su-name">Lauren Calvey</div>
+<div class="guide-su-dept">Product Management</div>
+<div class="guide-su-modules"><span class="pill pill-gray">Foundation</span><span class="pill pill-gray">Product Mgmt</span></div>
+<div class="guide-su-sessions">~7 sessions · Estimate 3–4 training hours</div>
+<div style="font-size:11px;color:var(--muted)">Key topics: Item master, MRP settings, discontinuing items (status 50)</div>
+</div>
+</div>
+<div class="guide-tip"><strong>Recommended order:</strong> Start with Foundation for everyone. Then go module by module in the order shown on the portal. Foundation first ensures they can navigate M3 before tackling department-specific workflows.</div>
+</div>
+
+<div class="guide-section">
+<h3>After Super User Certification — Dept Training Handoff</h3>
+<ul class="guide-step-list">
+<li><div class="guide-step-num">1</div><div><strong>Confirm the Super User can teach it</strong> — before handoff, ask them to walk YOU through one session as if you were a new employee. If they can explain it clearly, they are ready.</div></li>
+<li><div class="guide-step-num">2</div><div><strong>Set up dept user portal accounts</strong> — department employees are already in the portal. Give the Super User the list of usernames and passwords for their team (from the User Accounts table above).</div></li>
+<li><div class="guide-step-num">3</div><div><strong>Super User schedules dept sessions</strong> — they should plan group sessions of 4–6 people. Longer team = more sessions needed. Suggest 1–1.5 hours per session for dept users.</div></li>
+<li><div class="guide-step-num">4</div><div><strong>Same flow applies for dept training</strong> — Super User uses the portal the same way you used it with them: watch video → walk through steps in M3 test → employees do it solo → quiz → checklist.</div></li>
+<li><div class="guide-step-num">5</div><div><strong>Track dept progress in the Team view</strong> — you can monitor each Super User's department from the Teams tab. Super Users can update training status for their people as they complete sessions.</div></li>
+<li><div class="guide-step-num">6</div><div><strong>You are the escalation point</strong> — if a Super User or their dept encounters a scenario not covered in training, they come to you. Log it as a gap and add to the portal if it keeps coming up.</div></li>
+</ul>
+</div>
+
+<div class="guide-section">
+<h3>Quiz &amp; Certification Standards</h3>
+<ul class="guide-step-list">
+<li><div class="guide-step-num">✓</div><div><strong>70% or higher</strong> to pass each session quiz. Below 70% = retake required before moving to the next session.</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>Checklist 100% complete</strong> before a Super User is considered certified on that session. Unchecked items mean they have not demonstrated that skill yet.</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>All module sessions passed</strong> before a Super User can begin training their department on that module.</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>No time limit</strong> on quizzes — this is not a test, it is a learning tool. Encourage them to reference the steps while answering.</div></li>
+</ul>
+</div>
+
+<div class="guide-section">
+<h3>Using the Admin Panel to Track Progress</h3>
+<ul class="guide-step-list">
+<li><div class="guide-step-num">→</div><div><strong>Progress tab</strong> (this panel) shows each Super User's quiz pass rate across all their sessions. Check this weekly.</div></li>
+<li><div class="guide-step-num">→</div><div><strong>Teams tab</strong> shows each Super User's department roster and lets you (or the Super User) update training status per person: Not Started → In Progress → Trained.</div></li>
+<li><div class="guide-step-num">→</div><div><strong>Super Users tab</strong> shows all 7 Super Users at a glance — good for sharing with Mike Parsons or leadership as a status snapshot.</div></li>
+</ul>
+<div class="guide-tip"><strong>Note:</strong> Quiz scores and checklist progress are stored in each user's browser (localStorage). Progress shown in the admin panel reflects data from the browser you are currently on. Super Users must log in on the same browser they trained on to see their own progress.</div>
+</div>
+</div>
+</div>
+`;}`
+function switchAdminTab(id,el){document.querySelectorAll(".admin-tab").forEach(t=>t.classList.remove("active"));document.querySelectorAll(".admin-tab-pane").forEach(p=>p.classList.remove("active"));el.classList.add("active");const pane=document.getElementById("atab-"+id);if(pane)pane.classList.add("active");}
 function renderTeam(){
   const isAdmin=currentUserData.role==="admin";
   const suMap=Object.entries(USERS).filter(([,u])=>u.superuser===true).map(([un,u])=>({un,name:u.name,dept:u.dept,color:u.color,users:DEPT_USERS[un]||[]}));
