@@ -76,35 +76,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">
     <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
       <div style="font-size:13px;font-weight:800;color:var(--ink)">Open Any Program</div>
-      <div style="font-size:12px;color:var(--body);margin-top:3px">Press <strong>Ctrl+R</strong> → type the program code → Enter</div>
+      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>search bar</strong> in the left panel → type the program code → Enter. Click ≡ first if the panel is closed.</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
       <div style="font-size:13px;font-weight:800;color:var(--ink)">Create a New Record</div>
-      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>+ New</strong> button in the toolbar (top left of the program)</div>
+      <div style="font-size:12px;color:var(--body);margin-top:3px">From a <strong>list view</strong>, click the <strong>+</strong> button in the toolbar. Fill in the required fields (yellow = required).</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
       <div style="font-size:13px;font-weight:800;color:var(--ink)">Search / Lookup a Field</div>
-      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>lookup icon</strong> (small square) next to the field, or type part of the value and press Enter</div>
+      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>🔍 lookup icon</strong> next to the field. Type part of the name or number, press Enter, click the result.</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
-      <div style="font-size:13px;font-weight:800;color:var(--ink)">Save / Confirm</div>
-      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>✓ checkmark</strong> button, or press <strong>Enter</strong> on the last field</div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink)">Add a Line / Save</div>
+      <div style="font-size:12px;color:var(--body);margin-top:3px">Fill in the entry row at the bottom → click <strong>Add</strong>. When all lines are done, click <strong>Change</strong> to save the record.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
+      <div style="font-size:13px;font-weight:800;color:var(--ink)">Work With a Record</div>
+      <div style="font-size:12px;color:var(--body);margin-top:3px"><strong>Right-click</strong> any row → <strong>Select</strong> (Ctrl+1) to use it, <strong>Change</strong> (Ctrl+2) to edit, <strong>Display</strong> (Ctrl+5) to view only.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
+      <div style="font-size:13px;font-weight:800;color:var(--ink)">Navigate Between Panels</div>
+      <div style="font-size:12px;color:var(--body);margin-top:3px">Click <strong>Next</strong> (bottom right) to move forward, or click any <strong>panel tab</strong> at the bottom (B, E, F, G…) to jump directly.</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
       <div style="font-size:13px;font-weight:800;color:var(--ink)">Cancel / Go Back</div>
-      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>X</strong> button or press <strong>Esc</strong></div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
-      <div style="font-size:13px;font-weight:800;color:var(--ink)">Related Programs</div>
-      <div style="font-size:12px;color:var(--body);margin-top:3px"><strong>Right-click</strong> a line → select from the Related menu</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px">
-      <div style="font-size:13px;font-weight:800;color:var(--ink)">Filter a List</div>
-      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>funnel / filter icon</strong> in the toolbar, enter your criteria, press Enter</div>
+      <div style="font-size:12px;color:var(--body);margin-top:3px">Click the <strong>&lt; back arrow</strong> at the bottom, or right-click → <strong>Cancel</strong> (F12) to exit without saving.</div>
     </div>
     <div style="background:#fff8f0;border:1px solid #f0c060;border-radius:6px;padding:10px">
       <div style="font-size:13px;font-weight:800;color:#7a4010">⚠️ Do NOT press F5</div>
-      <div style="font-size:12px;color:#7a4010;margin-top:3px">In a browser, F5 <strong>refreshes the page</strong> and loses your unsaved work. Use the ✓ button to save instead.</div>
+      <div style="font-size:12px;color:#7a4010;margin-top:3px">F5 <strong>refreshes the browser</strong> and loses unsaved work. Use the <strong>Change</strong> button to save. Use the &lt; back arrow to go back.</div>
     </div>
   </div>
 </div>
@@ -118,64 +118,112 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 <div class="mod-body open">
 
+<!-- fnd-1 -->
 <div class="session-card">
-  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>M3 Navigation and Getting Started</h3><span class="dur">30 min</span></div>
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>Kickoff and Super User Role</h3><span class="dur">2 hours</span></div>
   <div class="session-body open">
-    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">M3 Main Menu</span><span class="prog-tag">Ctrl+R (Quick Nav)</span><span class="prog-tag">MNS010 (User Settings)</span></div></div>
-    <div class="sg"><div class="sg-label">Before the Session — Set Up</div><ul class="setup-list"><li><span class="icon">📋</span>Make sure the Super User has their M3 test login credentials and can reach the test environment URL.</li><li><span class="icon">📋</span>Have the portal open on your screen as well so you can reference the steps side-by-side.</li></ul></div>
-    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
-      <li><span class="icon">▶</span>Log in to M3 test environment together. Show them the home screen layout.</li>
-      <li><span class="icon">▶</span>Press <strong>Ctrl+R</strong> — type PPS200, hit Enter. This is how you open any M3 program. Show them 2-3 programs this way.</li>
-      <li><span class="icon">▶</span>Show the M3 H5 toolbar actions: <strong>+ New button = Create a new record &nbsp;|&nbsp; Lookup icon (small square next to a field) = Search/lookup &nbsp;|&nbsp; Checkmark ✓ = Save/Confirm &nbsp;|&nbsp; Esc = Cancel/Go back</strong>. These toolbar buttons appear in every program.</li>
-      <li><span class="icon">▶</span>Show how to click the lookup icon next to the Vendor field in PPS200 to open a search list. Type part of the name and press Enter to filter results.</li>
-      <li><span class="icon">▶</span>Show how to right-click a line to see Related options — this is how you navigate to sub-screens.</li>
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">No M3 — discussion only</span><span class="prog-tag">Training Portal</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session — Set Up</div><ul class="setup-list">
+      <li><span class="icon">📋</span>Print or share the Super User Role Definition doc and the Module Ownership chart.</li>
+      <li><span class="icon">📋</span>Have the training portal open on your screen to show the session list and expectations.</li>
+      <li><span class="icon">📋</span>Confirm all 7 super users have their portal logins and can access the test environment URL.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Cover</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Why Adleta is moving to Infor M3 — what is changing, what stays the same. Be specific about their department's workflows.</li>
+      <li><span class="icon">▶</span>Super user responsibilities: before training (practice, attend, log issues), during go-live (support their department, escalate blockers), after go-live (own their module, train new hires).</li>
+      <li><span class="icon">▶</span>Module ownership — confirm who owns Purchasing, Inventory, Order Management, Finance AP, Finance GL, and Reporting. Each person should leave knowing exactly which sessions they are responsible for.</li>
+      <li><span class="icon">▶</span>Walk through the training model: Concept → Demo → Practice → Real Scenario → Teach-Back. Explain that teach-back is required to pass.</li>
+      <li><span class="icon">▶</span>Readiness expectations: practice requirements, issue log, attendance policy, sign-off process, and department training handoff plan.</li>
+      <li><span class="icon">▶</span>Open discussion: each super user names their biggest department workflow and their biggest concern about M3.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">Assignment (Due Next Session)</div><ul class="demo-list">
+      <li><span class="icon">📝</span>Each super user writes: their primary process, three questions about how it will work in M3, and one thing they expect to teach their team.</li>
     </ul></div>
     <div class="sg"><div class="sg-label">Watch For</div><ul class="watch-list">
-      <li><span class="icon">⚠️</span>Super Users who are used to Windows apps will try to click through menus. Keep redirecting them to Ctrl+R and function keys.</li>
-      <li><span class="icon">⚠️</span>If they press Enter too fast and submit an empty form, show them how Esc backs out without saving.</li>
+      <li><span class="icon">⚠️</span>Super users who seem unclear about module ownership — resolve this now, not in week 3.</li>
+      <li><span class="icon">⚠️</span>Anyone who says "I'll just figure it out during go-live." Set the expectation clearly: teach-back is required to be cleared.</li>
     </ul></div>
-    <div class="pass-box">✓ They can open any program with Ctrl+R, use the + New button to create records, the lookup icon to search fields, the ✓ checkmark to save, and Esc to cancel — and navigate back to the main menu.</div>
+    <div class="pass-box">✓ Every super user can name their module, their responsibilities, and what is required to be cleared for go-live. Assignment submitted before next session.</div>
   </div>
 </div>
 
+<!-- fnd-2 -->
 <div class="session-card">
-  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">2</div><h3>M3 Data Structure — Items, Customers, Vendors</h3><span class="dur">30 min</span></div>
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">2</div><h3>Navigation and Core UI — Logging In and Getting Around</h3><span class="dur">2 hours</span></div>
   <div class="session-body">
-    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MMS060 (Item Master)</span><span class="prog-tag">CRS610 (Customer Master)</span><span class="prog-tag">CRS620 (Vendor/Supplier Master)</span></div></div>
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">CRS610 (Customer Master)</span><span class="prog-tag">CRS620 (Supplier Master)</span><span class="prog-tag">MMS060 (Stock Balance)</span><span class="prog-tag">PPS200 (Purchase Orders)</span><span class="prog-tag">OIS100 (Customer Orders)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session — Set Up</div><ul class="setup-list">
+      <li><span class="icon">📋</span>Confirm every super user can log in to the M3 test environment (TST) before the session starts — resolve access issues with IT beforehand.</li>
+      <li><span class="icon">📋</span>Have a test customer number, supplier number, and item number ready to use for demos (use real Adleta data from the test environment).</li>
+    </ul></div>
     <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
-      <li><span class="icon">▶</span>Open MMS060. Look up a real item number (use a common Adleta stocking item). Walk through the key panels: Description, Unit of Measure, Warehouse settings, Acquisition/Planning flags.</li>
-      <li><span class="icon">▶</span>Open CRS610. Look up a real customer. Show: payment terms, credit limit, ship-to addresses, invoice delivery method.</li>
-      <li><span class="icon">▶</span>Open CRS620. Look up a real vendor. Show: payment terms, bank/ACH info, EDI trading partner flag.</li>
-      <li><span class="icon">▶</span>Explain the relationship: a Customer Order (OIS100) links a Customer (CRS610) + Item (MMS060). A Purchase Order (PPS200) links a Vendor (CRS620) + Item (MMS060).</li>
+      <li><span class="icon">▶</span>Log in together. Point out: TST badge (top right = test environment), home screen Favorites and Recent, company/division at bottom right.</li>
+      <li><span class="icon">▶</span><strong>Opening a program:</strong> Click the search bar in the left panel (≡ to open it if closed). Type CRS610, press Enter. Show them 3–4 programs this way. This is the only way to open programs in M3 H5.</li>
+      <li><span class="icon">▶</span><strong>Multiple programs open:</strong> Open CRS610, then PPS200, then OIS100. Show the tabs at the top — all three are open at the same time. Click between tabs.</li>
+      <li><span class="icon">▶</span><strong>Panel navigation:</strong> Open CRS610 and look up customer 001001. Point to the panel tabs at the bottom (E, F, G, H, J…). Click F (Details) — show CO type and Cust no. mand fields. Click J (Financial 1) — show payment terms and credit limits. Use Next to move forward.</li>
+      <li><span class="icon">▶</span><strong>Right-click in a list:</strong> From the CRS610 list, right-click any row. Show: Select (Ctrl+1) = open/use it, Change (Ctrl+2) = edit it, Display (Ctrl+5) = view only. This menu appears in every M3 list.</li>
+      <li><span class="icon">▶</span><strong>Lookup icon:</strong> In any field with a 🔍 icon, click it to search. Type part of a name, press Enter, click the result. Demo in the Customer field of OIS100/A.</li>
+      <li><span class="icon">▶</span><strong>Add + Change buttons:</strong> Show OIS101 — the entry row at the bottom with the Add button adds a line. The Change button at the bottom saves the record. These replace the checkmark in older M3 versions.</li>
+      <li><span class="icon">▶</span>Set up a Favorite: navigate to a program, right-click the tab or use the star. Show it appears on the home screen.</li>
+      <li><span class="icon">▶</span>Show the issue log in Teams/SharePoint. Have them submit one test entry: program code, steps, question, business impact.</li>
     </ul></div>
-    <div class="tip-box"><strong>Tip:</strong> Use Adleta's real vendor and customer numbers from the test environment — it makes the data feel familiar and relevant to them.</div>
-    <div class="pass-box">✓ They can look up any item, customer, or vendor in M3 and identify the key fields (terms, status, unit of measure).</div>
+    <div class="sg"><div class="sg-label">Watch For</div><ul class="watch-list">
+      <li><span class="icon">⚠️</span>Anyone pressing F5 — it refreshes the browser and kills unsaved work. Address it immediately and show the Change button instead.</li>
+      <li><span class="icon">⚠️</span>Super users who try to double-click records — in H5 you right-click → Select/Change/Display. Correct this early or it will cause confusion in every module session.</li>
+      <li><span class="icon">⚠️</span>Anyone who can't find the left panel search bar — if the ≡ hamburger is collapsed they won't see it. Show them how to open it.</li>
+    </ul></div>
+    <div class="pass-box">✓ They can open any M3 program by code, navigate panels, right-click to Select/Change/Display a record, use the lookup icon, and submit a complete issue log entry — all without coaching.</div>
   </div>
 </div>
 
+<!-- fnd-3 -->
 <div class="session-card">
-  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">3</div><h3>Running Reports and Printing in M3</h3><span class="dur">20 min</span></div>
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">3</div><h3>Terminology and Entity Crosswalk</h3><span class="dur">1.5 hours</span></div>
   <div class="session-body">
-    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MNS300 (Print Manager)</span><span class="prog-tag">Any standard inquiry report</span></div></div>
-    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
-      <li><span class="icon">▶</span>Run a simple standard report (e.g., open item list or stock status). Show them the parameters screen — how to set filters before running.</li>
-      <li><span class="icon">▶</span>Open MNS300 (Print Manager). Show them where print jobs land and how to view or re-print a report.</li>
-      <li><span class="icon">▶</span>Show how to export a report to PDF or Excel from the output screen.</li>
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">CRS610 (Customer)</span><span class="prog-tag">CRS620 (Supplier)</span><span class="prog-tag">MMS060 (Stock Balance)</span><span class="prog-tag">OIS100 (Customer Order)</span><span class="prog-tag">PPS200 (Purchase Order)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session — Set Up</div><ul class="setup-list">
+      <li><span class="icon">📋</span>Print the Terminology Crosswalk doc — have copies for every super user.</li>
+      <li><span class="icon">📋</span>Have a live customer order and a live purchase order visible in the test environment to reference.</li>
     </ul></div>
-    <div class="pass-box">✓ They can run a report, set parameters, find the output in Print Manager, and export it.</div>
-  </div>
-</div>
-
-<div class="session-card">
-  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">4</div><h3>Support, Escalation, and Go-Live Resources</h3><span class="dur">20 min</span></div>
-  <div class="session-body">
     <div class="sg"><div class="sg-label">What to Cover</div><ul class="demo-list">
-      <li><span class="icon">▶</span>Who to call when M3 has an error message they don't understand: <strong>you (Kristen)</strong> first, then escalate to Bravo support if needed.</li>
-      <li><span class="icon">▶</span>Show them where the Bravo support ticket system is and how to submit a ticket.</li>
-      <li><span class="icon">▶</span>Confirm the go-live date and the support model for the first 30 days post go-live.</li>
-      <li><span class="icon">▶</span>Show them the Resources tab in the training portal — all reference documents are there.</li>
+      <li><span class="icon">▶</span>Walk the M3 entity map: Customer (CRS610), Supplier (CRS620), Item/Stock Balance (MMS060), Warehouse, Purchase Order (PPS200), Customer Order (OIS100), Invoice, GL Account. For each: primary program, department owner, who sets it up vs. who uses it daily.</li>
+      <li><span class="icon">▶</span>Review the Terminology Crosswalk — map Adleta terms to M3 terms. Examples: "vendor" = Supplier, "product/SKU" = Item number, "stock on hand" = On-hand in MMS060, "sales order" = Customer Order in OIS100.</li>
+      <li><span class="icon">▶</span>Trace Procure to Pay in M3: PO (PPS200) → Receiving (PPS300) → AP Invoice (APS100) → Three-Way Match → Payment (APS130).</li>
+      <li><span class="icon">▶</span>Trace Order to Cash: Customer Order (OIS100) → Shipment (OIS300) → AR Invoice → Cash Receipt (ARS110).</li>
+      <li><span class="icon">▶</span>Each super user explains one entity: what it is, which program, who owns it, why it matters to their department. No notes — verbal only.</li>
     </ul></div>
-    <div class="pass-box">✓ They know who to contact for M3 issues, how to submit a support ticket, and where to find reference documents.</div>
+    <div class="sg"><div class="sg-label">Watch For</div><ul class="watch-list">
+      <li><span class="icon">⚠️</span>Confusion between MMS060 (Stock Balance by location/lot) and item setup. MMS060 shows WHERE inventory is and in which lot — it is not the item configuration screen.</li>
+      <li><span class="icon">⚠️</span>Finance team members who are unfamiliar with the warehouse flow — they need to understand Procure to Pay end-to-end even if they only touch the AP end.</li>
+    </ul></div>
+    <div class="pass-box">✓ They can explain any M3 entity in plain language — which program it lives in, who owns it, and why it matters. They can trace both the Procure to Pay and Order to Cash flows without help.</div>
+  </div>
+</div>
+
+<!-- fnd-4 -->
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">4</div><h3>Foundation Mastery Check</h3><span class="dur">1.5 hours</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">Any 3 programs relevant to their module</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session — Set Up</div><ul class="setup-list">
+      <li><span class="icon">📋</span>Prepare one customer, one supplier, and one item lookup task for each super user using test data.</li>
+      <li><span class="icon">📋</span>Have the issue log open and ready — you will review all open issues from Weeks 1–2.</li>
+      <li><span class="icon">📋</span>Prepare your Ready / Ready With Coaching / Not Ready assessment sheet.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Assess</div><ul class="demo-list">
+      <li><span class="icon">▶</span><strong>Navigation practical:</strong> Ask each super user to open three programs relevant to their module using the search bar — no coaching. Watch for hesitation, wrong clicks, or going to the wrong panel.</li>
+      <li><span class="icon">▶</span><strong>Record lookup practical:</strong> Ask them to find a specific customer, supplier, and item by number. Then ask them to name 2–3 key fields on each record (e.g., payment terms, status, unit of measure).</li>
+      <li><span class="icon">▶</span><strong>Right-click practical:</strong> Open a list view (e.g., CRS610). Ask them to open a record for editing. Watch that they right-click → Change, not double-click.</li>
+      <li><span class="icon">▶</span><strong>Entity explanation:</strong> Each super user explains one record type — what it is, which program, who owns it, why it matters — without notes.</li>
+      <li><span class="icon">▶</span><strong>Teach-back (3–5 min):</strong> Each super user explains to the group how they would help a department user find the right screen, look up a record, and log an issue.</li>
+      <li><span class="icon">▶</span><strong>Issue log review:</strong> Go through all open issues from fnd-1 through fnd-3. Assign owners. Resolve all access blockers before Week 3 module training begins.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">Watch For</div><ul class="watch-list">
+      <li><span class="icon">⚠️</span>Super users still pressing F5, double-clicking, or looking for Ctrl+R — these are H5 habits that will break in every module session. Do not pass them until these are corrected.</li>
+      <li><span class="icon">⚠️</span>Anyone with unresolved login or access issues — these must be resolved before module training starts or they will fall behind immediately.</li>
+    </ul></div>
+    <div class="note-box"><strong>Readiness decision:</strong> Mark each super user as <strong>Ready</strong> (proceed to module training), <strong>Ready With Coaching</strong> (proceed with a targeted follow-up on one specific gap), or <strong>Not Ready</strong> (requires one more foundation session before module training). Do not move a Not Ready super user into module training — they will struggle and slow the group.</div>
+    <div class="pass-box">✓ They can open three role-relevant programs without coaching, look up a customer/supplier/item and name key fields, right-click correctly, and complete a 3–5 minute teach-back. All access blockers resolved.</div>
   </div>
 </div>
 
@@ -603,7 +651,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="session-card">
   <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>Discontinuing an Item — Status 50 and MRP Off</h3><span class="dur">30 min</span></div>
   <div class="session-body">
-    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MMS060 (Item Master)</span><span class="prog-tag">OIS100 (Test — verify blocked)</span><span class="prog-tag">PPS200 (Test — verify blocked)</span></div></div>
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MMS060 (Stock Balance by Location)</span><span class="prog-tag">OIS100 (Test — verify blocked)</span><span class="prog-tag">PPS200 (Test — verify blocked)</span></div></div>
     <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
       <li><span class="icon">📋</span><strong>Ask Bravo:</strong> In MMS060, what is the exact field name and panel for: (1) Item Status (where you change to 50), and (2) the MRP/planning flag (where you turn off planning)? Write here: Status field: ________ Panel: ________ | MRP flag field: ________ Panel: ________</li>
       <li><span class="icon">📋</span>Set up a test item in the test environment that can be safely discontinued during training.</li>
