@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trainer Guide — Adleta Infor M3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#1a7a6d;--ink:#111;--body:#444;--muted:#888;--surface:#f8f9fa;--line:#e5e7eb;--r:8px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:var(--ink);min-height:100vh}
+.top-bar{background:var(--teal);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.top-bar h1{font-size:16px;font-weight:800;letter-spacing:.02em}
+.top-bar a{color:#fff;font-size:13px;opacity:.8;text-decoration:none}
+.top-bar a:hover{opacity:1}
+.container{max-width:900px;margin:0 auto;padding:24px 16px}
+.intro{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin-bottom:24px}
+.intro h2{font-size:15px;font-weight:800;margin-bottom:8px}
+.intro p{font-size:13px;color:var(--body);line-height:1.65}
+.intro .flow{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.flow-step{flex:1;min-width:140px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;text-align:center}
+.flow-step .num{font-size:20px;font-weight:900;color:var(--teal)}
+.flow-step .label{font-size:12px;font-weight:700;margin:4px 0 2px}
+.flow-step .sub{font-size:11px;color:var(--muted)}
+.mod-header{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 18px;margin-bottom:4px;cursor:pointer;user-select:none}
+.mod-header:hover{background:var(--surface)}
+.mod-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.mod-header h2{font-size:15px;font-weight:800;flex:1}
+.mod-header .pill{font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.mod-header .arrow{font-size:12px;color:var(--muted);transition:transform .2s}
+.mod-header.open .arrow{transform:rotate(90deg)}
+.mod-body{display:none;margin-bottom:20px}
+.mod-body.open{display:block}
+.session-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;overflow:hidden}
+.session-head{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;background:var(--surface)}
+.session-head:hover{background:#eef0f2}
+.session-num{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center}
+.session-head h3{font-size:13px;font-weight:700;flex:1}
+.session-head .dur{font-size:11px;color:var(--muted)}
+.session-body{display:none;padding:16px;border-top:1px solid var(--line)}
+.session-body.open{display:block}
+.sg{margin-bottom:14px}
+.sg-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:6px}
+.prog-tags{display:flex;flex-wrap:wrap;gap:6px}
+.prog-tag{background:#e8f4f2;color:var(--teal);font-size:12px;font-weight:700;padding:3px 9px;border-radius:4px;font-family:'Courier New',monospace}
+.setup-list,.demo-list,.watch-list{list-style:none;padding:0}
+.setup-list li,.demo-list li,.watch-list li{display:flex;gap:8px;font-size:12px;color:var(--body);padding:5px 0;border-bottom:1px solid var(--line);line-height:1.5}
+.setup-list li:last-child,.demo-list li:last-child,.watch-list li:last-child{border:none}
+.icon{flex-shrink:0;font-size:13px}
+.tip-box{background:#fef9ec;border:1px solid #f0d060;border-radius:6px;padding:10px 12px;font-size:12px;color:#7a6020;margin-top:10px}
+.tip-box strong{color:#5a4010}
+.pass-box{background:#eef8f5;border:1px solid #a0d4c8;border-radius:6px;padding:10px 12px;font-size:12px;color:#1a5a50;margin-top:10px}
+.note-box{background:#f0f4ff;border:1px solid #b0c0e8;border-radius:6px;padding:10px 12px;font-size:12px;color:#2a3a6a;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <h1>📋 Adleta M3 — Trainer Guide</h1>
+  <a href="portal.html">← Back to Portal</a>
+</div>
+<div class="container">
+
+<div class="intro">
+  <h2>How to Use This Guide</h2>
+  <p>This is your session-by-session reference for training each Super User. For every session you will find: the M3 programs to open, what to set up in the test environment beforehand, exactly what to demo, and what to watch for. Run every session in the <strong>M3 test environment</strong> — never in production during training.</p>
+  <div class="flow">
+    <div class="flow-step"><div class="num">1</div><div class="label">Watch Video</div><div class="sub">Watch the CRP recording together first</div></div>
+    <div class="flow-step"><div class="num">2</div><div class="label">You Demo</div><div class="sub">Walk through steps in M3 test while they watch</div></div>
+    <div class="flow-step"><div class="num">3</div><div class="label">They Do It</div><div class="sub">Reset and have them do it solo. Don't hint.</div></div>
+    <div class="flow-step"><div class="num">4</div><div class="label">Quiz + Checklist</div><div class="sub">Pass = 70%+ quiz, all checklist boxes checked</div></div>
+  </div>
+</div>
+
+<!-- ═══ FOUNDATION ═══════════════════════════════════════════════════════════ -->
+<div class="mod-header open" onclick="toggleMod(this)" style="border-left:4px solid #555">
+  <div class="mod-dot" style="background:#555"></div>
+  <h2>Foundation</h2>
+  <span class="pill">All Super Users — Start Here</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body open">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>M3 Navigation and Getting Started</h3><span class="dur">30 min</span></div>
+  <div class="session-body open">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">M3 Main Menu</span><span class="prog-tag">Ctrl+R (Quick Nav)</span><span class="prog-tag">MNS010 (User Settings)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session — Set Up</div><ul class="setup-list"><li><span class="icon">📋</span>Make sure the Super User has their M3 test login credentials and can reach the test environment URL.</li><li><span class="icon">📋</span>Have the portal open on your screen as well so you can reference the steps side-by-side.</li></ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Log in to M3 test environment together. Show them the home screen layout.</li>
+      <li><span class="icon">▶</span>Press <strong>Ctrl+R</strong> — type PPS200, hit Enter. This is how you open any M3 program. Show them 2-3 programs this way.</li>
+      <li><span class="icon">▶</span>Show the standard function keys: <strong>F3 = Create new, F4 = Search/lookup, F5 = Refresh/save, Esc = Go back</strong>. These work the same in every program.</li>
+      <li><span class="icon">▶</span>Show how to use F4 in a field to open a lookup list. Demo on the Vendor field in PPS200.</li>
+      <li><span class="icon">▶</span>Show how to right-click a line to see Related options — this is how you navigate to sub-screens.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">Watch For</div><ul class="watch-list">
+      <li><span class="icon">⚠️</span>Super Users who are used to Windows apps will try to click through menus. Keep redirecting them to Ctrl+R and function keys.</li>
+      <li><span class="icon">⚠️</span>If they press Enter too fast and submit an empty form, show them how Esc backs out without saving.</li>
+    </ul></div>
+    <div class="pass-box">✓ They can open any program with Ctrl+R, use F3/F4/F5/Esc correctly, and navigate back to the main menu.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">2</div><h3>M3 Data Structure — Items, Customers, Vendors</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MMS060 (Item Master)</span><span class="prog-tag">CRS610 (Customer Master)</span><span class="prog-tag">CRS620 (Vendor/Supplier Master)</span></div></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open MMS060. Look up a real item number (use a common Adleta stocking item). Walk through the key panels: Description, Unit of Measure, Warehouse settings, Acquisition/Planning flags.</li>
+      <li><span class="icon">▶</span>Open CRS610. Look up a real customer. Show: payment terms, credit limit, ship-to addresses, invoice delivery method.</li>
+      <li><span class="icon">▶</span>Open CRS620. Look up a real vendor. Show: payment terms, bank/ACH info, EDI trading partner flag.</li>
+      <li><span class="icon">▶</span>Explain the relationship: a Customer Order (OIS100) links a Customer (CRS610) + Item (MMS060). A Purchase Order (PPS200) links a Vendor (CRS620) + Item (MMS060).</li>
+    </ul></div>
+    <div class="tip-box"><strong>Tip:</strong> Use Adleta's real vendor and customer numbers from the test environment — it makes the data feel familiar and relevant to them.</div>
+    <div class="pass-box">✓ They can look up any item, customer, or vendor in M3 and identify the key fields (terms, status, unit of measure).</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">3</div><h3>Running Reports and Printing in M3</h3><span class="dur">20 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MNS300 (Print Manager)</span><span class="prog-tag">Any standard inquiry report</span></div></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Run a simple standard report (e.g., open item list or stock status). Show them the parameters screen — how to set filters before running.</li>
+      <li><span class="icon">▶</span>Open MNS300 (Print Manager). Show them where print jobs land and how to view or re-print a report.</li>
+      <li><span class="icon">▶</span>Show how to export a report to PDF or Excel from the output screen.</li>
+    </ul></div>
+    <div class="pass-box">✓ They can run a report, set parameters, find the output in Print Manager, and export it.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">4</div><h3>Support, Escalation, and Go-Live Resources</h3><span class="dur">20 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">What to Cover</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Who to call when M3 has an error message they don't understand: <strong>you (Kristen)</strong> first, then escalate to Bravo support if needed.</li>
+      <li><span class="icon">▶</span>Show them where the Bravo support ticket system is and how to submit a ticket.</li>
+      <li><span class="icon">▶</span>Confirm the go-live date and the support model for the first 30 days post go-live.</li>
+      <li><span class="icon">▶</span>Show them the Resources tab in the training portal — all reference documents are there.</li>
+    </ul></div>
+    <div class="pass-box">✓ They know who to contact for M3 issues, how to submit a support ticket, and where to find reference documents.</div>
+  </div>
+</div>
+
+</div><!-- end Foundation -->
+
+<!-- ═══ PURCHASING ════════════════════════════════════════════════════════════ -->
+<div class="mod-header" onclick="toggleMod(this)" style="border-left:4px solid #2d6fa3">
+  <div class="mod-dot" style="background:#2d6fa3"></div>
+  <h2>Purchasing</h2>
+  <span class="pill">Alan Burk</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>Planned PO Release</h3><span class="dur">35 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">PPS170 (Planned PO)</span><span class="prog-tag">PPS200 (Purchase Order)</span><span class="prog-tag">CRS620 (Vendor Lookup)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list"><li><span class="icon">📋</span>Confirm with IT that the test environment has planned POs (MRP-generated) for Alan's buyer code. If not, ask Bravo to generate test planned POs before the session.</li><li><span class="icon">📋</span>Know Alan's buyer code in M3 test so you can filter PPS170 to his records.</li></ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open PPS170. Set Buyer = Alan's code, Warehouse = the main warehouse. Press Enter. Show the list of planned POs.</li>
+      <li><span class="icon">▶</span>Click into one planned PO. Walk through each field: item, quantity, vendor, suggested date. Explain that these are system-generated from reorder points — the buyer reviews and decides whether to release.</li>
+      <li><span class="icon">▶</span>Select 2-3 planned POs. Choose Release. M3 converts them to firm POs.</li>
+      <li><span class="icon">▶</span>Open PPS200 and show that the released POs now appear. Verify status = 15 (or your configured released status).</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">Watch For</div><ul class="watch-list">
+      <li><span class="icon">⚠️</span>Alan may try to release every planned PO at once. Explain the review step — not every suggested PO should be released automatically.</li>
+      <li><span class="icon">⚠️</span>If a vendor is inactive, M3 will error on release. Show him how to check vendor status in CRS620 before releasing.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can filter PPS170 by buyer, review planned POs, release selected ones, and verify the released PO in PPS200.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">2</div><h3>Non-Stocking WHS PO — One-Time Exception</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">PPS200 (Create PO)</span><span class="prog-tag">PPS201 (PO Lines)</span><span class="prog-tag">PPS310 (Transmit PO)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What PO Type does Adleta use for non-stocking/special purchase orders? (Common values: NP, SP, or a custom type.) Write it here: ________</li>
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What item number does Adleta use for non-stocked items on a PO? (Some sites use a catch-all item like "MISC" or "SPECIAL".) Write it here: ________</li>
+      <li><span class="icon">📋</span>Have a test vendor number ready to use for this scenario.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open PPS200. Press F3 to create new. Enter vendor number, the non-stock PO type, warehouse, and a future delivery date.</li>
+      <li><span class="icon">▶</span>In PPS201 (lines), enter the non-stock item code. Enter qty, unit price, and unit of measure. In the line notes/reference field, enter a test customer order number.</li>
+      <li><span class="icon">▶</span>Save. Show Alan how to check the approval status if the amount requires approval.</li>
+      <li><span class="icon">▶</span>Open PPS310. Show how to print/email the PO to the vendor.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can create a non-stock PO from scratch, enter line with reference, and transmit to vendor.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">3</div><h3>Receiving Goods — PPS300 Three-Way Match</h3><span class="dur">35 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">PPS300 (Receive PO)</span><span class="prog-tag">PPS200 (Verify PO status)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list"><li><span class="icon">📋</span>Have a released PO in test environment (status 20-35) ready to receive against.</li><li><span class="icon">📋</span>Have a sample vendor delivery note number to use.</li></ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open PPS300. Enter the PO number. M3 loads the PO lines.</li>
+      <li><span class="icon">▶</span>Enter the delivery note number from the vendor. Enter received quantities per line.</li>
+      <li><span class="icon">▶</span>For lot-managed items: enter the lot/shade number from the carton label before saving.</li>
+      <li><span class="icon">▶</span>Demonstrate a short receipt (received less than PO qty). Show the remaining open balance on the PO.</li>
+      <li><span class="icon">▶</span>Demonstrate an over-receipt. Show the M3 error and explain why you cannot receive more than the PO quantity without Purchasing authorization.</li>
+      <li><span class="icon">▶</span>Post the receipt. Open PPS200 and show that the PO status updated.</li>
+    </ul></div>
+    <div class="watch-list"><li style="padding:5px 0;font-size:12px;color:var(--body)"><span class="icon">⚠️</span>Alan needs to understand that lot numbers entered here flow all the way to customer invoices. Wrong lot number = wrong shade on the invoice.</li></div>
+    <div class="pass-box">✓ Can receive a PO in PPS300, enter lot numbers, handle a short receipt, and verify PO status updated in PPS200.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">7</div><h3>Pre-Receipts — PPS300</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">PPS300 (Pre-Receipt)</span></div></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open PPS300. Enter the PO number. Instead of entering received quantities, enter the expected shipment quantities from the supplier ASN or packing list.</li>
+      <li><span class="icon">▶</span>For each line, enter the lot/shade number from the supplier's emailed shipping notice. Explain: this is done the day before the truck arrives so the warehouse doesn't have to enter lot data at receiving time.</li>
+      <li><span class="icon">▶</span>In the Charge fields at the header, enter the freight cost from the supplier's invoice. M3 prorates it across lines automatically.</li>
+      <li><span class="icon">▶</span>Save the pre-receipt. Show Alan that the pre-receipt is now on file and the warehouse just needs to confirm quantities when the truck arrives.</li>
+    </ul></div>
+    <div class="tip-box"><strong>Tip:</strong> Pre-receipts are especially important for large shade-sensitive shipments. If the shade numbers aren't entered before receiving, the warehouse team has to pull carton labels one by one — very slow.</div>
+    <div class="pass-box">✓ Can create a pre-receipt with lot numbers and freight charges before a shipment arrives.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">8</div><h3>EDI in Purchasing</h3><span class="dur">35 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">CRS620 (Vendor EDI settings)</span><span class="prog-tag">PPS200 (EDI PO)</span><span class="prog-tag">PPS300 (Auto pre-receipt)</span><span class="prog-tag">APS100 (EDI 810 invoices)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list"><li><span class="icon">📋</span>Identify 1-2 vendors in the test environment that are EDI-enabled. Ask IT or Bravo for their vendor numbers.</li><li><span class="icon">📋</span>If possible, have a test EDI 856 pre-receipt already created in the test environment to show the auto-creation result.</li></ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open CRS620 for an EDI vendor. Navigate to Related > EDI. Show the trading partner ID and which EDI transactions are enabled (850 out, 855/856 in, 810 in).</li>
+      <li><span class="icon">▶</span>Show a PO in PPS200 that was transmitted via EDI (you can see this in the transmission status). Explain: when you release a PO to an EDI vendor, M3 sends the 850 automatically — no extra step needed.</li>
+      <li><span class="icon">▶</span>Show an auto-created pre-receipt in PPS300 that came from a vendor's 856 ASN. Show that lot numbers are already populated — Alan only needs to add freight charges.</li>
+      <li><span class="icon">▶</span>Open APS100 and show an EDI 810 invoice that came in automatically. Show the match status — matched invoices need no action; exceptions need review.</li>
+    </ul></div>
+    <div class="pass-box">✓ Understands the EDI flow (850 out → 856 in → 810 in), can verify EDI settings on a vendor, and can handle an EDI 810 match exception in APS100.</div>
+  </div>
+</div>
+
+</div><!-- end Purchasing -->
+
+<!-- ═══ ORDER MANAGEMENT ══════════════════════════════════════════════════════ -->
+<div class="mod-header" onclick="toggleMod(this)" style="border-left:4px solid #8b5e3c">
+  <div class="mod-dot" style="background:#8b5e3c"></div>
+  <h2>Order Management</h2>
+  <span class="pill">Tony Shipka · Jeanell Coral</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>Manual Order Entry — Standard Net Terms (CL1)</h3><span class="dur">35 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">OIS100 (Customer Order Entry)</span><span class="prog-tag">OIS101 (Order Lines)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is Adleta's order type code for standard net-terms orders? (CL1 is the configured code — confirm this is set up in M3 test.) Write here: ________</li>
+      <li><span class="icon">📋</span>Have a test customer number with net terms, a warehouse code, and 2-3 test item numbers ready.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open OIS100. Press F3. Enter the test customer number — M3 fills in name, terms, salesperson. Confirm the order type is CL1. Set warehouse and delivery date.</li>
+      <li><span class="icon">▶</span>Add 2 order lines. Show how to check available inventory on the line before confirming quantity.</li>
+      <li><span class="icon">▶</span>Show a price lookup — right-click the price field to see the price source (price list, customer agreement, etc.).</li>
+      <li><span class="icon">▶</span>Release the order. Show the order number assigned. Show it in OIS100 with status Released.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can create a standard net-terms order in OIS100, verify pricing, check available inventory, and release.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">2</div><h3>Customer Return — Creating a Return Order</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">OIS100 (Return Order)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the order type code for customer returns at Adleta? This is typically a type starting with "R" (e.g., "RMA", "RET", or similar). Write here: ________</li>
+      <li><span class="icon">📋</span>Know the return reason codes set up in M3 (e.g., defective, wrong item, customer changed mind). Ask Bravo for the list.</li>
+      <li><span class="icon">📋</span>Have the original order number from the test environment to reference.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open OIS100. Press F3. Select the return order type. Enter the customer number.</li>
+      <li><span class="icon">▶</span>Enter the original order number in the reference field.</li>
+      <li><span class="icon">▶</span>Add the return line: same item as original, enter quantity as a <strong>negative number</strong> (e.g., -5). Select the return reason code.</li>
+      <li><span class="icon">▶</span>Show that M3 creates a credit line — the return amount shows as a negative. Release the return order.</li>
+      <li><span class="icon">▶</span>Explain: a credit memo will be created and applied to the customer account in AR.</li>
+    </ul></div>
+    <div class="tip-box"><strong>For shade/lot items:</strong> Make sure the return references the original lot number so inventory is credited back to the correct shade. This is critical for carpet/LVP.</div>
+    <div class="pass-box">✓ Can create a return order with correct order type, negative quantity, reason code, and original order reference.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">3</div><h3>Order Entry — Handling a Credit Hold</h3><span class="dur">25 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">OIS100 (Order Entry)</span><span class="prog-tag">CRS610 (Customer — to see hold)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list"><li><span class="icon">📋</span>Set up a test customer in the test environment with a credit hold (CRS610 > set credit hold flag). Or ask Bravo to set one up so the hold triggers when you enter the order.</li></ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Enter an order for the credit-hold customer in OIS100. Fill in all lines. Try to release.</li>
+      <li><span class="icon">▶</span>M3 will block the release with a credit hold message. Show the exact message so they recognize it.</li>
+      <li><span class="icon">▶</span>Open CRS610 for the customer. Show where the hold flag is set. Explain that <strong>only Philip Jones or his designee</strong> removes credit holds — Tony and Jeanell cannot do this themselves.</li>
+      <li><span class="icon">▶</span>Show them how to add a note to the order documenting who they called and when.</li>
+    </ul></div>
+    <div class="pass-box">✓ Recognizes a credit hold message, knows NOT to bypass it, knows the escalation path (Philip Jones / AR), and can document it in order notes.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">5</div><h3>Manual Order — COD and Credit Card Payment</h3><span class="dur">25 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">OIS100 (Order Entry)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the payment terms code for COD orders at Adleta? Write here: ________</li>
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the payment terms code for credit card orders? Write here: ________</li>
+      <li><span class="icon">📋</span>Confirm Adleta's credit card processing workflow — do they enter it in M3 or in a separate system (like a POS terminal)?</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Create an order in OIS100. Set the payment terms to COD. Walk through all fields. Show that the order total populates — this is the exact amount the driver must collect.</li>
+      <li><span class="icon">▶</span>Explain the COD driver process: the amount on the order flows to the load manifest. Drivers must collect this exact amount.</li>
+      <li><span class="icon">▶</span>If Adleta uses M3 for credit card: show how to enter the payment method. If they use a separate terminal: explain that workflow and what gets entered in M3 after the card is run.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can set COD payment on an order, understands the driver collection process, and knows the credit card handling procedure.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">7</div><h3>Quote to Customer Order — Converting (N30)</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">OIS100 (Quote + Convert)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the order type code for Quotes at Adleta? And what is the order type for the converted Customer Order (N30 is the terms description — confirm the actual order type code)? Write here: Quote type: ________ CO type: ________</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Create a quote in OIS100 using the Quote order type. Enter customer, items, quantities, pricing. Save. Note: inventory is NOT allocated at quote stage.</li>
+      <li><span class="icon">▶</span>Show them the quote in OIS100 with Quote status. Point out the quote number they would give to the customer.</li>
+      <li><span class="icon">▶</span>Convert the quote to a Customer Order — change the order type to the CO type (N30 terms). M3 allocates inventory at this point.</li>
+      <li><span class="icon">▶</span>Show the converted order with CO status and a new order number. Verify all lines came through correctly.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can create a quote, give the customer a quote number, and convert it to a firm CO when the customer confirms.</div>
+  </div>
+</div>
+
+</div><!-- end Order Management -->
+
+<!-- ═══ FINANCE AP ═════════════════════════════════════════════════════════════ -->
+<div class="mod-header" onclick="toggleMod(this)" style="border-left:4px solid #c49a2a">
+  <div class="mod-dot" style="background:#c49a2a"></div>
+  <h2>Finance — Accounts Payable</h2>
+  <span class="pill">Philip Jones</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>AP Invoice Entry with PO Match — APS100</h3><span class="dur">40 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">APS100 (Invoice Entry)</span><span class="prog-tag">PPS200 (PO reference)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list"><li><span class="icon">📋</span>Have a PO in the test environment that has been partially or fully received (PPS300 receipt posted) so the 3-way match can be demonstrated.</li><li><span class="icon">📋</span>Have a second PO with a price discrepancy (PO price differs from what you'll enter as the invoice price) to demo a variance.</li></ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open APS100. Press F3. Enter vendor number, a test invoice number, today's date, and the invoice amount.</li>
+      <li><span class="icon">▶</span>Navigate to the PO matching screen (F14 or Match button). Enter the PO number. Show how M3 displays the PO lines and received quantities side by side with the invoice.</li>
+      <li><span class="icon">▶</span>Demo a clean match (all quantities and prices agree). Show that M3 approves automatically.</li>
+      <li><span class="icon">▶</span>Demo a price variance using the second PO. Show the variance flag. Explain: do NOT approve — contact the buyer to either correct the PO or get a credit memo from the vendor.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can enter an AP invoice, run PO match, identify a variance, and knows not to approve variances without Purchasing authorization.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">3</div><h3>AP Payment Proposal — In-House Check (CH1)</h3><span class="dur">40 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">APS130 (Payment Proposal)</span><span class="prog-tag">APS310 (Check Print)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the bank account code for in-house check payments in M3? (This is the code you select in the payment proposal.) Write here: ________</li>
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the menu path or program for check printing after the proposal is approved? (Standard is APS310 or similar.) Write here: ________</li>
+      <li><span class="icon">📋</span>Have 3-5 posted AP invoices in the test environment that are due and ready to pay.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open APS130. Press F3. Set payment date, select the check bank account code, set the due date cutoff.</li>
+      <li><span class="icon">▶</span>Show the proposal list — M3 pulls in all invoices due. Walk through each line. Show how to exclude an invoice (demo removing one from the proposal).</li>
+      <li><span class="icon">▶</span>Approve the proposal. Navigate to the check print program. Show the check print parameters.</li>
+      <li><span class="icon">▶</span>In a real session: don't actually print (no check stock in training). Show what the screen looks like and explain the process. Post the proposal after "print" to close invoices.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can create a payment proposal, review/exclude invoices, approve it, and understands the check print and post process.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">6</div><h3>Voiding an AP Check</h3><span class="dur">25 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">APS220 (Payment History)</span><span class="prog-tag">APS205 (Verify invoices reopened)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What program does Adleta use to access AP check/payment history? (Standard is APS220 or APS215.) Write here: ________</li>
+      <li><span class="icon">📋</span>Have a posted check in the test environment that can be voided.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open APS220. Look up the check by vendor or check number. Review the check details.</li>
+      <li><span class="icon">▶</span>Select the check and choose Void. Enter the void date and reason.</li>
+      <li><span class="icon">▶</span>Open APS205 and show that the invoices that were on the voided check are now open again and available for the next payment run.</li>
+      <li><span class="icon">▶</span>Explain stop payment process: for lost checks, Philip must call Fifth Third Bank BEFORE voiding in M3. Voiding in M3 does not automatically stop the check at the bank.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can locate a check in payment history, void it, verify invoices reopen, and knows to contact the bank before voiding a lost check.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">7</div><h3>Lockbox — Daily Cash Import and AP Check Run</h3><span class="dur">40 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">ARS110 (Lockbox Import)</span><span class="prog-tag">ARS120 (Open Items — verify applied)</span><span class="prog-tag">APS130 (AP checks)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the exact menu path for the lockbox import in M3? (Typically Finance > AR > Cash Management > Import, or ARS110.) Write here: ________</li>
+      <li><span class="icon">📋</span>Ask IT if there is a sample lockbox file in the test environment. If not, ask Bravo to load one for training purposes.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open ARS110 (or the lockbox import menu path). Show the import screen — select the bank account, import the file.</li>
+      <li><span class="icon">▶</span>Show the matched items and unmatched items after import. Walk through how to manually apply an unmatched payment to an open invoice.</li>
+      <li><span class="icon">▶</span>Post the batch. Open ARS120 for a customer to verify their invoice is now closed.</li>
+      <li><span class="icon">▶</span>Walk through APS130 for the check proposal portion (same as fin-3 session above).</li>
+    </ul></div>
+    <div class="pass-box">✓ Can import a lockbox file, manually apply unmatched payments, post the batch, and verify invoices closed in ARS120.</div>
+  </div>
+</div>
+
+</div><!-- end Finance AP -->
+
+<!-- ═══ FINANCE GL ═════════════════════════════════════════════════════════════ -->
+<div class="mod-header" onclick="toggleMod(this)" style="border-left:4px solid #c49a2a">
+  <div class="mod-dot" style="background:#b08020"></div>
+  <h2>Finance — General Ledger &amp; AR</h2>
+  <span class="pill">Philip Jones</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>AP and GL Master Data — Account String Setup</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">GLS040 (GL Account Master)</span><span class="prog-tag">GLS025 (Cost Center)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the cost center master program at Adleta? (Standard is GLS025 or GLS050. It may also be under the Finance master data menu.) Write here: ________</li>
+      <li><span class="icon">📋</span>Print or have on hand Adleta's GL account listing and the list of division and cost center codes. Philip should know these by heart before go-live.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open GLS040. Look up the AP trade payable account. Show the account type, description, and active status.</li>
+      <li><span class="icon">▶</span>Look up 2-3 expense accounts Philip will use frequently (freight, cost of goods, etc.).</li>
+      <li><span class="icon">▶</span>Open the cost center master. Show the list of cost centers and which department each belongs to. Philip must know these to code invoices correctly.</li>
+      <li><span class="icon">▶</span>Practice building a full account string: Company + Division + Department + GL Account + Cost Center. Have Philip assemble a few account strings from memory.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can look up any GL account or cost center in M3 and assemble a valid account string for AP invoice coding.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">3</div><h3>Automatic Bank Reconciliation</h3><span class="dur">35 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">GLS (Bank Recon menu)</span><span class="prog-tag">GLS200 (GL Inquiry)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the exact menu path for bank statement import and reconciliation in M3? Write here: ________</li>
+      <li><span class="icon">📋</span>Ask IT if there is a sample bank statement file (BAI2 or CSV) loaded in the test environment for practice. If not, ask Bravo to load one.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Navigate to the bank reconciliation menu. Show the import screen. Import the sample bank statement file.</li>
+      <li><span class="icon">▶</span>Show the auto-matched items. Show the unmatched items on both sides (bank items with no book entry; book entries not on bank statement).</li>
+      <li><span class="icon">▶</span>Manually match an unmatched item — show how to search for the corresponding book entry.</li>
+      <li><span class="icon">▶</span>Show how to record a bank fee as a journal entry for fees that appear on the bank statement but not in M3.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can import a bank statement, review auto-matched items, manually match exceptions, and identify outstanding items needing resolution.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">4</div><h3>AR Debit Note Write Off</h3><span class="dur">25 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">ARS120 (AR Open Items)</span><span class="prog-tag">GLS040 (Write-off GL account)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the program for AR open item write-off at Adleta? (May be accessible from ARS120 right-click > Write Off, or a separate program like ARS170.) Write here: ________</li>
+      <li><span class="icon">📋</span>Know the write-off GL account and reason codes configured in M3. Ask Bravo for the list.</li>
+      <li><span class="icon">📋</span>Know Adleta's write-off dollar threshold — above what amount requires manager approval?</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open ARS120 for a test customer. Find a small open debit note or balance.</li>
+      <li><span class="icon">▶</span>Right-click the item and select Write Off (or navigate to the write-off program). Select the reason code and GL account.</li>
+      <li><span class="icon">▶</span>Post the write-off. Show that the open item is now closed in ARS120.</li>
+      <li><span class="icon">▶</span>Open GLS200 and show the write-off expense transaction posted to the GL.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can locate an open debit note, apply a write-off with correct reason code and GL account, and verify it closed in AR and posted in GL.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">5</div><h3>AR Tickler Notes — Collections Follow-Up</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">ARS440 (Tickler Notes)</span><span class="prog-tag">ARS120 (AR Aging)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What program does Adleta use for AR tickler/collections notes? (Standard is ARS440 or ARS445.) Write here: ________</li>
+      <li><span class="icon">📋</span>Have 2-3 test customers with past-due balances set up in the test environment.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open ARS440. Show the tickler queue — today's follow-ups. Walk through one customer together.</li>
+      <li><span class="icon">▶</span>Open ARS120 for that customer. Review their aging, oldest invoice, and previous note history.</li>
+      <li><span class="icon">▶</span>Document a sample call: "Spoke with John Smith 6/9/26. Promised payment of $2,450 by 6/13. Follow up Monday if not received."</li>
+      <li><span class="icon">▶</span>Set the next follow-up date. Save. Show that the note will reappear on that date.</li>
+      <li><span class="icon">▶</span>Explain escalation: if 3 calls with no payment, Philip notifies you or Mike Parsons to authorize a credit hold in CRS610.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can work the daily tickler queue, document calls with follow-up dates, review AR aging while on calls, and knows the escalation path for non-paying accounts.</div>
+  </div>
+</div>
+
+</div><!-- end Finance GL -->
+
+<!-- ═══ LOGISTICS ══════════════════════════════════════════════════════════════ -->
+<div class="mod-header" onclick="toggleMod(this)" style="border-left:4px solid #5b7fa6">
+  <div class="mod-dot" style="background:#5b7fa6"></div>
+  <h2>Logistics &amp; Transportation</h2>
+  <span class="pill">Abbey Parker</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>Pick and Pack — Will Call Order</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MWS420 (Warehouse Order)</span><span class="prog-tag">OIS100 (Verify order status)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span>Have a released will call order in the test environment ready for picking.</li>
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the warehouse management program (pick/pack) used at Adleta? MWS420 is standard — confirm it's configured. Write here: ________</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open MWS420. Find the will call order. Show the pick list — items, quantities, locations.</li>
+      <li><span class="icon">▶</span>Walk through the "picking" process in the system: select the order, confirm quantities picked, update the status.</li>
+      <li><span class="icon">▶</span>Show how to print the packing list for the customer.</li>
+      <li><span class="icon">▶</span>Update the order as "ready for pickup." Open OIS100 and show the order status has changed.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can locate a will call order in MWS420, confirm pick quantities, and update status to ready for pickup.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">2</div><h3>Common Carrier Shipping</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">OIS100 (Order — ship via)</span><span class="prog-tag">DPS100 (BOL)</span><span class="prog-tag">WAR 8 (Load sheets)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> What is the BOL generation program at Adleta? (Standard is DPS100 or similar.) Write here: ________</li>
+      <li><span class="icon">📋</span>Know the carrier codes set up in M3 for UPS, FedEx, LTL carriers Adleta uses. Ask Bravo for the list.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Show a released order in OIS100 with a carrier assigned in the Ship Via field. Show how to update Ship Via if incorrect.</li>
+      <li><span class="icon">▶</span>Open the BOL program (DPS100). Show how to generate a BOL for an LTL shipment. Walk through the fields: shipper, consignee, commodity, weight, freight class.</li>
+      <li><span class="icon">▶</span>Open WAR 8 > C3 (Customer Manifest). Run for today's date and route. Show the manifest output.</li>
+      <li><span class="icon">▶</span>Show how to enter a carrier tracking number back into the order after the carrier picks up.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can verify carrier assignment, generate a BOL, print a manifest, and enter tracking numbers on shipped orders.</div>
+  </div>
+</div>
+
+</div><!-- end Logistics -->
+
+<!-- ═══ PRODUCT MANAGEMENT ══════════════════════════════════════════════════════ -->
+<div class="mod-header" onclick="toggleMod(this)" style="border-left:4px solid #7a5ea6">
+  <div class="mod-dot" style="background:#7a5ea6"></div>
+  <h2>Product Management</h2>
+  <span class="pill">Lauren Calvey</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>Discontinuing an Item — Status 50 and MRP Off</h3><span class="dur">30 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Programs to Open</div><div class="prog-tags"><span class="prog-tag">MMS060 (Item Master)</span><span class="prog-tag">OIS100 (Test — verify blocked)</span><span class="prog-tag">PPS200 (Test — verify blocked)</span></div></div>
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span><strong>Ask Bravo:</strong> In MMS060, what is the exact field name and panel for: (1) Item Status (where you change to 50), and (2) the MRP/planning flag (where you turn off planning)? Write here: Status field: ________ Panel: ________ | MRP flag field: ________ Panel: ________</li>
+      <li><span class="icon">📋</span>Set up a test item in the test environment that can be safely discontinued during training.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open MMS060. Look up the test item. Review current status, on-hand quantity, any open orders.</li>
+      <li><span class="icon">▶</span>Navigate to the correct panel. Change the MRP/planning flag to OFF. Save. Explain: this stops M3 from auto-generating planned POs for this item.</li>
+      <li><span class="icon">▶</span>Change the Item Status to 50. Save. Explain: status 50 prevents new orders from being placed.</li>
+      <li><span class="icon">▶</span>Open OIS100 and try to enter an order line for the discontinued item. M3 should error or warn. Show Lauren what the message looks like.</li>
+      <li><span class="icon">▶</span>Add a note to the item in MMS060 documenting the discontinuation date, reason, and who authorized it.</li>
+    </ul></div>
+    <div class="watch-list"><li style="padding:5px 0;font-size:12px;color:var(--body)"><span class="icon">⚠️</span>Changing an item to status 50 is not easily undone. Make sure Lauren only does this on items that Product Management and Purchasing have both approved to discontinue.</li></div>
+    <div class="pass-box">✓ Can find the MRP flag and status field in MMS060, change both correctly, verify new orders are blocked, and document the change in item notes.</div>
+  </div>
+</div>
+
+</div><!-- end Product Management -->
+
+<!-- ═══ REPORTING ══════════════════════════════════════════════════════════════ -->
+<div class="mod-header" onclick="toggleMod(this)" style="border-left:4px solid #7a3c7a">
+  <div class="mod-dot" style="background:#7a3c7a"></div>
+  <h2>Reporting — Birst</h2>
+  <span class="pill">Jeanell Coral</span>
+  <span class="arrow">▶</span>
+</div>
+<div class="mod-body">
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">1</div><h3>Birst Reporting — Content Overview</h3><span class="dur">40 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">Before the Session</div><ul class="setup-list">
+      <li><span class="icon">📋</span>Confirm Jeanell has a Birst user account and license. She needs a separate Birst login (not just M3). Contact IT to set this up before the session.</li>
+      <li><span class="icon">📋</span>Get the Birst URL for Adleta. Write here: ________</li>
+      <li><span class="icon">📋</span>Identify 2-3 pre-built reports in Birst that are most relevant to Jeanell's role (sales reports, customer reports). Ask IT or Bravo where these are saved.</li>
+    </ul></div>
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open Birst together. Log in. Orient Jeanell to the home screen: report library on left, canvas center, filters right.</li>
+      <li><span class="icon">▶</span>Open a pre-built sales report. Show the data — this is live M3 data. Change the date range filter. Show the report refresh automatically.</li>
+      <li><span class="icon">▶</span>Apply a branch filter. Show how the same report narrows to one branch.</li>
+      <li><span class="icon">▶</span>Click into a chart bar to drill down. Show the underlying order detail. Show how to drill back up.</li>
+      <li><span class="icon">▶</span>Show how to save a filtered view as a Favorite.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can log in to Birst, open a pre-built report, apply date and branch filters, and drill into data.</div>
+  </div>
+</div>
+
+<div class="session-card">
+  <div class="session-head" onclick="toggleSess(this)"><div class="session-num">2</div><h3>Birst Visualizer — Building Custom Reports</h3><span class="dur">45 min</span></div>
+  <div class="session-body">
+    <div class="sg"><div class="sg-label">What to Demo</div><ul class="demo-list">
+      <li><span class="icon">▶</span>Open the Birst Visualizer. Select the Sales subject area. Together, build a simple report: drag Customer Name as a dimension, drag Sales Amount as a measure.</li>
+      <li><span class="icon">▶</span>Switch the chart type from table to bar chart. Sort descending by Sales Amount.</li>
+      <li><span class="icon">▶</span>Add a date filter for the current month. Add a Top 10 filter to show only the top 10 customers.</li>
+      <li><span class="icon">▶</span>Save as "Top 10 Customers This Month." Show how to navigate back to it.</li>
+      <li><span class="icon">▶</span>Have Jeanell build a second report on her own: Sales by Salesperson, current quarter, bar chart. You watch and coach, but don't touch the keyboard.</li>
+    </ul></div>
+    <div class="pass-box">✓ Can independently build a custom report in Birst Visualizer with a dimension, measure, chart type, date filter, and save it.</div>
+  </div>
+</div>
+
+</div><!-- end Reporting -->
+
+</div><!-- container -->
+<script>
+function toggleMod(header){
+  header.classList.toggle('open');
+  const body=header.nextElementSibling;
+  if(body)body.classList.toggle('open');
+}
+function toggleSess(head){
+  const body=head.nextElementSibling;
+  if(body)body.classList.toggle('open');
+}
+</script>
+</body>
+</html>
