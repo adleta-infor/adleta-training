@@ -236,6 +236,7 @@ p{color:var(--body);line-height:1.6;}
 #shotBox img{max-width:100%;max-height:100%;border-radius:6px;background:#fff}
 @media(max-width:768px){.ex-shot{width:100%}}
 </style>
+<link rel="stylesheet" href="learning-hub.css">
 </head>
 <body>
 <div class="app">
@@ -872,8 +873,8 @@ You are using a <strong>Train-the-Trainer</strong> model. You (Kristen) train ea
 <h3>Quiz &amp; Certification Standards</h3>
 <ul class="guide-step-list">
 <li><div class="guide-step-num">✓</div><div><strong>70% or higher</strong> to pass each session quiz. Below 70% = retake required before moving to the next session.</div></li>
-<li><div class="guide-step-num">✓</div><div><strong>Checklist 100% complete</strong> before a Super User is considered certified on that session. Unchecked items mean they have not demonstrated that skill yet.</div></li>
-<li><div class="guide-step-num">✓</div><div><strong>All module sessions passed</strong> before a Super User can begin training their department on that module.</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>Checklist 100% complete</strong> records practice only. Observed evidence and process-owner review are required before sign-off.</div></li>
+<li><div class="guide-step-num">✓</div><div><strong>Before teaching a department:</strong> complete observed scenarios and a scored teach-back, then obtain functional-owner and IT sign-off.</div></li>
 <li><div class="guide-step-num">✓</div><div><strong>No time limit</strong> on quizzes — this is not a test, it is a learning tool. Encourage them to reference the steps while answering.</div></li>
 </ul>
 </div>
@@ -912,5 +913,8 @@ function renderTeam(){
 if(!checkAuth())throw new Error("Not authenticated");
 buildNav();buildUserPill();renderDashboard();
 </script>
+<script src="learning-hub-data.js"></script>
+<script src="learning-hub.js"></script>
 </body>
 </html>
+
