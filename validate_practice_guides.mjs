@@ -6,7 +6,7 @@ const start = portal.indexOf("const USERS=");
 const end = portal.indexOf("const SK=");
 let code = portal.slice(start, end).replace(/\bconst\s+(USERS|MODULES|EXERCISES|PHASES|NEXT_ACTIONS|RESOURCES)\s*=/g, "var $1=");
 
-const sandbox = {};
+const sandbox = { document: { addEventListener() {}, getElementById() { return null; } } };
 vm.createContext(sandbox);
 vm.runInContext(code, sandbox, { timeout: 5000 });
 
