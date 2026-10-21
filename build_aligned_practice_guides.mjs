@@ -17,7 +17,7 @@ let dataBlock = portal.slice(start, end);
 dataBlock = dataBlock.replace(/\bconst\s+(USERS|MODULES|EXERCISES|PHASES|NEXT_ACTIONS|RESOURCES)\s*=/g, "var $1=");
 dataBlock = dataBlock.replace(/\blet\s+(ST)\s*=/g, "var $1=");
 
-const sandbox = {};
+const sandbox = { document: { addEventListener() {}, getElementById() { return null; } } };
 vm.createContext(sandbox);
 vm.runInContext(dataBlock, sandbox, { timeout: 5000 });
 
