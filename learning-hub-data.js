@@ -1,4 +1,4 @@
-/* Source inventory verified against Adleta Learning Hub, 20 October 2026. */
+/* Source inventory verified against Adleta Learning Hub, 21 October 2026. June 2026 guides and decks are in each folder's "Archive - June 2026" subfolder. */
 const LEARNING_LIBRARY = [
   {
     "id": "foundation",
@@ -20,9 +20,9 @@ const LEARNING_LIBRARY = [
         "type": "Pilot PDF"
       },
       {
-        "name": "Adleta_M3_Foundation_LearningGuide.docx",
-        "title": "Foundation Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BBFE3BDD1-5E50-4024-A778-EDE27EBB2CF8%7D&file=Adleta_M3_Foundation_LearningGuide.docx&action=default&mobileredirect=true",
+        "name": "Adleta_M3_Foundation_Guide_Oct2026.docx",
+        "title": "Foundation Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/00%20Foundation%20and%20Navigation/Adleta_M3_Foundation_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
     ]
@@ -41,22 +41,16 @@ const LEARNING_LIBRARY = [
     "validation": "Validate credit rules, order types, routes, and pricing before demonstration; never use historical IDs in production.",
     "files": [
       {
-        "name": "Adleta_M3_OrderManagement_LearningGuide.docx",
-        "title": "OrderManagement Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7B8D11A24E-F230-4B52-B414-A91A4ECA8552%7D&file=Adleta_M3_OrderManagement_LearningGuide.docx&action=default&mobileredirect=true",
-        "type": "Learning guide"
-      },
-      {
-        "name": "Adleta_M3_OrderManagement_Training_Deck.pptx",
-        "title": "OrderManagement Training Deck",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BE57269BD-AAFC-4DE4-A6EF-2F708BC70BA9%7D&file=Adleta_M3_OrderManagement_Training_Deck.pptx&action=edit&mobileredirect=true",
-        "type": "Training deck"
-      },
-      {
         "name": "Adleta_Order_Management_Learning_Pack_PILOT.pdf",
         "title": "Order Management Learning Pack",
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/01%20Customer%20Service%20and%20Order%20Entry/Adleta_Order_Management_Learning_Pack_PILOT.pdf",
         "type": "Pilot PDF"
+      },
+      {
+        "name": "Adleta_M3_CustomerService_OrderEntry_Guide_Oct2026.docx",
+        "title": "Customer Service and Order Entry Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/01%20Customer%20Service%20and%20Order%20Entry/Adleta_M3_CustomerService_OrderEntry_Guide_Oct2026.docx",
+        "type": "Learning guide"
       }
     ]
   },
@@ -74,22 +68,16 @@ const LEARNING_LIBRARY = [
     "validation": "Thresholds, approval automation and matching rules in older material require current-tenant validation.",
     "files": [
       {
-        "name": "Adleta_M3_Purchasing_LearningGuide.docx",
-        "title": "Purchasing Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BF97457BF-543A-40E7-9243-195192E5AAD0%7D&file=Adleta_M3_Purchasing_LearningGuide.docx&action=default&mobileredirect=true",
-        "type": "Learning guide"
-      },
-      {
-        "name": "Adleta_M3_Purchasing_Training_Deck.pptx",
-        "title": "Purchasing Training Deck",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7B0FEF4DEE-D653-42A7-BB75-A5101B0C7ED5%7D&file=Adleta_M3_Purchasing_Training_Deck.pptx&action=edit&mobileredirect=true",
-        "type": "Training deck"
-      },
-      {
         "name": "Adleta_Purchasing_Learning_Pack_PILOT.pdf",
         "title": "Purchasing Learning Pack",
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/02%20Purchasing%20and%20Procurement/Adleta_Purchasing_Learning_Pack_PILOT.pdf",
         "type": "Pilot PDF"
+      },
+      {
+        "name": "Adleta_M3_Purchasing_Guide_Oct2026.docx",
+        "title": "Purchasing Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/02%20Purchasing%20and%20Procurement/Adleta_M3_Purchasing_Guide_Oct2026.docx",
+        "type": "Learning guide"
       }
     ]
   },
@@ -113,16 +101,10 @@ const LEARNING_LIBRARY = [
         "type": "Pilot PDF"
       },
       {
-        "name": "Adleta_M3_Inventory_LearningGuide.docx",
-        "title": "Inventory Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BE1D207B4-E54E-48D3-ADBF-3DDEF96C5827%7D&file=Adleta_M3_Inventory_LearningGuide.docx&action=default&mobileredirect=true",
+        "name": "Adleta_M3_Inventory_Guide_Oct2026.docx",
+        "title": "Inventory Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/03%20Inventory%20and%20Warehouse/Adleta_M3_Inventory_Guide_Oct2026.docx",
         "type": "Learning guide"
-      },
-      {
-        "name": "Adleta_M3_Inventory_Training_Deck.pptx",
-        "title": "Inventory Training Deck",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BB33F12A8-9353-41FD-B34F-56489003F34C%7D&file=Adleta_M3_Inventory_Training_Deck.pptx&action=edit&mobileredirect=true",
-        "type": "Training deck"
       }
     ]
   },
@@ -146,9 +128,9 @@ const LEARNING_LIBRARY = [
         "type": "Pilot PDF"
       },
       {
-        "name": "Adleta_M3_Logistics_LearningGuide.docx",
-        "title": "Logistics Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7B028D440A-D6CE-4812-BA7C-BD55A81FC87B%7D&file=Adleta_M3_Logistics_LearningGuide.docx&action=default&mobileredirect=true",
+        "name": "Adleta_M3_Warehouse_Shipping_Routes_Guide_Oct2026.docx",
+        "title": "Warehouse, Shipping, and Routes Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/04%20Shipping%20and%20Will%20Call/Adleta_M3_Warehouse_Shipping_Routes_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
     ]
@@ -173,16 +155,10 @@ const LEARNING_LIBRARY = [
         "type": "Pilot PDF"
       },
       {
-        "name": "Adleta_M3_Finance_APAR_LearningGuide.docx",
-        "title": "Finance APAR Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BBBB18FE6-302E-4E22-9B3D-76EE07B2A65D%7D&file=Adleta_M3_Finance_APAR_LearningGuide.docx&action=default&mobileredirect=true",
+        "name": "Adleta_M3_Accounts_Payable_Guide_Oct2026.docx",
+        "title": "Accounts Payable Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/05%20Finance%20AP%20and%20AR/Adleta_M3_Accounts_Payable_Guide_Oct2026.docx",
         "type": "Learning guide"
-      },
-      {
-        "name": "Adleta_M3_Finance_APAR_Training_Deck.pptx",
-        "title": "Finance APAR Training Deck",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7B72B73EFB-F638-4850-BC2D-6DC73B564A8D%7D&file=Adleta_M3_Finance_APAR_Training_Deck.pptx&action=edit&mobileredirect=true",
-        "type": "Training deck"
       }
     ]
   },
@@ -206,16 +182,10 @@ const LEARNING_LIBRARY = [
         "type": "Pilot PDF"
       },
       {
-        "name": "Adleta_M3_Finance_GL_LearningGuide.docx",
-        "title": "Finance GL Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7B55B2ED50-7B01-49DF-8A67-FE3CF48C513C%7D&file=Adleta_M3_Finance_GL_LearningGuide.docx&action=default&mobileredirect=true",
+        "name": "Adleta_M3_General_Ledger_Guide_Oct2026.docx",
+        "title": "General Ledger Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/06%20Finance%20General%20Ledger/Adleta_M3_General_Ledger_Guide_Oct2026.docx",
         "type": "Learning guide"
-      },
-      {
-        "name": "Adleta_M3_Finance_GL_Training_Deck.pptx",
-        "title": "Finance GL Training Deck",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7B91CE98D6-50C8-419D-B108-2F5AA85CB946%7D&file=Adleta_M3_Finance_GL_Training_Deck.pptx&action=edit&mobileredirect=true",
-        "type": "Training deck"
       }
     ]
   },
@@ -233,22 +203,16 @@ const LEARNING_LIBRARY = [
     "validation": "Historical claims about available dashboards and scheduled reports are not proof of current configuration.",
     "files": [
       {
-        "name": "Adleta_M3_Reporting_LearningGuide.docx",
-        "title": "Reporting Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7B5079F67F-774D-4B7B-9605-23D1A6700FE6%7D&file=Adleta_M3_Reporting_LearningGuide.docx&action=default&mobileredirect=true",
-        "type": "Learning guide"
-      },
-      {
-        "name": "Adleta_M3_Reporting_Training_Deck.pptx",
-        "title": "Reporting Training Deck",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BE6DA55F8-564F-49FA-A46F-D5FC653426CE%7D&file=Adleta_M3_Reporting_Training_Deck.pptx&action=edit&mobileredirect=true",
-        "type": "Training deck"
-      },
-      {
         "name": "Adleta_Reporting_Learning_Pack_PILOT.pdf",
         "title": "Reporting Learning Pack",
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/07%20Reporting%20and%20Leadership/Adleta_Reporting_Learning_Pack_PILOT.pdf",
         "type": "Pilot PDF"
+      },
+      {
+        "name": "Adleta_M3_Pricing_Reporting_Guide_Oct2026.docx",
+        "title": "Pricing and Reporting Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/07%20Reporting%20and%20Leadership/Adleta_M3_Pricing_Reporting_Guide_Oct2026.docx",
+        "type": "Learning guide"
       }
     ]
   },
@@ -266,16 +230,16 @@ const LEARNING_LIBRARY = [
     "validation": "Current Rhythm organization-account setup and pricing logic remain unresolved in documented rollout plan.",
     "files": [
       {
-        "name": "Adleta_M3_ProductManagement_LearningGuide.docx",
-        "title": "ProductManagement Learning Guide",
-        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/_layouts/15/Doc.aspx?sourcedoc=%7BB7A3EC9B-798A-471F-A4F8-73C77ADE9A1B%7D&file=Adleta_M3_ProductManagement_LearningGuide.docx&action=default&mobileredirect=true",
-        "type": "Learning guide"
-      },
-      {
         "name": "Adleta_Product_Rhythm_Learning_Pack_PILOT.pdf",
         "title": "Product Rhythm Learning Pack",
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/08%20Product%20Management%20and%20Rhythm/Adleta_Product_Rhythm_Learning_Pack_PILOT.pdf",
         "type": "Pilot PDF"
+      },
+      {
+        "name": "Adleta_M3_Product_Management_Guide_Oct2026.docx",
+        "title": "Product Management Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/08%20Product%20Management%20and%20Rhythm/Adleta_M3_Product_Management_Guide_Oct2026.docx",
+        "type": "Learning guide"
       }
     ]
   },
@@ -299,6 +263,81 @@ const LEARNING_LIBRARY = [
         "title": "Training Exercises and Readiness",
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/09%20Super%20Users%20and%20Coaching/Adleta_Training_Exercises_and_Readiness_PILOT.pdf",
         "type": "Pilot PDF"
+      },
+      {
+        "name": "Adleta_M3_End_to_End_Walkthroughs_Oct2026.docx",
+        "title": "End-to-End Walkthroughs (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/09%20Super%20Users%20and%20Coaching/Adleta_M3_End_to_End_Walkthroughs_Oct2026.docx",
+        "type": "Learning guide"
+      },
+      {
+        "name": "Adleta_M3_Trainer_Readiness_GoLive_Oct2026.docx",
+        "title": "Trainer Readiness and Go-Live (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/09%20Super%20Users%20and%20Coaching/Adleta_M3_Trainer_Readiness_GoLive_Oct2026.docx",
+        "type": "Learning guide"
+      }
+    ]
+  },
+  {
+    "id": "cashDesk",
+    "name": "Will Call Counter and Cash Desk",
+    "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/01%20Customer%20Service%20and%20Order%20Entry",
+    "summary": "Take counter and phone payments, clear prepay holds, and close the cash drawer at the end of the day.",
+    "steps": [
+      "Open OIS215 with Ctrl+S, select cash desk 101A or 101B, and confirm the order or invoice and amount with the customer.",
+      "Take a payment on a pay-first (PCD) test order and confirm the C10 stop on the MWS410 delivery clears.",
+      "Print the day’s payments in OIS223, reconcile the drawer, and validate the desk in OIS217 with your trainer."
+    ],
+    "evidence": "Trainer observes a payment taken on the correct desk, the C10 stop cleared, and a reconciled end-of-day validation.",
+    "validation": "Cash desks exist only at Carrollton (101A, 101B). Confirm payment methods (OIS211) and authorized users (OIS212) before practice.",
+    "files": [
+      {
+        "name": "Adleta_M3_WillCall_CashDesk_Guide_Oct2026.docx",
+        "title": "Will Call Counter and Cash Desk Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/01%20Customer%20Service%20and%20Order%20Entry/Adleta_M3_WillCall_CashDesk_Guide_Oct2026.docx",
+        "type": "Learning guide"
+      }
+    ]
+  },
+  {
+    "id": "credit",
+    "name": "Credit and Accounts Receivable",
+    "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/05%20Finance%20AP%20and%20AR",
+    "summary": "Review and release credit holds, set prepay customers, read the customer ledger, post payments, and follow up on collections.",
+    "steps": [
+      "Find held orders in OIS300, review the customer in CRS610 panel J, CRS315, and ARS200.",
+      "Release a test credit hold in OIS120 as your trainer directs.",
+      "Post a test customer payment in ARS110 and confirm the invoice clears in ARS200."
+    ],
+    "evidence": "Trainer observes the account review, the release decision, and a payment applied to the correct invoices.",
+    "validation": "Prepay customer setup, COD switch settings, and write-off thresholds are not settled. Practice only in company 100.",
+    "files": [
+      {
+        "name": "Adleta_M3_Credit_AR_Guide_Oct2026.docx",
+        "title": "Credit and Accounts Receivable Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/05%20Finance%20AP%20and%20AR/Adleta_M3_Credit_AR_Guide_Oct2026.docx",
+        "type": "Learning guide"
+      }
+    ]
+  },
+  {
+    "id": "setup",
+    "name": "M3 Setup and Administration",
+    "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/10%20Setup%20and%20Administration",
+    "summary": "Order types, payment terms and prepay switches, cash desks, warehouses and bins, number series, default views, and users. Admins only.",
+    "steps": [
+      "Read the order types in OIS010 and the field selection in OIS014. Change nothing.",
+      "Record the prepay switches for PCD, CSH, CC, DUR, COD, CSD, and PP in CRS075.",
+      "List cash desks (OIS210), their payment methods (OIS211), and users (OIS212)."
+    ],
+    "evidence": "Admin records the current setup values and sends differences to Mike before any change.",
+    "validation": "Test every setup change in company 100 first and tell affected teams before it goes live.",
+    "files": [
+      {
+        "name": "Adleta_M3_Setup_Administration_Guide_Oct2026.docx",
+        "title": "Setup and Administration Guide (Oct 2026)",
+        "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/10%20Setup%20and%20Administration/Adleta_M3_Setup_Administration_Guide_Oct2026.docx",
+        "type": "Learning guide"
       }
     ]
   }

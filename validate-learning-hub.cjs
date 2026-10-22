@@ -14,13 +14,13 @@ vm.runInContext(main.slice(0,main.indexOf('if(!checkAuth())')),context);
 vm.runInContext(read('learning-hub-data.js'),context);
 vm.runInContext(read('learning-hub.js').replace(/hubSetup\(\);\s*$/,''),context);
 function run(s){return vm.runInContext(s,context);}
-assert.equal(run('LEARNING_LIBRARY.length'),10);
-assert.equal(run('LEARNING_LIBRARY.reduce((n,c)=>n+c.files.length,0)'),26);
-assert.equal(run('new Set(LEARNING_LIBRARY.flatMap(c=>c.files.map(f=>f.url))).size'),26);
+assert.equal(run('LEARNING_LIBRARY.length'),13);
+assert.equal(run('LEARNING_LIBRARY.reduce((n,c)=>n+c.files.length,0)'),25);
+assert.equal(run('new Set(LEARNING_LIBRARY.flatMap(c=>c.files.map(f=>f.url))).size'),25);
 assert.equal(run('LEARNING_LIBRARY.every(c=>c.files.every(f=>new URL(f.url).hostname==="adleta.sharepoint.com"))'.replace('new URL(f.url).hostname===','f.url.split("/")[2]===')),true);
 assert.equal(run('LEARNING_LIBRARY.slice(0,9).every(c=>c.steps.length===3&&c.evidence&&c.validation)'),true);
 assert.equal(run('hubFind("zzzz-not-a-title","all","all").length'),0);
-assert.equal(run('hubFind("","inventory","all")[0].files.length'),3);
+assert.equal(run('hubFind("","inventory","all")[0].files.length'),2);
 assert.equal(run('hubFind("","all","Pilot PDF").reduce((n,c)=>n+c.files.length,0)'),11);
 assert.match(run('hubScore([2,2,2,2,2],false)'),/Eligible for owner review/);
 assert.match(run('hubScore([0,2,2,2,2],false)'),/Blocked/);
@@ -34,7 +34,7 @@ for(const [user,coach,admin] of [['marksmith',false,false],['alanburk',true,fals
  assert.equal(element('view-start').innerHTML.includes('SME Studio'),coach);
  assert.equal(element('view-start').innerHTML.includes('Training Admin'),admin);
  assert.ok(element('view-employee').innerHTML.includes('Foundation'));
- assert.equal(element('hub-count').textContent,'26 files found');
+ assert.equal(element('hub-count').textContent,'25 files found');
  if(coach){run('hubStudio()');assert.ok(element('view-studio').innerHTML.includes('Observed practice assessment'));}
  if(admin){run('hubControl()');assert.ok(element('view-control').innerHTML.includes('Release review'));}
 }
@@ -42,4 +42,4 @@ assert.ok(portal.includes('learning-hub.css'));
 assert.ok(portal.includes('learning-hub-data.js'));
 assert.ok(portal.includes('learning-hub.js'));
 assert.ok(!portal.includes('before a Super User is considered certified on that session'));
-console.log('PASS: JavaScript syntax, 26 unique source links, 10 areas, 9 complete practice sequences, filters, readiness boundaries, Employee/SME/Admin views, and portal integration.');
+console.log('PASS: JavaScript syntax, 25 unique source links, 13 areas, 9 complete practice sequences, filters, readiness boundaries, Employee/SME/Admin views, and portal integration.');
