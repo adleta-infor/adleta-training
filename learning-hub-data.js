@@ -25,7 +25,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/00%20Foundation%20and%20Navigation/Adleta_M3_Foundation_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/00%20Foundation%20and%20Navigation"
   },
   {
     "id": "orderManagement",
@@ -52,7 +53,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/01%20Customer%20Service%20and%20Order%20Entry/Adleta_M3_CustomerService_OrderEntry_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/01%20Customer%20Service%20and%20Order%20Entry"
   },
   {
     "id": "purchasing",
@@ -79,7 +81,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/02%20Purchasing%20and%20Procurement/Adleta_M3_Purchasing_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/03%20Purchasing"
   },
   {
     "id": "inventory",
@@ -106,7 +109,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/03%20Inventory%20and%20Warehouse/Adleta_M3_Inventory_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/04%20Inventory%20and%20Stock%20Control"
   },
   {
     "id": "logistics",
@@ -133,7 +137,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/04%20Shipping%20and%20Will%20Call/Adleta_M3_Warehouse_Shipping_Routes_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/05%20Warehouse%20Shipping%20and%20Routes"
   },
   {
     "id": "financeAP",
@@ -160,7 +165,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/05%20Finance%20AP%20and%20AR/Adleta_M3_Accounts_Payable_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/06%20Accounts%20Payable"
   },
   {
     "id": "financeGL",
@@ -187,7 +193,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/06%20Finance%20General%20Ledger/Adleta_M3_General_Ledger_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/08%20General%20Ledger"
   },
   {
     "id": "reporting",
@@ -214,7 +221,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/07%20Reporting%20and%20Leadership/Adleta_M3_Pricing_Reporting_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/09%20Pricing%20and%20Reporting"
   },
   {
     "id": "productManagement",
@@ -241,7 +249,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/08%20Product%20Management%20and%20Rhythm/Adleta_M3_Product_Management_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/10%20Product%20Management"
   },
   {
     "id": "coaching",
@@ -276,7 +285,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/09%20Super%20Users%20and%20Coaching/Adleta_M3_Trainer_Readiness_GoLive_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/11%20End-to-End%20Walkthroughs"
   },
   {
     "id": "cashDesk",
@@ -297,7 +307,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/01%20Customer%20Service%20and%20Order%20Entry/Adleta_M3_WillCall_CashDesk_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/02%20Will%20Call%20Counter%20and%20Cash%20Desk"
   },
   {
     "id": "credit",
@@ -318,7 +329,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/05%20Finance%20AP%20and%20AR/Adleta_M3_Credit_AR_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/07%20Credit%20and%20Accounts%20Receivable"
   },
   {
     "id": "setup",
@@ -339,6 +351,8 @@ const LEARNING_LIBRARY = [
         "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/10%20Setup%20and%20Administration/Adleta_M3_Setup_Administration_Guide_Oct2026.docx",
         "type": "Learning guide"
       }
-    ]
+    ],
+    "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/13%20Setup%20and%20Administration"
   }
 ];
+const VIDEO_LIBRARY_URL = "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos";
