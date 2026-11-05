@@ -57,12 +57,15 @@ function hubSetup() {
   const ic={home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',screen:'<rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4"/>',file:'<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>',alert:'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',people:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',teach:'<path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>',map:'<path d="M3 12h18M3 6h18M3 18h18"/>'};
   const items=[['start','Home','home'],['modules',admin?'All Modules':'My Training','book'],['classes','Classes','screen'],['library','Library','file'],['issues','Report an Issue','alert'],
     ...(coach?[['team',admin?'All Teams':'My Team','people'],['studio','SME Studio','teach']]:[]),
-    ...(admin?[['dashboard','Admin Dashboard','grid'],['roadmap','Roadmap','map'],['superusers','Super Users','people'],['employee','Learning Packs','book'],['control','Training Admin','gear'],['admin','Admin Panel','gear']]:[])];
+    ...(admin?[['dashboard','Admin','gear']]:[])];
   const nav=document.getElementById('navLinks');
   nav.innerHTML=items.map(([id,label,icon])=>`<button class="nav-btn" data-view="${id}"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">${ic[icon]}</svg>${label}</button>`).join('');
   nav.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
   const originalRender=renderView;
-  renderView=function(id){if(views[id])views[id]();else originalRender(id);};
+  const ADMIN_TABS=[['dashboard','Overview'],['admin','Users & progress'],['control','Sign-off & files'],['superusers','Super Users'],['roadmap','Roadmap'],['employee','Learning packs']];
+  renderView=function(id){if(views[id])views[id]();else originalRender(id);
+    if(admin&&ADMIN_TABS.some(t=>t[0]===id)){const v=document.getElementById('view-'+id);if(v&&!v.querySelector('.hub-admintabs')){const bar=document.createElement('div');bar.className='hub-admintabs';bar.setAttribute('role','tablist');bar.innerHTML=ADMIN_TABS.map(([t,l])=>`<button role="tab" aria-selected="${t===id}" class="hub-admintab${t===id?' on':''}" onclick="switchView('${t}')">${l}</button>`).join('');v.prepend(bar);}
+      const b=nav.querySelector('[data-view="dashboard"]');if(b)b.classList.add('active');}};
   if(admin){const notice=document.createElement('div');notice.className='hub-pilot';notice.textContent='Admin view · Progress and quiz scores are saved in each person\'s own browser. They show practice, not sign-off.';content.prepend(notice);}
   document.querySelector('.hero-eyebrow').textContent='Adleta Infor M3 Training';
   document.querySelector('.hero h1').textContent='Learn M3 one step at a time.';

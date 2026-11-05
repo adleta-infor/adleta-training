@@ -44,3 +44,4 @@ kbd{display:inline-block;min-width:1.6em;padding:1px 6px;margin:0 1px;border:1px
 .str-dots{display:inline-flex!important;flex-direction:row!important;align-items:center}.str-dots i{flex:0 0 auto}
 .rep-banner>div{display:block}.rep-banner strong{margin-left:6px}
 .gate,.rep-head,.rep-body,.rep-finish,.rep-banner,.team-card,.drill-q,#view-keys .card{margin-bottom:16px}.rep-ask{margin-bottom:14px}
+.hub-admintabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--line)}.hub-admintab{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font:600 13px/1.2 inherit;color:var(--body);cursor:pointer}.hub-admintab:hover{border-color:#2a7bbf;color:#005596}.hub-admintab.on{background:#005596;border-color:#005596;color:#fff}

@@ -94,6 +94,16 @@ Send each person their credentials:
   Everyone else:  firstnamelastname (all lowercase, e.g. lariahjohnson)
                   / Infor2026!
 
+  Test logins (see the site the way each department sees it), all / Infor2026!
+    testcs          Customer Service / Order Entry
+    testsales       Sales / CRM & Pricing / Reporting
+    testpurchasing  Purchasing / Inventory Control
+    testwarehouse   Warehouse
+    testlogistics   Logistics / Transportation
+    testaccounting  Accounting (AP, GL, Credit)
+    testproduct     Product Management
+  To see an SME's view, log in as the SME (e.g. lariahjohnson / Infor2026!).
+
 IMPORTANT: Ask each person to change their password after
 first login — or change the passwords in index.html before
 you publish (see Changing Passwords below).

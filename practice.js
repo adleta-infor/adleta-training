@@ -59,11 +59,19 @@ function moduleStrength(m) {
 function prFirst() { return (currentUserData.name || '').split(' ')[0]; }
 function prEmail(name) { const p = (name || '').trim().toLowerCase().split(/\s+/); return p.length > 1 ? p[0] + '.' + p[p.length - 1] + '@adleta.com' : ''; }
 function prLeadName(m) { return (m.owner || '').split('(')[0].split('/')[0].trim(); }
+/* Department → the module whose SME leads that department (used when someone isn't on a roster, e.g. test logins). */
+const DEPT_SME_MODULE = { 'Customer Service / Order Entry': 'orderManagement', 'Sales / CRM & Pricing / Reporting': 'reporting', 'Purchasing / Inventory Control': 'purchasing', 'Purchasing / Supply Chain': 'purchasing', 'Warehouse': 'logistics', 'Warehouse & Logistics': 'logistics', 'Logistics / Transportation': 'logistics', 'Accounting': 'credit', 'Credit / AR': 'credit', 'Accounts Payable': 'financeAP', 'Finance': 'financeGL', 'Product Management': 'productManagement' };
 function mySme() {
-  const m = visibleModules().find(x => x.id !== 'foundation' && x.owner && !/All super users/i.test(x.owner));
+  const backupsOf = name => { const m = Object.values(MODULES).find(x => prLeadName(x) === name && /\(backups?:/.test(x.owner)); return m ? (m.owner.match(/\(backups?:\s*([^)]*)\)/) || [])[1] : ''; };
+  /* 1. The roster says who each person's SME is. */
+  const me = (currentUserData.name || '').toLowerCase();
+  const key = Object.keys(DEPT_USERS).find(k => (DEPT_USERS[k] || []).some(p => (p.first + ' ' + p.last).toLowerCase() === me));
+  if (key && USERS[key]) { const n = USERS[key].name; return { name: n, backups: backupsOf(n), email: prEmail(n) }; }
+  /* 2. Otherwise go by department, then by the first assigned area. */
+  const m = MODULES[DEPT_SME_MODULE[currentUserData.dept]] || visibleModules().find(x => x.id !== 'foundation' && x.owner && !/All super users/i.test(x.owner));
   if (!m) return null;
-  const lead = prLeadName(m), b = (m.owner.match(/\(backups?:\s*([^)]*)\)/) || [])[1] || '';
-  return { name: lead, backups: b, email: prEmail(lead), module: m };
+  const lead = prLeadName(m);
+  return { name: lead, backups: backupsOf(lead), email: prEmail(lead), module: m };
 }
 function teamsLink(email, msg) { return 'https://teams.microsoft.com/l/chat/0/0?users=' + encodeURIComponent(email) + '&message=' + encodeURIComponent(msg); }
 
