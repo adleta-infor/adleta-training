@@ -79,7 +79,9 @@ Send each person their credentials:
 
   URL:       https://YOUR-USERNAME.github.io/adleta-training/
   
-  KRISTENB        kristenb        / Adleta2026!
+  KRISTENB        kristenb        / Adleta2026!   (admin)
+  Mike Parsons    mikeparsons     / Adleta2026!   (admin)
+  Gina Paredes    ginaparedes     / Adleta2026!   (admin)
   Alan Burk       alanburk        / Infor2026!
   Jose Manjarrez  josemanjarrez   / Infor2026!
   Tony Shipka     tonyshipka      / Infor2026!
