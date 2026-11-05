@@ -38,7 +38,9 @@ for(const [user,coach,admin] of [['marksmith',false,false],['alanburk',true,fals
  assert.equal(element('view-start').innerHTML.includes('Training Admin'),admin);
  assert.ok(!/nonproduction|controlled pilot|masked/i.test(element('view-start').innerHTML));
  assert.ok(element('view-employee').innerHTML.includes('Foundation'));
- assert.equal(element('hub-count').textContent,'25 files found');
+ assert.equal(element('hub-count').textContent,run('hubScope().reduce((n,c)=>n+c.files.length,0)')+' files found');
+ if(!admin)assert.ok(run('hubScope().every(c=>c.id==="coaching"||visibleModules().some(m=>m.id===c.id))'),'non-admins only see their own areas');
+ if(admin)assert.equal(run('hubScope().length'),13);
  if(coach){run('hubStudio()');assert.ok(element('view-studio').innerHTML.includes('Score a teach-back'));}
  if(admin){run('hubControl()');assert.ok(element('view-control').innerHTML.includes('Release review'));}
 }
