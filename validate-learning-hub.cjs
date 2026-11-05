@@ -12,6 +12,8 @@ scripts.forEach(s=>new vm.Script(s));
 const main=scripts.find(s=>s.includes('const MODULES='));
 vm.runInContext(main.slice(0,main.indexOf('if(!checkAuth())')),context);
 vm.runInContext(read('learning-hub-data.js'),context);
+vm.runInContext(read('practice-data.js'),context);
+vm.runInContext(read('practice.js'),context);
 vm.runInContext(read('learning-hub.js').replace(/hubSetup\(\);\s*$/,''),context);
 function run(s){return vm.runInContext(s,context);}
 assert.equal(run('LEARNING_LIBRARY.length'),13);
@@ -32,7 +34,7 @@ for(const [user,coach,admin] of [['marksmith',false,false],['alanburk',true,fals
  run(`currentUser=${JSON.stringify(user)};currentUserData=USERS[currentUser];ST={};hubStart();hubEmployee();hubLibrary();`);
  assert.equal(run('hubIsCoach()'),coach);
  assert.ok(element('view-start').innerHTML.includes('Your next step'));
- assert.ok(element('view-start').innerHTML.includes('Start this session'));
+ assert.ok(element('view-start').innerHTML.includes('Start this lesson'));
  assert.equal(element('view-start').innerHTML.includes('Training Admin'),admin);
  assert.ok(!/nonproduction|controlled pilot|masked/i.test(element('view-start').innerHTML));
  assert.ok(element('view-employee').innerHTML.includes('Foundation'));
@@ -44,6 +46,17 @@ run(`currentUser="juanserna";currentUserData=USERS[currentUser];ST={};hubStart()
 assert.match(element('view-start').innerHTML,/You're the backup for/);
 run(`currentUser="lariahjohnson";currentUserData=USERS[currentUser];ST={};hubStart();`);
 assert.match(element('view-start').innerHTML,/You're the SME for <strong>Customer Service and Order Entry/);
+// practice engine: spacing, fading, drill and keys
+run(`currentUser="juanserna";currentUserData=USERS[currentUser];ST={};PR=null;`);
+assert.equal(run('repInterval(1)'),1);assert.equal(run('repInterval(3)'),7);assert.equal(run('repInterval(99)'),30);
+run(`pr().reps["fnd-2"]={n:4,last:"2026-01-01",due:"2026-01-02",hist:[]};`);
+assert.equal(run('repState("fnd-2").fading'),true);assert.equal(run('repState("fnd-2").level'),2);
+assert.ok(run('repsDue().some(x=>x.s.id==="fnd-2")'));
+run('hubStart();');assert.match(element('view-start').innerHTML,/Today's reps/);
+assert.ok(run('drillPool().length')>=10);
+assert.ok(run('OPT_MAP.orderManagement.every(o=>o.confirm)'),'translator stays draft until the SME confirms');
+assert.ok(!run('drillPool().some(q=>/^On the green screen you used Opt/.test(q.q))'),'unconfirmed options are never drilled');
+assert.ok(portal.includes('practice.js')&&portal.includes('practice-data.js'));
 assert.ok(portal.includes('learning-hub.css'));
 assert.ok(portal.includes('learning-hub-data.js'));
 assert.ok(portal.includes('learning-hub.js'));
