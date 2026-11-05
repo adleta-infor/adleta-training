@@ -91,6 +91,9 @@ Send each person their credentials:
   Juan Serna      juanserna       / Infor2026!
   Terri Sauter    terrisauter     / Infor2026!
 
+  Everyone else:  firstnamelastname (all lowercase, e.g. lariahjohnson)
+                  / Infor2026!
+
 IMPORTANT: Ask each person to change their password after
 first login — or change the passwords in index.html before
 you publish (see Changing Passwords below).
