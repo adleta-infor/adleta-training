@@ -6,12 +6,12 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const { KEY_CARD, KEY_NEW, OPT_MAP } = ctx;
 const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>M3 Keys Desk Card</title>
 <style>
-:root{--ink:#1f1630;--muted:#6b6280;--line:#ddd3ea;--brand:#6841a5}
-*{box-sizing:border-box}body{margin:0;background:#f7f5fb;color:var(--ink);font:15px/1.45 -apple-system,Segoe UI,Roboto,Arial,sans-serif}
+:root{--ink:#0b2742;--muted:#5b7088;--line:#d6e2ee;--brand:#005596}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fa;color:var(--ink);font:15px/1.45 -apple-system,Segoe UI,Roboto,Arial,sans-serif}
 .page{max-width:900px;margin:24px auto;padding:28px 32px;background:#fff;border:1px solid var(--line);border-radius:12px}
 h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:26px 0 8px}p.sub{color:var(--muted);margin:0 0 16px}
 table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:7px;border-bottom:2px solid var(--line)}td{padding:9px 7px;border-bottom:1px solid var(--line);vertical-align:top}
-kbd{display:inline-block;min-width:1.7em;padding:2px 7px;border:1px solid #c9bedb;border-bottom-width:3px;border-radius:6px;background:#fff;font:700 15px ui-monospace,Menlo,Consolas,monospace;text-align:center;white-space:nowrap}
+kbd{display:inline-block;min-width:1.7em;padding:2px 7px;border:1px solid #bccfe2;border-bottom-width:3px;border-radius:6px;background:#fff;font:700 15px ui-monospace,Menlo,Consolas,monospace;text-align:center;white-space:nowrap}
 .ok{color:#1a7a6d;font-weight:700;white-space:nowrap}.add{color:#8a6410;font-weight:700}.draft{font-size:12px;color:#8a6410;background:#fff6df;border-radius:6px;padding:8px 10px}
 .print{float:right;padding:8px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font:inherit}
 @media print{body{background:#fff;font-size:13px}td{padding:6px 7px}h1{font-size:22px}.ok,.add{white-space:nowrap}.page{border:0;margin:0;padding:0;max-width:none}.print{display:none}.break{page-break-before:always}}

@@ -11,7 +11,7 @@
 body {
   font-family: 'DM Sans', sans-serif;
   min-height: 100vh;
-  background: #0f2133;
+  background: #0b2742;
   display: grid;
   place-items: center;
   padding: 24px;
@@ -23,13 +23,13 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 700px 400px at 80% 50%, rgba(26,122,109,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 400px at 80% 50%, rgba(0,85,150,0.18) 0%, transparent 70%),
     repeating-linear-gradient(120deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 52px);
   pointer-events: none;
 }
 .card {
   position: relative;
-  background: #172d42;
+  background: #12345a;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 16px;
   padding: 44px 48px;
@@ -45,7 +45,7 @@ body::before {
 }
 .logo-mark {
   width: 48px; height: 48px;
-  background: linear-gradient(135deg, #22a08f, #1a7a6d);
+  background: linear-gradient(135deg, #2a7bbf, #005596);
   border-radius: 12px;
   display: grid;
   place-items: center;
@@ -76,12 +76,12 @@ input {
   transition: border-color 0.15s;
 }
 input::placeholder { color: rgba(255,255,255,0.3); }
-input:focus { border-color: #22a08f; }
+input:focus { border-color: #2a7bbf; }
 
 .btn {
   width: 100%;
   padding: 12px;
-  background: #1a7a6d;
+  background: #005596;
   color: white;
   border: none;
   border-radius: 8px;
@@ -92,7 +92,7 @@ input:focus { border-color: #22a08f; }
   margin-top: 8px;
   transition: background 0.15s;
 }
-.btn:hover { background: #22a08f; }
+.btn:hover { background: #2a7bbf; }
 
 .error {
   display: none;
