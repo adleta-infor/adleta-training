@@ -82,10 +82,12 @@ Send each person their credentials:
   KRISTENB        kristenb        / Adleta2026!
   Alan Burk       alanburk        / Infor2026!
   Jose Manjarrez  josemanjarrez   / Infor2026!
+  Lariah Johnson  lariahjohnson   / Infor2026!
   Tony Shipka     tonyshipka      / Infor2026!
   Jeanell Coral   jeanellcoral    / Infor2026!
   Philip Jones    philipjones     / Infor2026!
-  Terri Sauter    terrisauter     / Infor2026!
+  Brandy McGee    brandymcgee     / Infor2026!
+  Desiree Parker  desireeparker   / Infor2026!
 
 IMPORTANT: Ask each person to change their password after
 first login — or change the passwords in index.html before
