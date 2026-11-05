@@ -122,7 +122,7 @@ ${quiz}
 
 function modulePage(module) {
   const body = `<section class="hero">
-<div class="eyebrow">${escapeHtml(module.weeks)} - ${escapeHtml(module.owner)}</div>
+<div class="eyebrow">${escapeHtml(module.weeks)} · ${escapeHtml(module.owner)}</div>
 <h1>${escapeHtml(module.name)}</h1>
 <p>${escapeHtml(cleanText(module.summary))}</p>
 <div class="meta">${module.programs.map(program => `<span class="pill gray">${escapeHtml(program)}</span>`).join("")}<span class="pill">${module.sessions.length} sessions</span></div>
@@ -135,7 +135,7 @@ function allPracticeGuide() {
   const modules = Object.values(MODULES);
   const index = `<section class="hero"><div class="eyebrow">All Modules</div><h1>Adleta M3 Practice Guide</h1><p>This guide is generated from the same practice exercises used in the portal. If a module session changes, this guide should be rebuilt from portal.html so the printed guide and online practice stay aligned.</p><div class="meta"><span class="pill">${modules.length} modules</span><span class="pill gray">${modules.reduce((sum, module) => sum + module.sessions.length, 0)} sessions</span></div></section>
 <section class="index-grid">${modules.map(module => `<a class="card index-card" href="#${escapeHtml(module.id)}"><div class="eyebrow">${escapeHtml(module.weeks)}</div><h2>${escapeHtml(module.name)}</h2><p>${escapeHtml(cleanText(module.summary))}</p></a>`).join("")}</section>`;
-  const pages = modules.map(module => `<section id="${escapeHtml(module.id)}" class="hero"><div class="eyebrow">${escapeHtml(module.weeks)} - ${escapeHtml(module.owner)}</div><h1>${escapeHtml(module.name)}</h1><p>${escapeHtml(cleanText(module.summary))}</p><div class="meta">${module.programs.map(program => `<span class="pill gray">${escapeHtml(program)}</span>`).join("")}</div></section>${module.sessions.map((session, index) => renderSession(module, session, index)).join("")}`).join("");
+  const pages = modules.map(module => `<section id="${escapeHtml(module.id)}" class="hero"><div class="eyebrow">${escapeHtml(module.weeks)} · ${escapeHtml(module.owner)}</div><h1>${escapeHtml(module.name)}</h1><p>${escapeHtml(cleanText(module.summary))}</p><div class="meta">${module.programs.map(program => `<span class="pill gray">${escapeHtml(program)}</span>`).join("")}</div></section>${module.sessions.map((session, index) => renderSession(module, session, index)).join("")}`).join("");
   return pageShell("Adleta M3 Practice Guide", index + pages);
 }
 
