@@ -22,22 +22,28 @@ assert.equal(run('LEARNING_LIBRARY.slice(0,9).every(c=>c.steps.length===3&&c.evi
 assert.equal(run('hubFind("zzzz-not-a-title","all","all").length'),0);
 assert.equal(run('hubFind("","inventory","all")[0].files.length'),2);
 assert.equal(run('hubFind("","all","Pilot PDF").reduce((n,c)=>n+c.files.length,0)'),11);
-assert.match(run('hubScore([2,2,2,2,2],false)'),/Eligible for owner review/);
-assert.match(run('hubScore([0,2,2,2,2],false)'),/Blocked/);
-assert.match(run('hubScore([2,2,2,2,2],true)'),/Blocked/);
-assert.match(run('hubScore([1,1,1,2,2],false)'),/Practice again/);
-assert.match(run('hubScore([1,1,1,1,1],false)'),/Guided retraining/);
-assert.match(run('hubScore(["",2,2,2,2],false)'),/Select a score/);
+assert.match(run('hubScore([2,2,2,2,2],false)'),/Ready/);
+assert.match(run('hubScore([0,2,2,2,2],false)'),/Not ready yet/);
+assert.match(run('hubScore([2,2,2,2,2],true)'),/Not ready yet/);
+assert.match(run('hubScore([1,1,1,2,2],false)'),/practice again/);
+assert.match(run('hubScore([1,1,1,1,1],false)'),/more training/);
+assert.match(run('hubScore(["",2,2,2,2],false)'),/Pick a score/);
 for(const [user,coach,admin] of [['marksmith',false,false],['alanburk',true,false],['kristenb',true,true]]){
- run(`currentUser=${JSON.stringify(user)};currentUserData=USERS[currentUser];hubStart();hubEmployee();hubLibrary();`);
+ run(`currentUser=${JSON.stringify(user)};currentUserData=USERS[currentUser];ST={};hubStart();hubEmployee();hubLibrary();`);
  assert.equal(run('hubIsCoach()'),coach);
- assert.equal(element('view-start').innerHTML.includes('SME Studio'),coach);
+ assert.ok(element('view-start').innerHTML.includes('Your next step'));
+ assert.ok(element('view-start').innerHTML.includes('Start this session'));
  assert.equal(element('view-start').innerHTML.includes('Training Admin'),admin);
+ assert.ok(!/nonproduction|controlled pilot|masked/i.test(element('view-start').innerHTML));
  assert.ok(element('view-employee').innerHTML.includes('Foundation'));
  assert.equal(element('hub-count').textContent,'25 files found');
- if(coach){run('hubStudio()');assert.ok(element('view-studio').innerHTML.includes('Observed practice assessment'));}
+ if(coach){run('hubStudio()');assert.ok(element('view-studio').innerHTML.includes('Score a teach-back'));}
  if(admin){run('hubControl()');assert.ok(element('view-control').innerHTML.includes('Release review'));}
 }
+run(`currentUser="juanserna";currentUserData=USERS[currentUser];ST={};hubStart();`);
+assert.match(element('view-start').innerHTML,/You're the backup for/);
+run(`currentUser="lariahjohnson";currentUserData=USERS[currentUser];ST={};hubStart();`);
+assert.match(element('view-start').innerHTML,/You're the SME for <strong>Customer Service and Order Entry/);
 assert.ok(portal.includes('learning-hub.css'));
 assert.ok(portal.includes('learning-hub-data.js'));
 assert.ok(portal.includes('learning-hub.js'));
