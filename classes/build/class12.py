@@ -29,12 +29,12 @@ imgs = {
     'mplan':   load_img(f'{I}/mplan.jpg', [b(18, 589, 1236, 625), b(610, 295, 776, 324)], crop=b(0, 126, 1250, 665)),
 }
 
-CSR, CALLER = 'Rachel · Adleta CS', 'Jen · Heart of Texas Flooring'
+CSR, CALLER = 'Rachel · Adleta CS', 'Jen · Bosque River Floors'
 
 calls = {
  'c1': [
   ['csr', 'Adleta, this is Rachel.'],
-  ['cust', 'Hi, Jen at Heart of Texas Flooring in Waco, account 47980. I need three Kerapoxy CQ, the 1 gallon, in gray.'],
+  ['cust', 'Hi, Jen at Bosque River Floors in Waco, account 47980. I need three Kerapoxy CQ, the 1 gallon, in gray.'],
   ['csr', 'Let me check.'],
   ['cust', 'If you don\'t have it, when can I get it?'],
   ['csr', 'One second.'],
@@ -55,8 +55,8 @@ title(12, 'Out of stock,<br>mill ETAs.',
 compare('Last time you checked stock first', 'Class 5', 'Item search, the warehouse column<br>Don\'t promise what isn\'t there',
         'Today', 'M3 opens <b>MMS165</b> when there isn\'t enough<br><b>Confirm delivery date → Yes</b> for a real ETA<br>Follow up in <b>Material Plan</b><br><b>Tell purchasing</b>',
         notes="Bridge from Class 5."),
-call('c1', 'Heart of Texas Flooring', 'Jen needs something you don\'t have', end='On hold. Add the line.'),
-heard('A backorder call', [('Account', '047980', 'Heart of Texas'), ('Item', 'Kerapoxy CQ 1 gal', 'Gray'), ('Qty', '3', 'EA'),
+call('c1', 'Bosque River Floors', 'Jen needs something you don\'t have', end='On hold. Add the line.'),
+heard('A backorder call', [('Account', '047980', 'Bosque River'), ('Item', 'Kerapoxy CQ 1 gal', 'Gray'), ('Qty', '3', 'EA'),
       ('Asks', 'When can I get it?', 'a real date'), ('PO', 'None', 'in class: TEST-your name-date'), ('After', 'Tell purchasing', 'every backorder')],
       notes="In TST, 047980 shows the real customer's name; the deck uses a made-up one because the site is public.", kicker='What did Jen need?'),
 step('Step 1 of 4', '"Ordered quantity is not available"', 'atp',
@@ -76,13 +76,13 @@ step('Step 3 of 4', 'Read her the Cfdldt', 'lines',
 step('Step 4 of 4', 'Follow up: Material Plan', 'mplan',
      ['Click the line, then <b>Material Plan</b> on the right (MMS080). OK on "due for replanning".', 'Your order is the demand. Incoming POs or transfers would show here with dates.',
       'Here nothing is coming (<b>10-Not stocked</b>). <b>Tell purchasing.</b>'],
-     notes="Step 4. M3 isn't creating purchase suggestions in the test company yet (PPS170 is empty), so a backorder doesn't reach purchasing by itself. Until that's set up, tell purchasing about every backorder.",
+     notes="Step 4. In TST, this backorder didn't create a purchase suggestion in PPS170 (only drop ship orders do, Class 16), so it doesn't reach purchasing by itself. Until that's set up, tell purchasing about every backorder.",
      card=['tell']),
 cards('Discontinued items', 'Status 50: can\'t be ordered', [
     ('New lines', 'M3 won\'t let you key a discontinued item, even with stock on the shelf: <b>Line type 1 not allowed when item status = 50</b>. Offer the replacement, or ask product management or your lead.'),
     ('Already on order', 'If an item is discontinued after the customer ordered it, the line stays open. Nothing warns you and nothing tells purchasing. Check <b>OIS301</b> by item and make sure purchasing knows.')],
     notes="From the session's 29 Oct test. We didn't re-find a status-50 item today, so there's no fresh screenshot."),
-call('c2', 'Heart of Texas Flooring', 'Give her the real date', kicker='Back to Jen', ring=False, end='Call ended.', empty='Pick up when you have the Cfdldt.',
+call('c2', 'Bosque River Floors', 'Give her the real date', kicker='Back to Jen', ring=False, end='Call ended.', empty='Pick up when you have the Cfdldt.',
      notes="Back to Jen. Not in Carrollton, here's the date from Cfdldt, and we'll let you know if it changes."),
 try_it('Your turn: a backorder',
        'Customer <b class="mono">047980</b>. Pick an item with <b>0</b> in the CAR column of Item search.',
@@ -104,5 +104,5 @@ closing(12, 'A real date,<br>not a guess.', 'Confirm delivery date → Yes, read
 if __name__ == '__main__':
     out = build(os.path.join(ROOT, 'cs-class-12.html'), number=12, title='Out of Stock and Mill ETAs',
                 chrome='Out of stock', slides=slides, calls=calls, csr=CSR, caller=CALLER,
-                card_head='Jen · Heart of Texas Flooring', card_items=card_items, imgs=imgs)
+                card_head='Jen · Bosque River Floors', card_items=card_items, imgs=imgs)
     print(out, os.path.getsize(out))
