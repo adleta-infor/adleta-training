@@ -1,7 +1,7 @@
 """Class 2 — A Phone Order the Way Calls Really Go (training site session ord-14).
 
 Tested in M3 TST (CMP100) on 6 Nov 2026: CO 1000000482, customer 000320
-A-1 Floor Covering, STAPSA820 x2 + STAXTR1 x2, side mark in Job description.
+Mesa Floor Covering, STAPSA820 x2 + STAXTR1 x2, side mark in Job description.
 """
 import os, sys
 sys.path.insert(0, os.path.dirname(__file__))
@@ -12,24 +12,24 @@ Y = 37  # screenshots were cropped 37px at the top
 def b(x0, y0, x1, y1): return (x0, y0 - Y, x1, y1 - Y)
 
 imgs = {
-    'acctresult': load_img(f'{I}/acctresult.jpg', [b(250, 256, 1318, 293)], crop=b(245, 64, 1324, 330)),
-    'header':     load_img(f'{I}/header.jpg', [b(176, 222, 470, 452), b(1128, 671, 1238, 706)]),
-    'po':         load_img(f'{I}/po.jpg', [b(574, 464, 809, 496), b(574, 615, 712, 647)]),
-    'sidemark':   load_img(f'{I}/sidemark.jpg', [b(165, 539, 393, 573)]),
+    'acctresult': load_img(f'{I}/acctresult.jpg', [b(250, 256, 1318, 293)], crop=b(245, 64, 1324, 330), blur=[b(388, 256, 1320, 293), b(255, 170, 760, 198)]),
+    'header':     load_img(f'{I}/header.jpg', [b(176, 222, 470, 452), b(1128, 671, 1238, 706)], blur=[b(287, 226, 470, 281), b(14, 636, 700, 662)]),
+    'po':         load_img(f'{I}/po.jpg', [b(574, 464, 809, 496), b(574, 615, 712, 647)], blur=[b(287, 186, 470, 207)]),
+    'sidemark':   load_img(f'{I}/sidemark.jpg', [b(165, 539, 393, 573)], blur=[b(287, 186, 470, 207)]),
     'itemsearch': load_img(f'{I}/itemsearch.jpg', [b(206, 165, 776, 202), b(206, 256, 1362, 295)], crop=b(200, 64, 1369, 330)),
     'trowel':     load_img(f'{I}/trowel.jpg', [b(1019, 169, 1109, 199), b(206, 492, 1352, 532)], crop=b(200, 64, 1369, 650)),
-    'lines2':     load_img(f'{I}/lines2.jpg', [b(166, 228, 282, 259), b(18, 456, 1224, 528)]),
+    'lines2':     load_img(f'{I}/lines2.jpg', [b(166, 228, 282, 259), b(18, 456, 1224, 528)], blur=[b(286, 199, 470, 220)]),
 }
 
-CSR, CALLER = 'Rachel · Adleta CS', 'Teresa · A-1 Floor Covering'
+CSR, CALLER = 'Rachel · Adleta CS', 'Teresa · Mesa Floor Covering'
 
 calls = {
  'c1': [
   ['csr', 'Adleta, this is Rachel. How can I help you?'],
-  ['cust', 'Hi Rachel, it\'s Teresa over at A-1 Floor Covering. I need to put an order in.'],
+  ['cust', 'Hi Rachel, it\'s Teresa over at Mesa Floor Covering. I need to put an order in.'],
   ['csr', 'Sure. What\'s your account number?'],
-  ['cust', 'Oh gosh, I don\'t have it in front of me. We\'re A-1 Floor Covering, in Amarillo.'],
-  ['csr', 'No problem, I can find you. Hang on… A-1 Floor Covering on Hillside?'],
+  ['cust', 'Oh gosh, I don\'t have it in front of me. We\'re Mesa Floor Covering, in Amarillo.'],
+  ['csr', 'No problem, I can find you. Hang on… Mesa Floor Covering in Amarillo?'],
   ['cust', 'That\'s us.'],
   ['csr', 'Okay. What do you need?'],
   ['cust', 'I need that PSA 820. The pressure-sensitive adhesive for LVP.'],
@@ -116,14 +116,14 @@ slides = [
  'html': '''
 <div class="kicker red">Incoming call</div>
 <h2>Ring ring! A customer is calling.</h2>
-''' + call_html('c1', 'A-1 Floor Covering', end='Call on hold. Let’s enter the order!')},
+''' + call_html('c1', 'Mesa Floor Covering', end='Call on hold. Let’s enter the order!')},
 
 {'notes': "Let the room say it back. The account is the one thing she didn't give us, so step 1 is finding her by name. The PO she gave is 4471, but in class everyone types TEST, their first name and today's date instead, so each person can find their own order later. This card stays at the bottom of every slide.",
  'html': '''
 <div class="kicker red">What did Teresa need?</div>
 <h2>Everything but her account number</h2>
 <div class="heard h6">
-<div class="hd"><em>Account</em><b>A-1 Floor Covering</b><span>Amarillo · we'll look it up</span></div>
+<div class="hd"><em>Account</em><b>Mesa Floor Covering</b><span>Amarillo · we'll look it up</span></div>
 <div class="hd"><em>Item</em><b class="mono">PSA 820 · 2</b><span>pressure-sensitive adhesive</span></div>
 <div class="hd"><em>Anything else</em><b class="mono">Trowel · 2</b><span>Stauf #1</span></div>
 <div class="hd"><em>PO</em><b class="mono">4471</b><span>in class: TEST-your name-date</span></div>
@@ -132,7 +132,7 @@ slides = [
 </div>
 ${CARD([])}'''},
 
-{'notes': "Step 1. Ctrl+S, OIS100, Enter. Teresa doesn't know her number, so click the little search icon at the end of the Customer box. The Account Search box opens. Type part of the name, a-1 floor, and the list narrows as you type. You can also search by city or phone number. Click her row. Ask: what would you search if she only said 'the flooring place in Amarillo'? (Amarillo.)",
+{'notes': "Step 1. Ctrl+S, OIS100, Enter. Teresa doesn't know her number, so click the little search icon at the end of the Customer box. The Account Search box opens. Type part of the name, the city or the phone number. Today, type amarillo, and the list narrows as you type. Click account 000320. In TST the real customer's name shows on that account; the deck uses a made-up name because the site is public.",
  'html': '''
 <div class="kicker amber">Follow along · Step 1 of 6</div>
 <h2>Find the account by name</h2>
@@ -141,8 +141,8 @@ ${IMG('acctresult')}
 <ol class="steps side">
 <li><b>Ctrl+S</b>, type <b class="mono">OIS100</b>, Enter.</li>
 <li>Click the <b>search icon</b> at the end of the <b>Customer</b> box.</li>
-<li>Type <b class="mono">a-1 floor</b>. Name, city or phone all work.</li>
-<li>Click <b>A-1 Floor Covering</b>.</li>
+<li>Type <b class="mono">amarillo</b>. Name, city or phone all work.</li>
+<li>Click account <b class="mono">000320</b>.</li>
 </ol>
 </div>
 ${CARD(['acct'])}'''},
@@ -240,16 +240,16 @@ ${CARD(['item','more'])}'''},
  'html': '''
 <div class="kicker red">Follow along · Back to Teresa</div>
 <h2>Read back the order number</h2>
-''' + call_html('c2', 'A-1 Floor Covering', sub='On hold', ring=False, wait='On hold', on='Back on the line', end='Call ended. Order placed! 🎉', empty='Pick up when you have your CO number.')},
+''' + call_html('c2', 'Mesa Floor Covering', sub='On hold', ring=False, wait='On hold', on='Back on the line', end='Call ended. Order placed! 🎉', empty='Pick up when you have your CO number.')},
 
 {'notes': "Now they do one on their own. No step slides this time. Leave this card up and walk the room. Don't help unless someone is truly stuck; let them use their notes and the desk card. When they finish, have them read their CO number to a neighbor. If someone finishes early, have them do it again without looking at the card.",
  'cls': 'try',
  'html': '''
 <div class="kicker">Your turn · on your own</div>
 <h2>Teresa calls back</h2>
-<p class="lead" style="margin-bottom:14px">"Rachel, it's Teresa again at A-1 in Amarillo. Separate order: <b>one PSA 820</b> and <b>one of those #1 trowels</b>. PO <b>4472</b>, side mark <b>PATEL KITCHEN</b>. I'll pick it up."</p>
+<p class="lead" style="margin-bottom:14px">"Rachel, it's Teresa again at Mesa in Amarillo. Separate order: <b>one PSA 820</b> and <b>one of those #1 trowels</b>. PO <b>4472</b>, side mark <b>PATEL KITCHEN</b>. I'll pick it up."</p>
 <ul class="check">
-<li><span class="box">☐</span>Find A-1 Floor Covering by name</li>
+<li><span class="box">☐</span>Find her by city (amarillo), account 000320</li>
 <li><span class="box">☐</span>PO in Customer's ord (in class: TEST-your name-date)</li>
 <li><span class="box">☐</span>She's picking it up: change Delivery method to <b class="mono">WC</b></li>
 <li><span class="box">☐</span>PATEL KITCHEN in Job description</li>
@@ -314,5 +314,5 @@ ${CARD(['item','more'])}'''},
 if __name__ == '__main__':
     out = build(os.path.join(ROOT, 'cs-class-2.html'), number=2, title='A Phone Order the Way Calls Really Go',
                 chrome='Phone order', slides=slides, calls=calls, csr=CSR, caller=CALLER,
-                card_head='Teresa · A-1 Floor Covering', card_items=card_items, imgs=imgs)
+                card_head='Teresa · Mesa Floor Covering', card_items=card_items, imgs=imgs)
     print(out, os.path.getsize(out))

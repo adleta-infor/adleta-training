@@ -1,6 +1,6 @@
 """Class 3 — Changing an Order After It's Entered (training site session ord-10).
 
-Tested in M3 TST (CMP100) on 6 Nov 2026: CO 1000000484 (customer 000300 A to Z
+Tested in M3 TST (CMP100) on 6 Nov 2026: CO 1000000484 (customer 000300 Red River
 Carpet Center): qty 2 -> 3 in OIS101, one-time jobsite in OIS102 from OIS300
 (works at status 44), OT -> WC. CO 1000000482: OT -> WC through OIS100 change
 mode (Generic Panel); delivery fee recalculated from 149.00 to 17.50.
@@ -16,27 +16,27 @@ Y = 37
 def b(x0, y0, x1, y1): return (x0, y0 - Y, x1, y1 - Y)
 
 imgs = {
-    'changemode':   load_img(f'{I}/changemode.jpg', [b(432, 84, 460, 112), b(168, 214, 284, 244)]),
-    'lineselected': load_img(f'{I}/lineselected.jpg', [b(432, 84, 460, 112), b(18, 456, 1224, 492)]),
-    'qtychange':    load_img(f'{I}/qtychange.jpg', [b(166, 427, 292, 459), b(1128, 671, 1238, 706)]),
-    'qtydone':      load_img(f'{I}/qtydone.jpg', [b(446, 456, 528, 492), b(544, 622, 690, 654)]),
+    'changemode':   load_img(f'{I}/changemode.jpg', [b(432, 84, 460, 112), b(168, 214, 284, 244)], blur=[b(287, 186, 470, 207), b(287, 432, 470, 453), b(287, 470, 470, 491)]),
+    'lineselected': load_img(f'{I}/lineselected.jpg', [b(432, 84, 460, 112), b(18, 456, 1224, 492)], blur=[b(286, 199, 470, 220)]),
+    'qtychange':    load_img(f'{I}/qtychange.jpg', [b(166, 427, 292, 459), b(1128, 671, 1238, 706)], blur=[b(727, 185, 900, 206)]),
+    'qtydone':      load_img(f'{I}/qtydone.jpg', [b(446, 456, 528, 492), b(544, 622, 690, 654)], blur=[b(286, 199, 470, 220)]),
     'ois300':       load_img(f'{I}/ois300.jpg', [b(18, 423, 1216, 459), b(1266, 152, 1342, 180)]),
-    'chgadr':       load_img(f'{I}/chgadr.jpg', [b(172, 291, 202, 319), b(1128, 671, 1238, 706)]),
-    'addrno':       load_img(f'{I}/addrno.jpg', [b(597, 365, 673, 396)]),
+    'chgadr':       load_img(f'{I}/chgadr.jpg', [b(172, 291, 202, 319), b(1128, 671, 1238, 706)], blur=[b(14, 226, 180, 248), b(424, 226, 600, 248), b(18, 405, 820, 620)]),
+    'addrno':       load_img(f'{I}/addrno.jpg', [b(597, 365, 673, 396)], blur=[b(16, 366, 410, 546), b(178, 592, 410, 622)]),
     'jobsite':      load_img(f'{I}/jobsite.jpg', [b(15, 365, 410, 472)]),
     'yesall':       load_img(f'{I}/yesall.jpg', [b(539, 431, 704, 477)], crop=b(400, 260, 1170, 520)),
-    'addrdone':     load_img(f'{I}/addrdone.jpg', [b(18, 402, 330, 548)]),
-    'genericwc':    load_img(f'{I}/genericwc.jpg', [b(575, 614, 713, 648), b(419, 673, 546, 705)]),
+    'addrdone':     load_img(f'{I}/addrdone.jpg', [b(18, 402, 330, 548)], blur=[b(14, 226, 180, 248), b(424, 226, 600, 248)]),
+    'genericwc':    load_img(f'{I}/genericwc.jpg', [b(575, 614, 713, 648), b(419, 673, 546, 705)], blur=[b(287, 186, 470, 207)]),
     'wcprompt':     load_img(f'{I}/wcprompt.jpg', [b(539, 446, 704, 492)], crop=b(400, 250, 1170, 530)),
-    'charges':      load_img(f'{I}/charges.jpg', [b(18, 290, 615, 327)], crop=b(0, 126, 1250, 450)),
+    'charges':      load_img(f'{I}/charges.jpg', [b(18, 290, 615, 327)], crop=b(0, 126, 1250, 450), blur=[b(300, 199, 500, 221)]),
 }
 
-CSR, CALLER = 'Rachel · Adleta CS', 'Derek · A to Z Carpet Center'
+CSR, CALLER = 'Rachel · Adleta CS', 'Derek · Red River Flooring'
 
 calls = {
  'c1': [
   ['csr', 'Adleta, this is Rachel.'],
-  ['cust', 'Rachel, it\'s Derek at A to Z in Enid. I called in an order this morning and I need to change it.'],
+  ['cust', 'Rachel, it\'s Derek at Red River in Enid. I called in an order this morning and I need to change it.'],
   ['csr', 'Sure, what\'s the PO on it?'],
   ['cust', 'It\'s the one with the PSA 820 on it.'],
   ['csr', 'Okay, I\'ve got it. What do you need to change?'],
@@ -61,7 +61,7 @@ calls = {
  ],
 }
 
-card_items = [['acct', 'Account', '000300 A to Z'], ['qty', 'Change 1', 'PSA 820: 2 → 3'],
+card_items = [['acct', 'Account', '000300 Red River'], ['qty', 'Change 1', 'PSA 820: 2 → 3'],
               ['addr', 'Change 2', 'Jobsite: 2210 W Willow Rd'], ['wc', 'Change 3', 'Will call']]
 
 slides = [
@@ -98,9 +98,9 @@ slides = [
  'html': '''
 <div class="kicker">Warm-up · on your own</div>
 <h2>Key the order first</h2>
-<p class="lead" style="margin-bottom:14px">Derek at <b>A to Z Carpet Center</b> in Enid called this morning: <b>two PSA 820</b>, on our truck.</p>
+<p class="lead" style="margin-bottom:14px">Derek at <b>Red River Flooring</b> in Enid called this morning: <b>two PSA 820</b>, on our truck.</p>
 <ul class="check">
-<li><span class="box">☐</span>OIS100, find A to Z by name (try <b class="mono">a to z</b>)</li>
+<li><span class="box">☐</span>OIS100, search <b class="mono">enid</b>, pick account <b class="mono">000300</b></li>
 <li><span class="box">☐</span>PO: <b class="mono">TEST-</b>your name<b class="mono">-</b>date</li>
 <li><span class="box">☐</span>Item search <b class="mono">psa 820</b>, qty <b class="mono">2</b>, Add</li>
 <li><span class="box">☐</span><b>Write down your CO no.</b> You'll need it in a minute.</li>
@@ -111,14 +111,14 @@ slides = [
  'html': '''
 <div class="kicker red">Incoming call</div>
 <h2>Derek calls back</h2>
-''' + call_html('c1', 'A to Z Carpet Center', end='On hold. Let’s make the changes.')},
+''' + call_html('c1', 'Red River Flooring', end='On hold. Let’s make the changes.')},
 
 {'notes': "Two changes. A quantity, and a jobsite address for this one order. The customer's saved ship-to on the account stays the same.",
  'html': '''
 <div class="kicker red">What did Derek need?</div>
 <h2>Two changes on one order</h2>
 <div class="heard h4">
-<div class="hd"><em>Which order</em><b>A to Z</b><span>your CO no from the warm-up</span></div>
+<div class="hd"><em>Which order</em><b>Red River</b><span>your CO no from the warm-up</span></div>
 <div class="hd"><em>Change 1</em><b class="mono">PSA 820 · 3</b><span>was 2</span></div>
 <div class="hd"><em>Change 2</em><b>Jobsite</b><span>Martin jobsite, 2210 W Willow Rd, Enid 73703</span></div>
 <div class="hd"><em>Just this order?</em><b>Yes</b><span>his saved address stays</span></div>
@@ -172,7 +172,7 @@ ${CARD(['addr'])}'''},
 </div>
 ${CARD(['addr'])}'''},
 
-{'notes': "Step 4. M3 asks: change all the lines to this address? Yes means every line on the order goes to the jobsite, which is what Derek wants. No would only change lines that had the old address. Click Yes. The Delivery Address now shows the Martin jobsite. Only this order changed. A to Z's saved address on the account is the same.",
+{'notes': "Step 4. M3 asks: change all the lines to this address? Yes means every line on the order goes to the jobsite, which is what Derek wants. No would only change lines that had the old address. Click Yes. The Delivery Address now shows the Martin jobsite. Only this order changed. Red River's saved address on the account is the same.",
  'html': '''
 <div class="kicker amber">Follow along · Step 4 of 4</div>
 <h2>Yes, all lines</h2>
@@ -188,14 +188,14 @@ ${CARD(['addr'])}'''},
  'html': '''
 <div class="kicker red">Back to Derek</div>
 <h2>Read back the changes</h2>
-''' + call_html('c2', 'A to Z Carpet Center', sub='On hold', ring=False, wait='On hold', on='Back on the line', end='Call ended.', empty='Pick up when both changes are in.')},
+''' + call_html('c2', 'Red River Flooring', sub='On hold', ring=False, wait='On hold', on='Back on the line', end='Call ended.', empty='Pick up when both changes are in.')},
 
 {'notes': "Of course he calls back. This is the third change: truck to will call.",
  'cls': 'callslide',
  'html': '''
 <div class="kicker red">Incoming call</div>
 <h2>Derek, one more time</h2>
-''' + call_html('c3', 'A to Z Carpet Center', end='On hold. Switch it to will call.')},
+''' + call_html('c3', 'Red River Flooring', end='On hold. Switch it to will call.')},
 
 {'notes': "Open the order the same way: Ctrl+S, OIS100, CO no, pencil. Click Next once to Generic Panel, the same screen where the PO was. Change Delivery method from OT to WC and click Next. Heads up: if you open the order from OIS300 with the pencil instead, the screens are different and Delivery method is on Payment and Conditions. Either way works; we'll use OIS100 so it's the same screens every time.",
  'html': '''
@@ -232,12 +232,12 @@ ${CARD(['wc'])}'''},
 <div class="card"><h3>Ship from a different warehouse</h3><p>On an order with a transfer. Not settled yet.</p></div>
 </div>'''},
 
-{'notes': "On their own, on the Class 2 order for A-1 Floor Covering (Teresa). If someone doesn't have one, have them key a quick one first. Walk the room; help only when someone's truly stuck.",
+{'notes': "On their own, on the Class 2 order for Mesa Floor Covering (Teresa). If someone doesn't have one, have them key a quick one first. Walk the room; help only when someone's truly stuck.",
  'cls': 'try',
  'html': '''
 <div class="kicker">Your turn · on your own</div>
 <h2>Teresa calls back</h2>
-<p class="lead" style="margin-bottom:14px">"Rachel, it's Teresa at A-1. On my order from the other day: make the trowels <b>three</b>, not two. And I'll <b>pick it up</b>."</p>
+<p class="lead" style="margin-bottom:14px">"Rachel, it's Teresa at Mesa. On my order from the other day: make the trowels <b>three</b>, not two. And I'll <b>pick it up</b>."</p>
 <ul class="check">
 <li><span class="box">☐</span>Find her order (OIS300, customer <b class="mono">000320</b>)</li>
 <li><span class="box">☐</span>OIS100, CO no, pencil, Next to the lines</li>
@@ -245,7 +245,7 @@ ${CARD(['wc'])}'''},
 <li><span class="box">☐</span>Generic Panel: Delivery method <b class="mono">WC</b>, Next, Yes</li>
 <li><span class="box">☐</span>Check the charges</li>
 </ul>
-<p class="done">No Class 2 order? Key one for A-1 first, then change it.</p>'''},
+<p class="done">No Class 2 order? Key one for Mesa (000320) first, then change it.</p>'''},
 
 {'notes': "Recap in one picture.",
  'html': '''
@@ -298,5 +298,5 @@ ${CARD(['wc'])}'''},
 if __name__ == '__main__':
     out = build(os.path.join(ROOT, 'cs-class-3.html'), number=3, title="Changing an Order After It's Entered",
                 chrome='Changing an order', slides=slides, calls=calls, csr=CSR, caller=CALLER,
-                card_head='Derek · A to Z Carpet Center', card_items=card_items, imgs=imgs)
+                card_head='Derek · Red River Flooring', card_items=card_items, imgs=imgs)
     print(out, os.path.getsize(out))
