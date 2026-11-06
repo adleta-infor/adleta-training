@@ -104,7 +104,7 @@ step('Follow along · Step 4 of 5', 'The pickup day is on the lines', 'lines',
      notes="Step 4. Cfdldt is the confirmed date, and it's the pickup day we typed: 110926 means 11/09/26. Find the CO number.",
      card=['item', 'when']),
 step('Follow along · Step 5 of 5', 'The will call fee', 'charges',
-     ['F3 out of the lines: the <b>Charges</b> screen.', 'Will call orders get a <b class="mono">$17.50</b> fee in TST.', 'Tell the customer. F3 out.'],
+     ['F3 out of the lines: the <b>Charges</b> screen.', 'Will call orders get a <b class="mono">$17.50</b> fee in TST.', 'Mention it. Until the real fee is confirmed, check with your lead before you quote the amount. F3 out.'],
      notes="Step 5. F3 from the lines opens Charges. On a will call order it's the $17.50 will call fee instead of the delivery fee. Tell the customer before you hang up. Waiving it is its own class.",
      card=None),
 cards('Before he gets there', 'Two more things', [
