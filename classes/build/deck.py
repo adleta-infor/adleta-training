@@ -34,9 +34,22 @@ EXTRA_CSS = r"""
 """
 
 
-def load_img(path, boxes=(), width=1400, quality=80, crop=None):
-    """Open a screenshot, draw orange boxes around what to look at, embed it."""
+def pixelate(im, boxes, block=9):
+    """Blur real customer names, addresses and phone numbers: the site is public."""
+    for x0, y0, x1, y1 in boxes:
+        x0, y0, x1, y1 = map(int, (max(0, x0), max(0, y0), min(im.width, x1), min(im.height, y1)))
+        if x1 <= x0 or y1 <= y0: continue
+        r = im.crop((x0, y0, x1, y1))
+        r = r.resize((max(1, (x1 - x0) // block), max(1, (y1 - y0) // block)), Image.BILINEAR).resize((x1 - x0, y1 - y0), Image.NEAREST)
+        im.paste(r, (x0, y0))
+    return im
+
+
+def load_img(path, boxes=(), width=1400, quality=80, crop=None, blur=()):
+    """Open a screenshot, blur customer details, draw orange boxes around what to look at, embed it."""
     im = Image.open(path).convert('RGB')
+    if blur:
+        im = pixelate(im, blur)
     if boxes:
         d = ImageDraw.Draw(im)
         for b in boxes:

@@ -1,7 +1,7 @@
 """Class 4 — Answering Customer Questions: Order, Stock, and Invoice Lookups (session ord-9).
 
 Tested in M3 TST (CMP100) on 6 Nov 2026 with customer/payer 000350
-A. E. Howard Tile & Carpet: OIS300 (orders at 33, 44, 77), OIS301 sorted
+Canyon Tile & Stone: OIS300 (orders at 33, 44, 77), OIS301 sorted
 2-Cust/Item/Confi shows Customer's PO No (OCT30 = CO 1000000453, status 33),
 OIS350 sorted 3-CO no (CO 1000000451 = invoice 20260300013), invoice lines
 (OIS351) for invoice 20260300002, MMS002 STAPSA820 on hand 96 in CAR.
@@ -20,16 +20,16 @@ imgs = {
     'ois300':      load_img(f'{I}/ois300.jpg', [b(26, 391, 92, 418), b(196, 423, 540, 640)]),
     'ois301':      load_img(f'{I}/ois301.jpg', [b(857, 163, 1025, 192), b(18, 566, 1204, 602)]),
     'ois350co':    load_img(f'{I}/ois350co.jpg', [b(952, 163, 1248, 192), b(18, 323, 1215, 359)]),
-    'invlines':    load_img(f'{I}/invlines.jpg', [b(18, 356, 606, 464)]),
+    'invlines':    load_img(f'{I}/invlines.jpg', [b(18, 356, 606, 464)], blur=[b(296, 232, 500, 254)]),
     'mms002':      load_img(f'{I}/mms002.jpg', [b(26, 391, 150, 418), b(18, 423, 676, 459)]),
 }
 
-CSR, CALLER = 'Rachel · Adleta CS', 'Carla · A. E. Howard Tile & Carpet'
+CSR, CALLER = 'Rachel · Adleta CS', 'Carla · Canyon Tile & Stone'
 
 calls = {
  'c1': [
   ['csr', 'Adleta, this is Rachel.'],
-  ['cust', 'Hi Rachel, Carla at A. E. Howard Tile in Enid. Account 350. I\'ve got a few questions for you.'],
+  ['cust', 'Hi Rachel, Carla at Canyon Tile in Enid. Account 350. I\'ve got a few questions for you.'],
   ['csr', 'Sure, go ahead.'],
   ['cust', 'First one: has my PO OCT30 shipped yet?'],
   ['csr', 'Let me look.'],
@@ -51,12 +51,12 @@ calls = {
  ],
 }
 
-card_items = [['acct', 'Account', '000350 A. E. Howard'], ['q1', 'Question 1', 'PO OCT30 shipped?'],
+card_items = [['acct', 'Account', '000350 Canyon Tile'], ['q1', 'Question 1', 'PO OCT30 shipped?'],
               ['q2', 'Question 2', 'Invoice for 1000000451'], ['q3', 'Question 3', 'PSA 820 in stock?']]
 
 def mini_call(key, label):
     return {'notes': "Click Answer and step through this part of the call.", 'cls': 'callslide',
-            'html': f'<div class="kicker red">On the call</div><h2>{label}</h2>' + call_html(key, 'A. E. Howard Tile', ring=False, sub='On the line', wait='On the line', on='On the line', end='Look it up.', empty='Pick back up to keep going.')}
+            'html': f'<div class="kicker red">On the call</div><h2>{label}</h2>' + call_html(key, 'Canyon Tile', ring=False, sub='On the line', wait='On the line', on='On the line', end='Look it up.', empty='Pick back up to keep going.')}
 
 slides = [
 
@@ -86,7 +86,7 @@ slides = [
  'html': '''
 <div class="kicker red">Incoming call</div>
 <h2>Carla has three questions</h2>
-''' + call_html('c1', 'A. E. Howard Tile', end='On hold. Find PO OCT30.')},
+''' + call_html('c1', 'Canyon Tile', end='On hold. Find PO OCT30.')},
 
 {'notes': "The status numbers. They'll see these colors in OIS300 all day. Walk each one. The big ones: 33 means the stock is set aside but not picked; 44 means the warehouse has the pick list; 77 means it shipped and was invoiced. If it's not moving and there's no credit hold, ask your lead.",
  'html': '''
@@ -241,5 +241,5 @@ mini_call('c4', 'Wrap it up'),
 if __name__ == '__main__':
     out = build(os.path.join(ROOT, 'cs-class-4.html'), number=4, title='Answering Customer Questions',
                 chrome='Answering questions', slides=slides, calls=calls, csr=CSR, caller=CALLER,
-                card_head='Carla · A. E. Howard Tile & Carpet', card_items=card_items, imgs=imgs)
+                card_head='Carla · Canyon Tile & Stone', card_items=card_items, imgs=imgs)
     print(out, os.path.getsize(out))
