@@ -7,19 +7,62 @@ function hubHeading(title, text) { return `<div class="sec-hd"><div><h2>${title}
 const HUB_TYPE_LABEL = { 'Pilot PDF': 'Handout (PDF)', 'Learning guide': 'Step-by-step guide' };
 function hubFiles(category) { return category.files.map(f => hubLink(f.url, (HUB_TYPE_LABEL[f.type] || f.type) + ': ' + f.title)).join(''); }
 function hubCards(categories, detail) { return categories.map(c => `<article class="card hub-course"><h3>${hubEscape(c.name)}</h3><p>${hubEscape(c.summary)}</p>${detail ? `<ol>${c.steps.map(s => `<li>${hubEscape(s)}</li>`).join('')}</ol><p><strong>Evidence:</strong> ${hubEscape(c.evidence)}</p><p class="hub-note"><strong>Before practice:</strong> ${hubEscape(c.validation)}</p>` : ''}<div class="mod-links">${c.videos ? hubLink(c.videos, 'Videos for this module') : ''}${hubFiles(c)}</div></article>`).join(''); }
-function hubStart() {
-  const u = currentUserData, admin = u.role === 'admin', first = hubEscape(u.name.split(' ')[0]);
-  const mods = orderedModules();
+/* ---------- Home ----------
+   People with classes (Customer Service first) get a Home built around the class rhythm:
+   the class they last had, the one coming up, and practice for the classes they've had.
+   Everyone else keeps the lesson-by-lesson Home. */
+function hubClassSplit() {
+  const t = prToday(), list = myClasses().slice().sort((a, b) => (a.on || '9999').localeCompare(b.on || '9999') || a.n - b.n);
+  const had = list.filter(c => c.on && c.on <= t), ahead = list.filter(c => !c.on || c.on > t);
+  return { list, had, ahead, last: had[had.length - 1] || null, next: ahead[0] || null };
+}
+function hubClassSession(c) { const m = MODULES[c.module]; const s = m && m.sessions.find(x => x.id === c.session); return s ? { m, s } : null; }
+function hubPracticeBtn(c, cls) {
+  const x = hubClassSession(c); if (!x) return '';
+  const started = !!repRec(x.s.id);
+  return started ? `<button class="${cls}" onclick="startRep('${x.m.id}','${x.s.id}')">Practice it →</button>`
+                 : `<button class="${cls}" onclick="openSession('${x.m.id}','${x.s.id}')">Practice it →</button>`;
+}
+function hubPracticeStatus(sid) {
+  const r = repRec(sid); if (!r) return 'Not practiced yet';
+  const st = repState(sid), t = prToday();
+  const when = r.due <= t ? '<b>Due today</b>' : 'Next rep ' + prNice(r.due);
+  return `${strengthDots(st.level, st.fading)} ${REP_LEVELS[st.level]}${st.fading ? ' · fading' : ''} · ${when}`;
+}
+function hubRoleLine(mods) {
   const lead = mods.filter(m => myRoleIn(m) === 'lead').map(m => m.name), backup = mods.filter(m => myRoleIn(m) === 'backup').map(m => m.name);
   const list = a => a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ', and ' + a[a.length - 1];
-  const role = lead.length || backup.length ? `<p class="home-role">${lead.length ? `You're the SME for <strong>${hubEscape(list(lead))}</strong>.` : ''}${lead.length && backup.length ? ' ' : ''}${backup.length ? `You're the backup for <strong>${hubEscape(list(backup))}</strong>.` : ''}</p>` : '';
+  return lead.length || backup.length ? `<p class="home-role">${lead.length ? `You're the SME for <strong>${hubEscape(list(lead))}</strong>.` : ''}${lead.length && backup.length ? ' ' : ''}${backup.length ? `You're the backup for <strong>${hubEscape(list(backup))}</strong>.` : ''}</p>` : '';
+}
+function hubClassHome(role) {
+  const u = currentUserData, admin = u.role === 'admin', first = hubEscape(u.name.split(' ')[0]);
+  const { had, last, next } = hubClassSplit();
+  const cls = c => `${hubEscape(c.dept)} · Class ${c.n}`;
+  const lastCard = last ? `<section class="home-next home-class"><div><div class="home-next-label">Your last class · ${hubEscape(classDate(last))}</div><h3>${cls(last)}: ${hubEscape(last.title)}</h3><p>${hubEscape(last.summary)}</p></div><div class="home-class-btns">${hubPracticeBtn(last, 'btn home-go')}<a class="btn home-go home-go-ghost" href="${hubEscape(last.url)}" target="_blank" rel="noreferrer">Look back at the slides ↗</a></div></section>`
+    : `<section class="home-next home-class"><div><div class="home-next-label">Welcome</div><h3>Your first class is coming up</h3><p>After each class, come back here to look back at the slides and practice what you learned.</p></div></section>`;
+  const nextCard = next ? `<div class="home-upnext"><span class="home-next-label">Up next · ${hubEscape(classDate(next))}</span><strong>${cls(next)}: ${hubEscape(next.title)}</strong><span>${hubEscape(next.summary)}</span></div>` : '';
+  const rows = had.slice().reverse().map(c => { const x = hubClassSession(c); if (!x) return ''; const due = (repRec(x.s.id) || {}).due <= prToday();
+    return `<li class="home-prow${due ? ' due' : ''}"><div><strong>Class ${c.n} · ${hubEscape(c.title)}</strong><span>${hubPracticeStatus(x.s.id)}</span></div>${hubPracticeBtn(c, 'mod-link')}</li>`; }).join('');
+  const practice = rows ? `<div class="sec-hd" style="margin-top:28px"><div><h2>Practice what you've had</h2><p>Short reps, again and again, spread over days. Each time you need a little less help.</p></div></div><ul class="home-plist">${rows}</ul>` : '';
+  const streak = repStreak();
+  const strip = `<div class="home-help">${streak ? `<div class="home-chip"><b>${streak}</b> day${streak === 1 ? '' : 's'} in a row</div>` : ''}<button class="mod-link" onclick="switchView('classes')">All my classes</button><button class="mod-link" onclick="switchView('drill')">2-minute drill</button><button class="mod-link" onclick="switchView('keys')">Keys you already know</button><button class="mod-link" onclick="switchView('issues')">Something's wrong or confusing</button></div>`;
+  const sme = !admin && !hubIsCoach() ? mySme() : null;
+  const smeLine = sme ? `<div class="home-sme" style="margin-top:16px"><div><span class="home-next-label" style="color:var(--muted)">Questions? Your SME</span><strong>${hubEscape(sme.name)}</strong>${sme.backups ? `<span>Backup: ${hubEscape(sme.backups)}</span>` : ''}</div>${sme.email ? `<a class="mod-link" href="${teamsLink(sme.email, 'Hi ' + sme.name.split(' ')[0] + ', I have a question about M3: ')}" target="_blank" rel="noreferrer">Message ${hubEscape(sme.name.split(' ')[0])} in Teams ↗</a>` : ''}</div>` : '';
+  return `<div class="home-hello"><h2>Hi ${first}</h2>${role || ''}</div>${lastCard}${nextCard}${practice}${strip}${smeLine}`;
+}
+function hubStart() {
+  const u = currentUserData, admin = u.role === 'admin', first = hubEscape(u.name.split(' ')[0]);
+  const adminTiles = admin ? `<div class="hub-tiles" style="margin-top:28px"><button class="hub-tile" onclick="switchView('dashboard')"><span>ADMIN</span><h3>Dashboard</h3><p>Your rollout to-dos and every module.</p></button><button class="hub-tile" onclick="switchView('control')"><span>ADMIN</span><h3>Training Admin</h3><p>Sign-off steps and program files.</p></button><button class="hub-tile" onclick="switchView('admin')"><span>ADMIN</span><h3>Admin Panel</h3><p>Users and progress.</p></button></div>` : '';
+  const mods = orderedModules();
+  const role = hubRoleLine(mods);
+  if (!admin && myClasses().length) { document.getElementById('view-start').innerHTML = hubClassHome(role); return; }
   const tag = m => m.id === 'foundation' ? '<span class="pill pill-gray">Start here</span>' : myRoleIn(m) === 'lead' ? '<span class="pill pill-teal">You lead this</span>' : myRoleIn(m) === 'backup' ? '<span class="pill pill-gray">You\'re the backup</span>' : '';
   const cards = mods.map(m => practiceAreaCard(m, tag(m))).join('');
   document.getElementById('view-start').innerHTML =
     `<div class="home-hello"><h2>Hi ${first}</h2>${role}</div>${practiceHomeTop()}
-    <div class="sec-hd" style="margin-top:28px"><div><h2>Your training</h2><p>Pick any area to see its lessons. The bar shows how many tasks are solid.</p></div></div><div class="home-areas">${cards || '<div class="card"><p>No training is assigned to you yet. Ask Kristen.</p></div>'}</div>
-    <div class="home-help"><span>Need something?</span><button class="mod-link" onclick="switchView('classes')">Look back at a class</button><button class="mod-link" onclick="switchView('library')">Find a guide</button><button class="mod-link" onclick="switchView('keys')">Keys you already know</button><button class="mod-link" onclick="switchView('issues')">Something's wrong or confusing</button>${admin ? hubLink(VIDEO_LIBRARY_URL, 'Training videos') : ''}</div>
-    ${admin ? `<div class="hub-tiles" style="margin-top:28px"><button class="hub-tile" onclick="switchView('dashboard')"><span>ADMIN</span><h3>Dashboard</h3><p>Your rollout to-dos and every module.</p></button><button class="hub-tile" onclick="switchView('control')"><span>ADMIN</span><h3>Training Admin</h3><p>Sign-off steps and program files.</p></button><button class="hub-tile" onclick="switchView('admin')"><span>ADMIN</span><h3>Admin Panel</h3><p>Users and progress.</p></button></div>` : ''}`;
+    <div class="sec-hd" style="margin-top:28px"><div><h2>Practice</h2><p>Pick any area to see its lessons. The bar shows how many tasks are solid.</p></div></div><div class="home-areas">${cards || '<div class="card"><p>No training is assigned to you yet. Ask Kristen.</p></div>'}</div>
+    <div class="home-help"><span>Need something?</span><button class="mod-link" onclick="switchView('library')">Find a guide</button><button class="mod-link" onclick="switchView('keys')">Keys you already know</button><button class="mod-link" onclick="switchView('issues')">Something's wrong or confusing</button></div>
+    ${adminTiles}`;
 }
 function hubEmployee() {
   document.getElementById('view-employee').innerHTML = hubHeading('Learning Packs', 'The practice steps and handouts for each area.') +

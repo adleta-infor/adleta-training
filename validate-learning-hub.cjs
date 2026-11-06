@@ -48,6 +48,14 @@ run(`currentUser="juanserna";currentUserData=USERS[currentUser];ST={};hubStart()
 assert.match(element('view-start').innerHTML,/You're the backup for/);
 run(`currentUser="lariahjohnson";currentUserData=USERS[currentUser];ST={};hubStart();`);
 assert.match(element('view-start').innerHTML,/You're the SME for <strong>Customer Service and Order Entry/);
+// people with classes get a Home built around the class rhythm (admins keep the full Home)
+run(`currentUser="testcs";currentUserData=USERS[currentUser];ST={};PR=null;hubStart();`);
+assert.match(element('view-start').innerHTML,/Your last class/);
+assert.match(element('view-start').innerHTML,/Practice what you've had/);
+assert.ok(!element('view-start').innerHTML.includes('Start this lesson'),'class Home never pushes untaught lessons');
+run(`currentUser="testsales";currentUserData=USERS[currentUser];ST={};hubStart();`);
+assert.ok(!element('view-start').innerHTML.includes('Your last class'),'Sales does not see Customer Service classes');
+assert.equal(run('myClasses().length'),0);
 // practice engine: spacing, fading, drill and keys
 run(`currentUser="juanserna";currentUserData=USERS[currentUser];ST={};PR=null;`);
 assert.equal(run('repInterval(1)'),1);assert.equal(run('repInterval(3)'),7);assert.equal(run('repInterval(99)'),30);
