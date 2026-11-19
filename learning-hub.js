@@ -120,6 +120,7 @@ function hubSetup() {
   renderView=function(id){if(views[id])views[id]();else originalRender(id);
     if(admin&&ADMIN_TABS.some(t=>t[0]===id)){const v=document.getElementById('view-'+id);if(v&&!v.querySelector('.hub-admintabs')){const bar=document.createElement('div');bar.className='hub-admintabs';bar.setAttribute('role','tablist');bar.innerHTML=ADMIN_TABS.map(([t,l])=>`<button role="tab" aria-selected="${t===id}" class="hub-admintab${t===id?' on':''}" onclick="switchView('${t}')">${l}</button>`).join('');v.prepend(bar);}
       const b=nav.querySelector('[data-view="dashboard"]');if(b)b.classList.add('active');}};
+  if(currentUserData.testOf){const t=document.createElement('div');t.className='hub-pilot';t.textContent='Test login ('+currentUserData.testOf+') · You are seeing exactly what '+currentUserData.name+' (SME) sees.';content.prepend(t);}
   if(admin){const notice=document.createElement('div');notice.className='hub-pilot';notice.textContent='Admin view · Progress and quiz scores are saved in each person\'s own browser. They show practice, not sign-off.';content.prepend(notice);}
   if(!admin){const sp=document.querySelector('.hero-actions a.btn-primary');if(sp)sp.style.display='none';}
   document.querySelector('.hero-eyebrow').textContent='Adleta Infor M3 Training';
