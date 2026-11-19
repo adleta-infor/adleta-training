@@ -78,7 +78,7 @@ function hubLibrary() {
 }
 /* What each person sees: admins see everything; everyone else sees only their own training areas (SMEs also get coaching). */
 function hubScope() { if (typeof currentUserData === 'undefined' || !currentUserData || currentUserData.role === 'admin') return LEARNING_LIBRARY; const ids = new Set(visibleModules().map(m => m.id)); if (hubIsCoach()) ids.add('coaching'); return LEARNING_LIBRARY.filter(c => ids.has(c.id)); }
-const RES_AREA = [['foundation-learningguide','foundation'],['purchasing-learningguide','purchasing'],['inventory-learningguide','inventory'],['ordermanagement-learningguide','orderManagement'],['finance-apar-learningguide','financeAP'],['credit-learningguide','credit'],['cashdesk-learningguide','cashDesk'],['finance-gl-learningguide','financeGL'],['logistics-learningguide','logistics'],['productmanagement-learningguide','productManagement'],['reporting-learningguide','reporting'],['setup-learningguide','setup']];
+const RES_AREA = [['foundation-learningguide','foundation'],['purchasing-learningguide','purchasing'],['inventory-learningguide','inventory'],['ordermanagement-learningguide','orderManagement'],['finance-apar-learningguide','financeAP'],['credit-learningguide','credit'],['cashdesk-learningguide','isc'],['finance-gl-learningguide','financeGL'],['logistics-learningguide','logistics'],['productmanagement-learningguide','productManagement'],['reporting-learningguide','reporting'],['setup-learningguide','setup']];
 function hubResources() {
   if (typeof RESOURCES === 'undefined') return [];
   if (currentUserData.role === 'admin') return RESOURCES;

@@ -79,13 +79,13 @@ const OPT_MAP = {
     { opt: 'Opt 119', what: 'Reprint invoices', m3: 'OIS350', note: 'Invoice lookup', confirm: true }
   ]
 };
-OPT_MAP.cashDesk = OPT_MAP.orderManagement;
+OPT_MAP.isc = OPT_MAP.orderManagement;
 
 /* Ready-made class kits SMEs teach from. Kristen builds them; SMEs deliver them. */
 const CLASS_KITS = [
-  { dept: ['orderManagement', 'cashDesk'], title: 'CS Class 1: Getting into M3 and entering an order', slides: 'cs-class-1.html', practice: ['ord-1', 'ord-14'], ready: true },
-  { dept: ['orderManagement', 'cashDesk'], title: 'CS Class 2: Changing orders and credit holds', practice: ['ord-10', 'ord-3'], ready: false },
-  { dept: ['orderManagement', 'cashDesk'], title: 'CS Class 3: Will call, pay at the counter, and lookups', practice: ['ord-4', 'ord-6', 'ord-9'], ready: false }
+  { dept: ['orderManagement', 'isc'], title: 'CS Class 1: Getting into M3 and entering an order', slides: 'cs-class-1.html', practice: ['ord-1', 'ord-14'], ready: true },
+  { dept: ['orderManagement', 'isc'], title: 'CS Class 2: Changing orders and credit holds', practice: ['ord-10', 'ord-3'], ready: false },
+  { dept: ['orderManagement', 'isc'], title: 'CS Class 3: Will call, pay at the counter, and lookups', practice: ['ord-4', 'ord-6', 'ord-9'], ready: false }
 ];
 
 /* Training order numbers. In Customer's ord, trainees type their initials, a dash, and the code for the lesson,
