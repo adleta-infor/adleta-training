@@ -251,7 +251,7 @@ const IMGS={details:'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUD
 const IMG=n=>`<img class="shot" src="${IMGS[n]}" alt="">`;
 /* call card: which detail to highlight */
 const CARD=(hl)=>{
-  const it=[['acct','Account','000930'],['item','Item','STAPSA820'],['qty','Qty','1 EA'],['po','PO','TEST-PO-001'],['sm','Side mark','SMITH JOB']];
+  const it=[['acct','Account','000930'],['item','Item','STAPSA820'],['qty','Qty','1 EA'],['po','PO','your initials-OE1'],['sm','Side mark','SMITH JOB']];
   return `<div class="callcard"><span class="cc-h">📞 Danny · Prairie Floor Co.</span>${it.map(([k,l,v])=>`<span class="cc-i${hl.includes(k)?' on':''}"><em>${l}</em>${v}</span>`).join('')}</div>`;
 };
 const slides=[
@@ -433,7 +433,7 @@ html:`
 <div class="hd"><em>Account</em><b class="mono">000930</b><span>Prairie Floor Co.</span></div>
 <div class="hd"><em>Item</em><b class="mono">STAPSA820</b><span>PSA 820 adhesive</span></div>
 <div class="hd"><em>Quantity</em><b class="mono">1 EA</b><span>just one</span></div>
-<div class="hd"><em>PO</em><b class="mono">TEST-PO-001</b><span>the customer's PO</span></div>
+<div class="hd"><em>PO</em><b class="mono">your initials-OE1</b><span>in class, type this instead of Danny's PO (like LM-OE1)</span></div>
 <div class="hd"><em>Side mark</em><b class="mono">SMITH JOB</b><span>write it down today</span></div>
 </div>
 <p class="lead" style="margin-top:22px">Everyone enters this same order. This card stays on every slide so you don't have to remember it.</p>
@@ -485,12 +485,12 @@ ${IMG('details')}
 ${CARD([])}`},
 
 /* 14 — step 3 PO */
-{notes:"Step 3: Danny's PO. This screen has the one box M3 insists on: Customer's ord. Type TEST-PO-001. If you skip it and click Next, M3 stops you with this message. Have them try it once on purpose so the alert isn't scary later. Side mark: Danny gave SMITH JOB. Say it plainly: you'll keep asking for it, but where it goes in M3 is still being decided, so today we just write it down. Don't key it anywhere. Delivery: Danny wants it on the truck. M3 already has Delivery method OT, OUR TRUCK, on this screen, so there's nothing to change. Point at it so they see it. After the PO, Next brings up a blank 'User-Defined Fields' screen. Nothing to do there, click Next again.",
+{notes:"Step 3: Danny's PO. This screen has the one box M3 insists on: Customer's ord. Danny's PO is TEST-PO-001, but in class everyone types their own initials, a dash, and OE1, like LM-OE1 for Linda Morrison. OE1 means Order Entry, Class 1, so we can find each person's order in OIS300. If you skip it and click Next, M3 stops you with this message. Have them try it once on purpose so the alert isn't scary later. Side mark: Danny gave SMITH JOB. Say it plainly: you'll keep asking for it, but where it goes in M3 is still being decided, so today we just write it down. Don't key it anywhere. Delivery: Danny wants it on the truck. M3 already has Delivery method OT, OUR TRUCK, on this screen, so there's nothing to change. Point at it so they see it. After the PO, Next brings up a blank 'User-Defined Fields' screen. Nothing to do there, click Next again.",
 html:`
 <div class="kicker amber">Follow along · Step 3 of 5</div>
 <h2>Danny's PO number</h2>
 <div class="pair">
-<figure>${IMG('poentered')}<figcaption>Type the PO in <b>Customer's ord</b>: <b class="mono">TEST-PO-001</b></figcaption></figure>
+<figure>${IMG('poentered')}<figcaption>Type the PO in <b>Customer's ord</b>. In class: <b class="mono">your initials-OE1</b>, like <b class="mono">LM-OE1</b></figcaption></figure>
 <figure>${IMG('poalert')}<figcaption>Skip it, and M3 stops you. Click <b>OK</b> and fill it in.</figcaption></figure>
 </div>
 <p class="small">Click <b>Next</b>. A blank "User-Defined Fields" screen comes up. Nothing to do there, click <b>Next</b> again.</p>
@@ -659,8 +659,8 @@ html:`
 <p>You learned the green screen by doing it every day. M3 is the same. We'll practice this order again, and again, spread over days, with a little less help each time, until you don't have to think about it.</p>
 </div>
 <div class="card">
-<h3>Put your name on test orders</h3>
-<p>In the Customer's PO field type <b>TEST-</b>your first name<b>-</b>today's date, like <b>TEST-LINDA-1105</b>. Then everyone can find their own order in the order list.</p>
+<h3>Put your initials on practice orders</h3>
+<p>In <b>Customer's ord</b> type your initials, a dash, and the lesson code, like <b>LM-OE1</b> (Order Entry, Class 1). Then you and your SME can find your orders in OIS300.</p>
 </div>
 </div>
 <p class="lead" style="margin-top:24px">Your SME will watch you do it on your own when you're ready.</p>`},

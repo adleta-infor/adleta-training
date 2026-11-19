@@ -126,7 +126,7 @@ slides = [
 <div class="hd"><em>Account</em><b>Mesa Floor Covering</b><span>Amarillo · we'll look it up</span></div>
 <div class="hd"><em>Item</em><b class="mono">PSA 820 · 2</b><span>pressure-sensitive adhesive</span></div>
 <div class="hd"><em>Anything else</em><b class="mono">Trowel · 2</b><span>Stauf #1</span></div>
-<div class="hd"><em>PO</em><b class="mono">4471</b><span>in class: TEST-your name-date</span></div>
+<div class="hd"><em>PO</em><b class="mono">4471</b><span>in class: your initials-OE2</span></div>
 <div class="hd"><em>Side mark</em><b class="mono">JONES REMODEL</b><span>new today: Job description</span></div>
 <div class="hd"><em>Delivery</em><b>Our truck</b><span>OT, already the default</span></div>
 </div>
@@ -161,14 +161,14 @@ ${IMG('header')}
 </div>
 ${CARD(['acct'])}'''},
 
-{'notes': "Step 3, the PO and delivery screen. Customer's ord is the box M3 won't let you skip. In class, type TEST, your first name, and today's date, like TEST-LINDA-1106, instead of Teresa's 4471. Then look at Delivery method: OT OUR TRUCK is already there, which is what Teresa asked for. If a customer says they'll pick it up, that's where WC goes. Click Next.",
+{'notes': "Step 3, the PO and delivery screen. Customer's ord is the box M3 won't let you skip. In class, type your initials, a dash, and OE2, like LM-OE2, instead of Teresa's 4471. OE2 means Order Entry, Class 2. Then look at Delivery method: OT OUR TRUCK is already there, which is what Teresa asked for. If a customer says they'll pick it up, that's where WC goes. Click Next.",
  'html': '''
 <div class="kicker amber">Follow along · Step 3 of 6</div>
 <h2>PO and delivery</h2>
 <div class="shotrow">
 ${IMG('po')}
 <ol class="steps side">
-<li>In <b>Customer's ord</b>, type the PO. In class: <b class="mono">TEST-</b>your name<b class="mono">-</b>date.</li>
+<li>In <b>Customer's ord</b>, type the PO. In class: your initials<b class="mono">-OE2</b>, like <b class="mono">LM-OE2</b>.</li>
 <li>Check <b>Delivery method</b>. <b class="mono">OT</b> is our truck, <b class="mono">WC</b> is will call.</li>
 <li>Teresa said truck, so leave it. Click <b class="accent">Next</b>.</li>
 </ol>
@@ -250,7 +250,7 @@ ${CARD(['item','more'])}'''},
 <p class="lead" style="margin-bottom:14px">"Rachel, it's Teresa again at Mesa in Amarillo. Separate order: <b>one PSA 820</b> and <b>one of those #1 trowels</b>. PO <b>4472</b>, side mark <b>PATEL KITCHEN</b>. I'll pick it up."</p>
 <ul class="check">
 <li><span class="box">☐</span>Find her by city (amarillo), account 000320</li>
-<li><span class="box">☐</span>PO in Customer's ord (in class: TEST-your name-date)</li>
+<li><span class="box">☐</span>PO in Customer's ord (in class: your initials-WC2, like LM-WC2)</li>
 <li><span class="box">☐</span>She's picking it up: change Delivery method to <b class="mono">WC</b></li>
 <li><span class="box">☐</span>PATEL KITCHEN in Job description</li>
 <li><span class="box">☐</span>Both items by name, then read back your CO no</li>
@@ -299,7 +299,7 @@ ${CARD(['item','more'])}'''},
 </div>
 <div class="card">
 <h3>Practice this week</h3>
-<p>Key this same order two or three more times in TST, on different days. PO: <b>TEST-</b>your name<b>-</b>date. A little faster each time.</p>
+<p>Key this same order two or three more times in TST, on different days. PO: your initials<b>-OE2</b>, like <b>LM-OE2</b>. A little faster each time.</p>
 </div>
 </div>'''},
 
