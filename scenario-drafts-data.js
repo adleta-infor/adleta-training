@@ -471,18 +471,18 @@ const SCENARIO_DRAFTS = [
   "program": "OIS300",
   "title": "Create a return authorization for a stock item",
   "lookFor": "What has to be true before you authorize a return? Who approves it?",
-  "today": null,
+  "today": "ISC side (from Luz):\n1. The customer calls in the return. Only Mark is authorized to approve returns.\n2. Mark asks the reason, creates the return order, and gives the customer the MRA (return) number by phone.\n3. The customer brings the material and the MRA number. Two copies are printed: one for the customer, one goes to the warehouse with the material.\n4. The warehouse matches the material to the paperwork, and the paperwork goes back to Mark.\n5. Finance does the credit.\nStill needed: confirm with Customer Service whether 'only Mark approves returns' is company-wide.",
   "found": null,
   "gap": null,
   "talk": false,
   "ask": "A dealer calls: \"I ordered two cartons too many. Can I send them back?\"",
   "steps": [
-   "Ctrl+S, OIS300, find the original order.",
-   "Create the return (return order type) for the 2 cartons.",
-   "Read back the return number."
+   "Returns are approved by Mark only. He asks the reason, creates the return, and gives the customer the MRA number.",
+   "Ctrl+S, OIS300, find the original order, and create the return the way your SME shows you.",
+   "Read back the MRA number."
   ],
-  "good": "A return for the right item and quantity, linked to the original order, ready for the warehouse to receive.",
-  "careful": "Check the return policy (time limit, condition) before you say yes."
+  "good": "A return linked to the original order, approved by Mark, with an MRA number the customer has.",
+  "careful": "Confirm whether \"only Mark approves returns\" applies outside the ISC too."
  },
  {
   "id": "ORD-039",
@@ -1809,17 +1809,17 @@ const SCENARIO_DRAFTS = [
   "program": "OIS100 - to confirm",
   "title": "Walk-in retail sale on the location's retail account (Carrollton 99, Lenexa 95, Houston 96)",
   "lookFor": "Order goes on the right location's retail account. No customer setup needed.",
-  "today": "WHD-22 (do we do this: Yes)\n1. Pro Shop personnel print the picking label.\n2. Warehouse personnel pull the order.\n3. Match the material to the customer order.\n4. Load the customer’s order.\nWho: Pro Shop personnel; warehouse personnel; inventory supervisor; Credit Department\nHow often: Daily\nTo confirm: Confirm the Dancik screen/option and the steps for payment/account approval and inventory reduction.\n(from D.M.)",
+  "today": "Steps today:\n1. ISC staff print the picking label.\n2. Warehouse staff pull the order.\n3. Match the material to the customer order.\n4. Load the customer's order.\nWho: ISC staff, warehouse staff, inventory supervisor, Credit Dept.\nHow often: Daily.\nStill to confirm: the Dancik screen/option used, how payment/account approval is done, and when inventory is reduced. (from D.M.)",
   "found": null,
   "gap": null,
   "talk": false,
   "ask": "A walk-in at the ISC buys 2 buckets of adhesive.",
   "steps": [
    "Ctrl+S, OIS100, use the location's retail account.",
-   "Add the items and finish the sale."
+   "Add the items, check the price and tax, and take payment before anything leaves."
   ],
-  "good": "The sale is on the right location's retail account.",
-  "careful": "Use the right retail account for your location (Carrollton, Lenexa or Houston)."
+  "good": "The sale is on the right location's retail account and paid in full.",
+  "careful": "Use the right retail account for your location. Confirm the 95/96 numbers for Lenexa and Houston."
  },
  {
   "id": "ISC-02",
@@ -1829,16 +1829,17 @@ const SCENARIO_DRAFTS = [
   "program": "OIS100 - to confirm",
   "title": "Capture the retail customer's name and phone on the order",
   "lookFor": "We can find the sale later even though it's on a shared account.",
-  "today": null,
+  "today": "Steps today:\n1. If the walk-in is new, set them up as a retail customer with name, phone number, and company name (if they have one).\n2. They are created under the location's retail account.\n3. When they come back, look them up as an existing retail customer.\nRule: every retail customer is saved, not keyed as a one-time sale.\nStill to confirm: retail account numbers. The dictation said \"99, then 96, and Houston 95\", but this sheet says Lenexa 95 and Houston 96. Which is right?",
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "Take down the walk-in's name and phone on the order.",
+  "ask": "A new walk-in buys grout. Next month they come back for more.",
   "steps": [
-   "Enter the name and phone in the order fields your SME shows you."
+   "First visit: save them as a retail customer with name, phone, and company (if any), the way your SME shows you.",
+   "Next visit: look them up by name or phone instead of creating them again."
   ],
-  "good": "You can find the sale later by name or phone.",
-  "careful": "Don't create a new customer for a walk-in."
+  "good": "The walk-in is saved once, and you can find them and their past sales later.",
+  "careful": "Search first. Don't create the same person twice."
  },
  {
   "id": "ISC-03",
@@ -1848,16 +1849,17 @@ const SCENARIO_DRAFTS = [
   "program": "OIS017 / OIS100 - to confirm",
   "title": "Retail pricing",
   "lookFor": "Retail customers get retail price, not account pricing. We know who can discount and how it's recorded.",
-  "today": null,
+  "today": "Today: retail customers pay list price.\nDiscounts: only Luz can give a discount. It's decided case by case, based on the customer and their buying history.\nStill to confirm: is there a limit on discounts, and how is the discount recorded on the ticket?",
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "A walk-in asks the price of grout.",
+  "ask": "A walk-in asks the price of grout, then asks for a discount.",
   "steps": [
-   "Check the retail price on the retail account (OIS017)."
+   "Quote the list price (retail customers pay list).",
+   "For a discount, ask Luz. Only she can approve one, based on the customer and their history."
   ],
-  "good": "You give the retail price, not a dealer price.",
-  "careful": "Don't use a dealer's account for a retail sale."
+  "good": "The customer pays list price unless Luz approved a discount, and the discount is noted.",
+  "careful": "Don't give a discount yourself."
  },
  {
   "id": "ISC-04",
@@ -1867,7 +1869,7 @@ const SCENARIO_DRAFTS = [
   "program": "CRS610 / OIS100 - to confirm",
   "title": "Sales tax on a retail sale",
   "lookFor": "Tax is right for the location (Texas vs Kansas). Retail customers are taxed unless they show an exemption.",
-  "today": null,
+  "today": "Today: sales tax is already set up for each location in the system. The ISC doesn't calculate or change it.\nStill to confirm: the tax rates used for Texas (Carrollton, Houston) vs Kansas (Lenexa).",
   "found": null,
   "gap": null,
   "talk": false,
@@ -1886,17 +1888,17 @@ const SCENARIO_DRAFTS = [
   "program": "CRS610 - to confirm",
   "title": "Retail customer has a resale or tax-exempt certificate",
   "lookFor": "We can handle the exemption with no account to store it on.",
-  "today": null,
+  "today": "Today: retail (walk-in) customers are always charged tax. Tax exemption is only for customers who have an account with Adleta and an exemption certificate on file.\nRule: no exemption on a retail sale, even if they bring a certificate.\nStill to confirm: what the ISC tells a walk-in with a resale certificate (open an account first?).",
   "found": null,
   "gap": null,
   "talk": false,
   "ask": "The walk-in hands you a resale certificate.",
   "steps": [
-   "Check with your SME how tax-exempt walk-ins are handled.",
-   "Keep a copy of the certificate."
+   "Explain that walk-in sales are always taxed.",
+   "If they buy for resale, they need to open an account with Adleta and put their certificate on file."
   ],
-  "good": "Tax is removed only with a valid certificate on file.",
-  "careful": "No certificate, no exemption."
+  "good": "Tax is charged on the retail sale, and the customer knows how to get an exemption.",
+  "careful": "No exemption on a retail sale, even with a certificate in hand."
  },
  {
   "id": "ISC-06",
@@ -1906,16 +1908,18 @@ const SCENARIO_DRAFTS = [
   "program": "OIS210 / ARS110 - to confirm",
   "title": "Take payment at the ISC counter",
   "lookFor": "Cash or card goes through the cash desk. Material is released only once it's paid.",
-  "today": null,
+  "today": "Rules today:\n- Only cash or credit card is accepted at the ISC for will-call pickups.\n- Card payments over $1,500: ask for ID. If the name on the card doesn't match the ID, the payment is refused.\n- The order must be paid in full before any material is released.\nStill to confirm: is there a minimum, are partial payments ever allowed, and who can override.",
   "found": null,
   "gap": null,
   "talk": false,
   "ask": "Take payment at the ISC counter.",
   "steps": [
-   "Take the payment in the cash desk (OIS210 / ARS110)."
+   "Take cash or credit card only.",
+   "Card over $1,500: check ID. If the name doesn't match the card, don't take it.",
+   "Record the payment in the cash desk (OIS210 / ARS110) the way your SME shows you."
   ],
-  "good": "The payment matches the sale and the order is paid.",
-  "careful": "Count change back. Note card vs cash."
+  "good": "The order is paid in full before any material is released.",
+  "careful": "No partial payments at pickup."
  },
  {
   "id": "ISC-07",
@@ -1925,17 +1929,19 @@ const SCENARIO_DRAFTS = [
   "program": "ARS110 - to confirm",
   "title": "Close out the ISC drawer at end of day",
   "lookFor": "Drawer balances by location.",
-  "today": null,
+  "today": "Steps today (around 3:00 PM):\n1. Pull the day's credit card receipts and cash tickets. (Each cash order is printed as a screen print when it's done, to help balance.)\n2. Count the drawer.\n3. Enter the totals in the shared Excel balancing sheet. The drawer should end at $1,000 (the starting float).\n4. The sheet shows the cash taken in above the $1,000 and how much to send as the deposit.\n5. Make the deposit. The drawer starts the next day at $1,000.\nWho: ISC staff.\nHow often: Daily.\nStill to confirm: who the Excel sheet is shared with, who takes the deposit, and what happens if it's over/short.",
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "Close out the ISC drawer at end of day.",
+  "ask": "It's 3:00 PM. Balance the ISC drawer.",
   "steps": [
-   "Count the drawer.",
-   "Close the cash desk in ARS110."
+   "Pull the day's card receipts and cash tickets (screen prints of each cash order).",
+   "Count the drawer and enter it on the balancing sheet. The drawer should end at $1,000.",
+   "The cash above $1,000 is the deposit.",
+   "Close the cash desk in M3 (ARS110) the way your SME shows you."
   ],
-  "good": "The drawer matches M3 to the penny.",
-  "careful": "If it's off, report it. Don't adjust it."
+  "good": "The drawer is back to $1,000 and the deposit matches the day's cash.",
+  "careful": "If it's over or short, report it. Don't adjust it."
  },
  {
   "id": "ISC-08",
@@ -1945,17 +1951,18 @@ const SCENARIO_DRAFTS = [
   "program": "OIS300 / ARS110 - to confirm",
   "title": "Retail return or refund",
   "lookFor": "Refund goes back to the original card or as cash, and the stock goes back into the ISC.",
-  "today": null,
+  "today": "Steps today:\n1. The customer calls in the return. Only Mark is authorized to approve returns.\n2. Mark asks the reason, creates the return order, and gives the customer the MRA (return) number by phone.\n3. The customer brings the material and the MRA number to the ISC.\n4. ISC prints two copies of the MRA. The customer keeps one; the other goes to the warehouse with the material.\n5. The warehouse matches the material to the paperwork, and the paperwork goes back to Mark.\n6. The credit/refund is done by Finance, not at the ISC.\nWho: Mark (approval), ISC staff, warehouse, Finance.\nStill to confirm: how a cash or card refund goes back to a retail customer, and whether returned stock goes back to the ISC shelf or the warehouse.",
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "A walk-in returns a bucket of adhesive for a refund.",
+  "ask": "A walk-in brings back two buckets of adhesive for a refund.",
   "steps": [
-   "Create the return (OIS300).",
-   "Refund the way your SME shows you."
+   "Ask for the MRA (return) number. Returns are approved by Mark only; if they don't have one, they call it in to Mark.",
+   "Print two copies of the MRA. The customer keeps one; the other goes to the warehouse with the material.",
+   "The warehouse matches the material to the paperwork. Finance does the credit or refund."
   ],
-  "good": "The return and refund are recorded and match.",
-  "careful": "Check the receipt and the return rules first."
+  "good": "The return has an MRA, the paperwork matches the material, and Finance handles the refund.",
+  "careful": "Don't take a return or give money back without an MRA from Mark."
  },
  {
   "id": "ISC-09",
@@ -1965,17 +1972,18 @@ const SCENARIO_DRAFTS = [
   "program": "OIS100 / PPS200 - to confirm",
   "title": "Retail customer wants something not in the ISC",
   "lookFor": "We can sell from warehouse stock or special order it on the retail account, with prepayment.",
-  "today": null,
+  "today": "Today: retail customers can buy VCT, cove base, millwork, rubber flooring, and anything in the ISC (tools and sundries) directly.\nIf they want something not in stock (e.g. a base we don't carry in stock) and it's something we sell to retail, we special order it.\nRule: the customer pays up front before we order it. It's done under the retail account.\nStill to confirm: who places the special-order PO and how the customer is told it has arrived.",
   "found": null,
   "gap": null,
   "talk": false,
   "ask": "A walk-in wants an item the ISC doesn't carry.",
   "steps": [
    "Check main warehouse stock.",
-   "Order it for them the way your SME shows you."
+   "If it's something we sell to retail but don't stock, special order it on the retail account.",
+   "Take full payment before the order is placed."
   ],
-  "good": "The customer knows when it will be ready.",
-  "careful": "Take payment or a deposit the way your SME says."
+  "good": "The customer has paid up front and knows when it will be ready.",
+  "careful": "Retail can buy VCT, cove base, millwork, rubber flooring, and ISC tools and sundries. Check before you promise anything else."
  },
  {
   "id": "ISC-10",
@@ -1985,17 +1993,18 @@ const SCENARIO_DRAFTS = [
   "program": "OIS100 / MWS410 - to confirm",
   "title": "Installer with an account does a will-call at the ISC and charges it",
   "lookFor": "Credit is checked before release.",
-  "today": null,
+  "today": "Today: the ISC does NOT take orders for customers with an account.\n1. Account customers call their order in to Customer Service (calls are recorded). Some orders need an approved PO.\n2. The installer comes to the ISC with the order reference. It's pickup only.\n3. No add-ons at the ISC. If they want to add something, they call Customer Service.\nWhy: an account once refused to pay for an add-on picked up at the ISC (\"we never authorized that\"). In-person requests aren't recorded.\nException: rarely, for a long-known customer, staff may allow an add-on, but the rule is no add-ons.",
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "An installer with an account picks up at the ISC and charges it.",
+  "ask": "An installer with an account walks in: \"I need to pick up my order, and add a box of trowels.\"",
   "steps": [
-   "Enter the order on the installer's account (OIS100).",
-   "Release it as will-call (MWS410)."
+   "The ISC doesn't enter orders for account customers. The order must already be called in to Customer Service.",
+   "Find their order by the reference they bring, pull it, and release it as a will-call pickup (MWS410).",
+   "For the trowels: no add-ons at the ISC. Ask them to call Customer Service so it's recorded."
   ],
-  "good": "The sale is on the installer's account, not the retail account.",
-  "careful": "Check they are allowed to charge on that account."
+  "good": "They pick up exactly what was ordered, and any add-on goes through Customer Service.",
+  "careful": "Accounts have refused to pay for add-ons picked up at the counter. Don't add it."
  },
  {
   "id": "ISC-11",
@@ -2005,7 +2014,7 @@ const SCENARIO_DRAFTS = [
   "program": "MWS410 - to confirm",
   "title": "Installer picks up an order a dealer placed and paid for",
   "lookFor": "Pickup paperwork shows no pricing.",
-  "today": "WHD-13 (do we do this: Yes)\n1. Will-call personnel print the picking label.\n2. Pull the order.\n3. Match the paperwork to the customer order.\n4. Change the order to Ship status.\nWho: Will-call personnel; warehouse personnel\nHow often: Daily\nTo confirm: Confirm the Dancik screen/option and how pricing is suppressed on pickup paperwork.\n(from D.M.)",
+  "today": "Steps today:\n1. Will-call staff print the picking label.\n2. Pull the order.\n3. Match the paperwork to the customer order.\n4. Change the order to Shipped status.\nWho: will-call staff, warehouse staff.\nHow often: Daily.\nStill to confirm: the Dancik screen/option, and how pricing is kept off the pickup paperwork. (from D.M.)",
   "found": null,
   "gap": null,
   "talk": false,
@@ -2026,16 +2035,18 @@ const SCENARIO_DRAFTS = [
   "program": "MMS060 / MMS010 - to confirm",
   "title": "See ISC stock separately from main warehouse stock",
   "lookFor": "We can see what's on the ISC floor vs the warehouse.",
-  "today": null,
+  "today": "Today: ISC stock is a location inside the main warehouse, not its own warehouse.\nProblem: when Customer Service enters an order, the system takes stock from the location with the lowest quantity, which is often the ISC. ISC stock gets allocated to phone orders, so walk-ins find items \"on hand\" but already allocated. Fixing it means cancelling the line and re-entering the order, and it's hard to find which account it was allocated to.\nWhat we want: ISC stock left alone for walk-ins. Phone orders should take warehouse stock first and only use ISC stock if it's the last we have. Making the ISC its own warehouse (or a protected location) may fix this.",
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "\"How much is on the ISC floor vs the warehouse?\"",
+  "ask": "Customer Service enters a phone order and M3 allocates the ISC's last buckets. A walk-in wants them.",
   "steps": [
-   "Ctrl+S, MMS060, look at the ISC location or warehouse."
+   "Ctrl+S, MMS060, look at the ISC location vs the warehouse.",
+   "Check what's allocated against the ISC stock.",
+   "Write down what happened so the team can decide how to protect ISC stock."
   ],
-  "good": "You can tell ISC stock from warehouse stock.",
-  "careful": "Ask your SME how the ISC is set up in M3."
+  "good": "You can tell ISC stock from warehouse stock and see when phone orders take it.",
+  "careful": "Today the system takes from the location with the lowest stock, often the ISC. How ISC stock will be protected in M3 is still being decided."
  },
  {
   "id": "ISC-13",
@@ -2045,16 +2056,18 @@ const SCENARIO_DRAFTS = [
   "program": "MMS100 - to confirm",
   "title": "Restock the ISC from the warehouse",
   "lookFor": "The move or transfer is recorded and both quantities stay right.",
-  "today": null,
+  "today": "Steps today:\n1. The ISC manager and team check the ISC's stock and decide what needs restocking.\n2. They print a ticket for the restock.\n3. Warehouse staff pull the material and move it into the ISC.\nWho: ISC manager and team; warehouse staff.\nRule: if the item is in stock in the warehouse, the ISC manager handles the restock. If the warehouse is out of stock, Purchasing handles it.\nStill to confirm: how often the ISC restocks, which Dancik screen prints the ticket, and who checks the quantities after the move.",
   "found": null,
   "gap": null,
   "talk": false,
   "ask": "The ISC is low on adhesive. Restock it from the warehouse.",
   "steps": [
-   "Create the move or transfer (MMS100)."
+   "The ISC manager checks ISC stock and decides what to restock.",
+   "Record the move from the warehouse to the ISC (MMS100) the way your SME shows you.",
+   "Warehouse staff pull it and move it into the ISC."
   ],
-  "good": "The ISC gets the stock and the warehouse balance goes down.",
-  "careful": "Check if it is a move or a transfer for your location."
+  "good": "The ISC gets the stock and the warehouse balance goes down by the same amount.",
+  "careful": "If the warehouse is out of stock, Purchasing handles it."
  },
  {
   "id": "ISC-14",
@@ -2064,7 +2077,7 @@ const SCENARIO_DRAFTS = [
   "program": "OIS300 / reporting - to confirm",
   "title": "Retail sales report by location",
   "lookFor": "Retail sales for 99, 95 and 96 can be pulled separately.",
-  "today": null,
+  "today": "Not answered yet. Ask the ISC:\n- Is there a retail sales report today? Who runs it and how often?\n- What does it need to show (by location, by day, cash vs card, tax)?",
   "found": null,
   "gap": null,
   "talk": false,
@@ -2646,7 +2659,7 @@ const SCENARIO_DRAFTS = [
   "program": "CRS610",
   "title": "Maintain tax exemption certificates",
   "lookFor": "Where are certificates stored and how do you know when one expires?",
-  "today": null,
+  "today": "ISC side (from Luz):\n- Tax exemption is only for customers who have an account with Adleta and an exemption certificate on file.\n- Walk-in (retail) customers are always charged tax, even if they bring a certificate.\nStill needed: how Finance stores and renews exemption certificates.",
   "found": null,
   "gap": null,
   "talk": false,
@@ -2936,7 +2949,7 @@ const SCENARIO_DRAFTS = [
   "program": "ARS110",
   "title": "Take a counter payment at the cash desk",
   "lookFor": "Which locations take cash or card at the counter?",
-  "today": null,
+  "today": "ISC side (from Luz):\n- Only cash or credit card is accepted at the ISC.\n- Card payments over $1,500: ask for ID. If the name on the card doesn't match the ID, the payment is refused.\n- The order must be paid in full before any material is released.\nStill needed: how Finance records counter payments.",
   "found": "Cash account order 000750 defaults COD + WC (CS-029). Cash desk user authorization is in OIS210.",
   "gap": null,
   "talk": false,
@@ -2955,7 +2968,7 @@ const SCENARIO_DRAFTS = [
   "program": "ARS110",
   "title": "Reconcile and close the cash desk at end of day",
   "lookFor": "Daily close routine and who balances it.",
-  "today": null,
+  "today": "ISC side (from Luz):\n1. Around 3:00 PM, pull the day's credit card receipts and cash tickets (each cash order is printed as a screen print to help balance).\n2. Count the drawer.\n3. Enter the totals in the shared Excel balancing sheet. The drawer should end at $1,000 (the starting float).\n4. The sheet shows the cash taken in above $1,000 and how much to send as the deposit.\nStill needed: Finance's side of the deposit and reconciliation.",
   "found": null,
   "gap": null,
   "talk": false,
@@ -3304,17 +3317,17 @@ const SCENARIO_DRAFTS = [
   "program": "OIS100 / OIS120 - to confirm",
   "title": "Customer adds material after prepayment",
   "lookFor": "Additional charges are calculated and any remaining payment requirement is satisfied before release. Order was paid and released from credit; CS then adds material or shipping changes.",
-  "today": null,
+  "today": "ISC side (from Luz):\n- No add-ons at the ISC. If the customer wants to add material, they call Customer Service so the request is recorded.\n- Reason: an account once refused to pay for an add-on picked up at the ISC.\nStill needed: how Customer Service and Credit handle the extra payment.",
   "found": "Open: Will the order go back on credit hold until the additional payment is made?",
   "gap": null,
   "talk": false,
   "ask": "A prepaid customer adds material.",
   "steps": [
-   "Add the line (OIS100).",
-   "Collect the extra before it ships (OIS120)."
+   "At the ISC: no add-ons. The customer calls Customer Service to add the line.",
+   "Customer Service adds the line (OIS100) and collects the extra before release."
   ],
-  "good": "The order is fully paid before release.",
-  "careful": "Don't ship the add-on unpaid."
+  "good": "The add-on is recorded through Customer Service and paid before pickup.",
+  "careful": "Don't add material at the counter."
  },
  {
   "id": "COD-09",
@@ -3343,7 +3356,7 @@ const SCENARIO_DRAFTS = [
   "program": "OIS210 / ARS110 - to confirm",
   "title": "Customer pays a partial deposit",
   "lookFor": "Deposit and remaining balance are visible. The order follows the required payment and release rules.",
-  "today": null,
+  "today": "ISC side (from Luz):\n- At the ISC, the order must be paid in full before any material is released.\nStill needed: whether Customer Service or Credit ever take a partial deposit on an order.",
   "found": null,
   "gap": null,
   "talk": false,
@@ -3362,7 +3375,7 @@ const SCENARIO_DRAFTS = [
   "program": "OIS100 / PPS200 / OIS210 - to confirm",
   "title": "COD customer orders special-order or nonstock material",
   "lookFor": "Customer prepays some or all of the COD order amount before the vendor order is placed. Infor tracks the prepayment and remaining balance, allows the vendor order to proceed once the required prepayment is received, and requires the remaining balance to be paid before the customer takes possession.",
-  "today": null,
+  "today": "ISC side (from Luz):\n- Retail special orders (items we sell but don't stock) must be paid up front before we order them. They go on the retail account.\nStill needed: how Customer Service handles special orders for COD account customers.",
   "found": "Open: Merged: #11 and #13 on Mike's list were identical.",
   "gap": null,
   "talk": false,
@@ -3382,7 +3395,7 @@ const SCENARIO_DRAFTS = [
   "program": "CRS949 / MWS410 (document output) - to confirm",
   "title": "Customer prepays and sends an installer or end user to pick up material",
   "lookFor": "After payment by an approved method, staff can generate pickup paperwork excluding pricing, payment amounts, and other sensitive customer information. Keep material descriptions, quantities, order reference, and pickup acknowledgment. Pricing stays available internally. Test initial prints and reprints.",
-  "today": null,
+  "today": "ISC side (from Luz):\n- Pickup only. The installer comes to the ISC with the order reference.\n- ISC staff print the picking label, pull the order, match the paperwork to the order, and change it to shipped.\n- No add-ons at pickup.\nStill needed: how the ISC knows who is allowed to pick up, and how pricing is kept off the pickup paperwork.",
   "found": "WHD-13: Installer or end user picks up a prepaid order",
   "gap": null,
   "talk": false,
