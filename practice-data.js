@@ -87,3 +87,22 @@ const CLASS_KITS = [
   { dept: ['orderManagement', 'cashDesk'], title: 'CS Class 2: Changing orders and credit holds', practice: ['ord-10', 'ord-3'], ready: false },
   { dept: ['orderManagement', 'cashDesk'], title: 'CS Class 3: Will call, pay at the counter, and lookups', practice: ['ord-4', 'ord-6', 'ord-9'], ready: false }
 ];
+
+/* Training order numbers. In Customer's ord, trainees type their initials, a dash, and the code for the lesson,
+   like LM-WC4 (Linda Morrison, Will Call, lesson 4). Then OIS300 can be filtered by person (starts with LM-)
+   or by area (contains -WC). Area codes: OE order entry, WC will call, CD cash desk, QT quotes, RT returns
+   and credits, CH changes and holds. Classes use the class number (CS Class 2 = OE2 / WC2). */
+const ORDER_CODES = {
+  'ord-1': 'OE1', 'ord-14': 'OE14', 'ord-10': 'CH10', 'ord-4': 'WC4', 'ord-6': 'WC6', 'ord-11': 'OE11',
+  'ord-5': 'OE5', 'ord-3': 'OE3', 'ord-13': 'OE13', 'ord-12': 'OE12', 'ord-7': 'QT7', 'ord-2': 'RT2',
+  'ord-8': 'OE8', 'cd-1': 'CD1', 'cd-2': 'CD2'
+};
+/* Initials from the person's name. If someone in the same department has the same initials, add the second letter of the last name. */
+function initialsFor(u) {
+  const parts = String((u && u.name) || '').replace(/[^A-Za-z ]/g, '').trim().split(/\s+/);
+  const first = parts[0] || '', last = parts[parts.length - 1] || '';
+  const base = (first[0] || '') + (parts.length > 1 ? last[0] : '');
+  const clash = typeof USERS !== 'undefined' && Object.values(USERS).some(o => o !== u && o.dept === u.dept && (() => { const p = String(o.name || '').replace(/[^A-Za-z ]/g, '').trim().split(/\s+/); return ((p[0] || '')[0] || '') + (p.length > 1 ? (p[p.length - 1][0] || '') : '') === base; })());
+  return (clash && last.length > 1 ? base + last[1] : base).toUpperCase();
+}
+function orderTag(code) { return initialsFor(currentUserData) + '-' + code; }

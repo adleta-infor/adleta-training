@@ -57,3 +57,5 @@ kbd{display:inline-block;min-width:1.6em;padding:1px 6px;margin:0 1px;border:1px
 .home-prow>div{display:flex;flex-direction:column;gap:4px}.home-prow span{font-size:13px;color:var(--muted)}
 .home-prow.due{border-color:#005596;box-shadow:0 0 0 1px #005596 inset}
 @media (max-width:700px){.home-class-btns{width:100%}}
+.order-tag{display:grid;gap:4px;border-left:4px solid var(--teal,#1a7a6d)}
+.order-tag code{font-size:1.1em;padding:1px 6px;background:#e8f4f2;border-radius:4px}

@@ -101,7 +101,7 @@ slides = [
 <p class="lead" style="margin-bottom:14px">Derek at <b>Red River Flooring</b> in Enid called this morning: <b>two PSA 820</b>, on our truck.</p>
 <ul class="check">
 <li><span class="box">☐</span>OIS100, search <b class="mono">enid</b>, pick account <b class="mono">000300</b></li>
-<li><span class="box">☐</span>PO: <b class="mono">TEST-</b>your name<b class="mono">-</b>date</li>
+<li><span class="box">☐</span>PO: your initials<b class="mono">-CH3</b>, like <b class="mono">LM-CH3</b></li>
 <li><span class="box">☐</span>Item search <b class="mono">psa 820</b>, qty <b class="mono">2</b>, Add</li>
 <li><span class="box">☐</span><b>Write down your CO no.</b> You'll need it in a minute.</li>
 </ul>'''},

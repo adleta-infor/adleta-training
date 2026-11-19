@@ -122,7 +122,7 @@ function practiceRep() {
     const head = (mode === 'timed' && !REP_CUR.shown[i]) ? `<span class="rep-hidden">Step ${i + 1}</span>` : `<strong>${hubEscape(t.n)}</strong>`;
     return `<li>${head}${open ? `<ol>${t.s.map(x => `<li>${hubEscape(x)}</li>`).join('')}</ol>` : `<button class="mod-link rep-hint" onclick="repHint(${i})">Show hint</button>`}</li>`;
   }).join('');
-  const tag = 'TEST-' + prFirst().toUpperCase() + '-' + prToday().slice(5).replace('-', '');
+  const tag = ORDER_CODES[sid] ? orderTag(ORDER_CODES[sid]) : null;
   el.innerHTML = `<button class="session-back" onclick="switchView('start')">← Back to Home</button>
   <div class="rep-head card"><div><div class="sec-eyebrow">${hubEscape(m.name)} · Rep ${st.n + 1}</div><h2>${hubEscape(s.title)}</h2><p><span class="pill pill-teal">${modeText[0]}</span> ${modeText[1]}</p></div><div class="rep-meta">${strengthDots(st.level, st.fading)}<div>${REP_LEVELS[st.level]}${st.fading ? ' · fading' : ''}</div>${mode !== 'guided' ? `<div class="rep-timer" id="rep-timer">0:00</div>${st.best ? `<div class="rep-best">Your best: ${repTime(st.best)}</div>` : ''}` : ''}</div></div>
   <div class="card rep-body">
@@ -131,7 +131,7 @@ function practiceRep() {
     ${v && v.careful ? `<p class="hub-note"><strong>Watch out:</strong> ${hubEscape(v.careful)}</p>` : ''}
     ${v && v.confirm ? `<p class="rep-confirm">The exact screens for this one are still being confirmed. Practice it in TST, and ask your SME if what you see doesn't match.</p>` : ''}
     ${tasks ? `<div class="sec-eyebrow" style="margin-top:16px">${mode === 'guided' ? 'Steps' : 'Hints'}</div><ol class="rep-steps">${tasks}</ol>` : ''}
-    <div class="rep-proof"><label>If you create or change an order, put <code>${tag}</code> in the Customer's PO field so it's easy to find in OIS300. Order number (optional):<input id="rep-order" type="text" inputmode="numeric" placeholder="e.g. 1000000471"></label></div>
+    <div class="rep-proof"><label>${tag ? `In <b>Customer's ord</b>, type <code>${tag}</code> (your initials and this lesson's code) so your order is easy to find in OIS300. ` : ''}Order number (optional):<input id="rep-order" type="text" inputmode="numeric" placeholder="e.g. 1000000471"></label></div>
   </div>
   <div class="card rep-finish"><h3>How did it go?</h3><div class="rep-btns"><button class="btn btn-primary" onclick="finishRep('own')">I did it on my own</button><button class="btn" onclick="finishRep('hints')">I needed some help</button><button class="btn" onclick="finishRep('stuck')">I got stuck</button></div><p class="home-why">Be honest. "Stuck" just brings it back tomorrow. That's how it sticks.</p></div>`;
   kbdify(el);
@@ -285,3 +285,13 @@ function practiceStudioTop() {
   submitQuiz = function (sid) { _submitQuiz(sid); if ((ST[`quiz-score-${sid}`] || 0) >= 70) { const P = pr(); if (!P.reps[sid]) { P.reps[sid] = { n: 1, last: prToday(), due: prAddDays(prToday(), 1), hist: [] }; repMark(); prSave(); } } };
   renderTeam = practiceTeamBoard;
 })();
+
+/* Show each trainee their training order number at the top of a lesson that creates an order. */
+if (typeof renderExercise === 'function') {
+  const _renderExercise = renderExercise;
+  renderExercise = function (s) {
+    const code = s && ORDER_CODES[s.id];
+    const box = code ? `<div class="card order-tag"><strong>Your training order number: <code>${orderTag(code)}</code></strong><span>Type it in <b>Customer's ord</b> whenever this lesson has you enter an order. It's your initials and this lesson's code (${code}), so you and your SME can find your orders in OIS300.</span></div>` : '';
+    return box + _renderExercise(s);
+  };
+}

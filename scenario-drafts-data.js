@@ -100,7 +100,7 @@ const SCENARIO_DRAFTS = [
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "A dealer calls: \"I need 18 feet off the 12-foot-wide carpet roll for a bedroom.\"",
+  "ask": "A dealer calls: \"I need 18 feet off the 12-foot-wide sheet vinyl roll for a bedroom.\"",
   "steps": [
    "Ctrl+S, OIS100, enter the customer.",
    "Add the roll item in OIS101 in the unit you sell it in (LF or SY).",
@@ -496,7 +496,7 @@ const SCENARIO_DRAFTS = [
   "found": null,
   "gap": null,
   "talk": false,
-  "ask": "A dealer calls: \"I want to return the carpet you cut for me.\"",
+  "ask": "A dealer calls: \"I want to return the sheet vinyl you cut for me.\"",
   "steps": [
    "Check with your SME what the rule is for cut goods.",
    "If an exception is approved, create the return in OIS300 and note who approved it."

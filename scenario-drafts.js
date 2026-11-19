@@ -44,6 +44,7 @@ function renderDrafts(openId) {
       <div class="drf-body">
         ${sec('The situation', `<p>${esc(d.ask)}</p>`)}
         ${sec(d.talk ? 'What to do' : 'Steps in M3 <em>(draft, check in TST)</em>', `<ol>${d.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol>`)}
+        ${!d.talk && /OIS100/.test(d.steps.join(' ')) ? sec('Training order number', `<p>In <b>Customer's ord</b>, type <code>${esc(orderTag(d.id.replace('-', '')))}</code> (your initials and the scenario ID) so the order is easy to find in OIS300.</p>`) : ''}
         ${sec('A good result', `<p>${esc(d.good)}</p>`)}
         ${sec('Watch out', `<p>${esc(d.careful)}</p>`)}
         <details class="drf-src"><summary>From the scenario list</summary>
