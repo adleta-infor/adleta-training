@@ -60,7 +60,7 @@ function prFirst() { return (currentUserData.name || '').split(' ')[0]; }
 function prEmail(name) { const p = (name || '').trim().toLowerCase().split(/\s+/); return p.length > 1 ? p[0] + '.' + p[p.length - 1] + '@adleta.com' : ''; }
 function prLeadName(m) { return (m.owner || '').split('(')[0].split('/')[0].trim(); }
 /* Department → the module whose SME leads that department (used when someone isn't on a roster, e.g. test logins). */
-const DEPT_SME_MODULE = { 'Customer Service / Order Entry': 'orderManagement', 'Sales / CRM & Pricing / Reporting': 'reporting', 'Purchasing / Inventory Control': 'purchasing', 'Purchasing / Supply Chain': 'purchasing', 'Warehouse': 'logistics', 'Warehouse & Logistics': 'logistics', 'Logistics / Transportation': 'logistics', 'Accounting': 'credit', 'Credit / AR': 'credit', 'Accounts Payable': 'financeAP', 'Finance': 'financeGL', 'Product Management': 'productManagement' };
+const DEPT_SME_MODULE = { 'Customer Service / Order Entry': 'orderManagement', 'Sales / CRM & Pricing / Reporting': 'reporting', 'Purchasing / Inventory Control': 'purchasing', 'Purchasing / Supply Chain': 'purchasing', 'Warehouse': 'logistics', 'Warehouse & Logistics': 'logistics', 'Logistics / Transportation': 'logistics', 'Accounting': 'credit', 'Credit / AR': 'credit', 'Accounts Payable': 'financeAP', 'Finance': 'financeGL', 'Product Management': 'productManagement', 'Installation Supply Center / Will Call': 'isc' };
 function mySme() {
   const backupsOf = name => { const m = Object.values(MODULES).find(x => prLeadName(x) === name && /\(backups?:/.test(x.owner)); return m ? (m.owner.match(/\(backups?:\s*([^)]*)\)/) || [])[1] : ''; };
   /* 1. The roster says who each person's SME is. */

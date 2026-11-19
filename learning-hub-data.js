@@ -289,10 +289,10 @@ const LEARNING_LIBRARY = [
     "videos": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/11%20Training%20Videos/11%20End-to-End%20Walkthroughs"
   },
   {
-    "id": "cashDesk",
-    "name": "Will Call Counter and Cash Desk",
+    "id": "isc",
+    "name": "Installation Supply Center / Will Call",
     "url": "https://adleta.sharepoint.com/sites/AdletaLearningHub/Shared%20Documents/08%20Department%20Training%20Library/01%20Customer%20Service%20and%20Order%20Entry",
-    "summary": "Take counter and phone payments, clear prepay holds, and close the cash drawer at the end of the day.",
+    "summary": "All pickups happen at the ISC: stage and hand over will call orders, take counter payments, clear prepay holds, and close the cash drawer at the end of the day.",
     "steps": [
       "Open OIS215 with Ctrl+S, select cash desk 101A or 101B, and confirm the order or invoice and amount with the customer.",
       "Take a payment on a pay-first (PCD) test order and confirm the C10 stop on the MWS410 delivery clears.",
